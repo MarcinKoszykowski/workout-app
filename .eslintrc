@@ -1,0 +1,25 @@
+{
+  "extends": ["prettier", "prettier/react"],
+  "globals": {
+    "document": true,
+    "window": true
+  },
+  "rules": {
+    "import/no-unresolved": 1,
+    "camelcase": [1, { "properties": "never" }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js"]
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": "src",
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}

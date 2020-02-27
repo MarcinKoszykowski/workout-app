@@ -4,9 +4,9 @@ import GlobalStyle from 'styled/GlobalStyle';
 import { main, login, sport } from 'data/routes';
 import LoginView from './views/LoginView';
 import MainView from './views/MainView';
-import UserProvider from 'providers/UserProvider';
 import Loader from 'components/Loader/Loader';
 import LoaderContext from 'contexts/LoaderContext';
+import UserProvider from 'providers/UserProvider';
 import SportView from 'views/SportView';
 
 const App = () => {

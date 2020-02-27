@@ -85,8 +85,16 @@ const LoginForm = () => {
     setInfoText(text);
   };
 
+  const setUserInLocalStorage = user => {
+    localStorage.setItem('userId', user._id);
+    localStorage.setItem('userEmail', user.email);
+    localStorage.setItem('userPassword', user.password);
+    localStorage.setItem('userLogin', true);
+  };
+
   const loginUser = user => {
     setUser({ ...user });
+    setUserInLocalStorage(user);
     setLogin(true);
     history.push(main);
   };

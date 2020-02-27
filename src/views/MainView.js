@@ -16,7 +16,7 @@ const Background = styled.div`
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background: url(${mainImage}) no-repeat top right;
+  background: url(${mainImage}) no-repeat top left;
   background-size: cover;
   animation: ${animations.opacityZeroToOne} 0.5s ease;
 

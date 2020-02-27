@@ -2,13 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { colorWithOpacity, purple } from 'styled/colors';
 import UserNavigation from './molecules/UserNavigation';
-import TitleBox from './molecules/TitleBox';
 
 const Wrapper = styled.div`
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   min-width: 175px;
   padding-right: 45px;
   padding-left: 40px;
@@ -47,7 +46,6 @@ const Wrapper = styled.div`
 
 const TopBar = () => (
   <Wrapper>
-    <TitleBox />
     <UserNavigation />
   </Wrapper>
 );

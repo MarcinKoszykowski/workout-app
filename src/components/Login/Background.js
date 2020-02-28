@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import backgroundImage from 'assets/images/background.jpg';
-import { purple } from 'styled/colors';
+import { purple, colorWithOpacity } from 'styled/colors';
 
 const Background = styled.div`
   position: relative;
@@ -15,8 +15,7 @@ const Background = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: ${purple};
-    opacity: 0.3;
+    background-color: ${colorWithOpacity(purple, 0.3)};
     z-index: 1;
   }
 

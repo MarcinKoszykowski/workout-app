@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import UserContext from 'contexts/UserContext';
 import userIcon from 'assets/icons/user-solid.svg';
 import Icon from '../atoms/Icon';
-import User from '../atoms/User';
+import Text from '../atoms/Text';
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const UserNavigation = () => {
   const { user } = useContext(UserContext);
   return (
     <Wrapper>
-      <User>{user.email}</User>
+      <Text>{user.email}</Text>
       <Icon icon={userIcon} />
     </Wrapper>
   );

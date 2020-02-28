@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   top: 0;
   bottom: 0;
   width: 160px;
-  background-color: ${colorWithOpacity(purple, 0.8)};
+  background-color: ${colorWithOpacity(purple, 0.6)};
   z-index: 1;
   overflow-y: scroll;
 
@@ -19,20 +19,19 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 992px) {
     width: 145px;
-    padding: 15px 0;
   }
 
   @media screen and (max-width: 768px) {
     width: 130px;
-    padding: 10px 0;
   }
 
   @media screen and (max-width: 576px) {
     width: 105px;
+    padding: 15px 0;
   }
 
   @media screen and (max-width: 420px) {
-    width: 90px;
+    width: 85px;
   }
 `;
 

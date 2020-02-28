@@ -27,8 +27,8 @@ const Icon = styled.div`
   }
 
   @media screen and (max-width: 420px) {
-    height: 45px;
-    width: 45px;
+    height: 40px;
+    width: 40px;
   }
 `;
 

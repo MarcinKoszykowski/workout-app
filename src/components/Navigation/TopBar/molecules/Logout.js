@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
+import UserContext from 'contexts/UserContext';
+import { lightRed } from 'styled/colors';
 import logoutIcon from 'assets/icons/logout.svg';
 import Icon from '../atoms/Icon';
 import Text from '../atoms/Text';
-import { lightRed } from 'styled/colors';
+import { login } from 'data/routes';
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,12 +24,6 @@ const StyledText = styled(Text)`
   margin-right: 0;
 
   @media screen and (max-width: 768px) {
-    font-weight: 400;
-    font-size: 0.9rem;
-    margin-left: 12.5px;
-  }
-
-  @media screen and (max-width: 576px) {
     display: none;
   }
 `;
@@ -35,15 +32,33 @@ const StyledIcon = styled(Icon)`
   height: 30px;
   width: 30px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 576px) {
     height: 25px;
     width: 25px;
   }
 `;
 
 const Logout = () => {
+  const { setUser, setLogin } = useContext(UserContext);
+
+  const history = useHistory();
+
+  const logoutOnClick = () => {
+    removeUserFromLS();
+    setUser({});
+    setLogin(false);
+    history.push(login);
+  };
+
+  const removeUserFromLS = () => {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userPassword');
+    localStorage.removeItem('userLogin');
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onClick={logoutOnClick}>
       <StyledIcon icon={logoutIcon} />
       <StyledText>logout</StyledText>
     </Wrapper>

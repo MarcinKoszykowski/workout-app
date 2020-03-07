@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import UserContext from 'contexts/UserContext';
 import userIcon from 'assets/icons/user-solid.svg';
 import Icon from '../atoms/Icon';
 import Text from '../atoms/Text';
@@ -35,8 +34,6 @@ const StyledIcon = styled(Icon)`
 `;
 
 const UserNavigation = () => {
-  const { userName } = useContext(UserContext);
-
   const history = useHistory();
 
   const userOnClick = () => {
@@ -45,7 +42,7 @@ const UserNavigation = () => {
 
   return (
     <Wrapper onClick={userOnClick}>
-      <Text>{userName}</Text>
+      <Text>{localStorage.getItem('userName')}</Text>
       <StyledIcon icon={userIcon} />
     </Wrapper>
   );

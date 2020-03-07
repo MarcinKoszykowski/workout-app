@@ -1,12 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import NavigationTemplate from 'templates/NavigationTemplate';
 import SportContext from 'contexts/SportContext';
 import animations from 'styled/animations';
 import { colorWithOpacity, purple } from 'styled/colors';
-import UserContext from 'contexts/UserContext';
-import { useHistory } from 'react-router';
-import { main } from 'data/routes';
+import sports from 'data/sports';
 
 const Background = styled.div`
   position: fixed;
@@ -32,21 +30,20 @@ const Background = styled.div`
 
 const SportView = () => {
   const { sportBackground } = useContext(SportContext);
-  const { userName } = useContext(UserContext);
-  const history = useHistory();
+  const location = window.location.href.slice(28);
 
-  const checkUserName = () => {
-    if (!userName) {
-      history.push(main);
+  const setBackground = () => {
+    if (sportBackground) {
+      return sportBackground;
+    } else {
+      return sports.find(item => item.name === location).background;
     }
   };
-
-  useEffect(() => checkUserName());
 
   return (
     <>
       <NavigationTemplate />
-      <Background sport={sportBackground} />
+      <Background sport={setBackground()} />
     </>
   );
 };

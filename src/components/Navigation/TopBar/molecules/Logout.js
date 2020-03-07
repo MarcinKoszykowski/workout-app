@@ -7,6 +7,7 @@ import logoutIcon from 'assets/icons/logout.svg';
 import Icon from '../atoms/Icon';
 import Text from '../atoms/Text';
 import { login } from 'data/routes';
+import { removeUserFromLocalStorage } from 'data/functions';
 
 const Wrapper = styled.div`
   display: flex;
@@ -44,18 +45,13 @@ const Logout = () => {
   const history = useHistory();
 
   const logoutOnClick = () => {
-    removeUserFromLS();
+    removeUserFromLocalStorage();
     setUser({});
     setLogin(false);
     history.push(login);
   };
 
-  const removeUserFromLS = () => {
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userPassword');
-    localStorage.removeItem('userLogin');
-  };
+
 
   return (
     <Wrapper onClick={logoutOnClick}>

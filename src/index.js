@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import LoaderProvider from 'providers/LoaderProvider';
+import SportProvider from 'providers/SportProvider';
+import UserProvider from 'providers/UserProvider';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <LoaderProvider>
-    <App />
-  </LoaderProvider>,
+  <BrowserRouter>
+    <UserProvider>
+      <SportProvider>
+        <LoaderProvider>
+          <App />
+        </LoaderProvider>
+      </SportProvider>
+    </UserProvider>
+  </BrowserRouter>,
   document.getElementById('root'),
 );
 

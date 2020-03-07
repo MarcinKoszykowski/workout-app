@@ -4,7 +4,7 @@ import axios from 'axios';
 import md5 from 'md5';
 import { login } from 'data/value';
 import { user as userRoute } from 'data/api_routes';
-import { setUrlAPI } from 'data/functions';
+import { setUrlAPI, getUserName, setUserInLocalStorage } from 'data/functions';
 import { colorWithOpacity, lightGrey, red } from 'styled/colors';
 import UserContext from 'contexts/UserContext';
 import FormInput from '../molecules/FormInput';
@@ -54,7 +54,7 @@ const LoginForm = () => {
     infoText: { incorrect, error },
   } = login;
 
-  const { setUser, setLogin } = useContext(UserContext);
+  const { setUser, setLogin, setUserName } = useContext(UserContext);
   const { setLoading } = useContext(LoaderContext);
 
   const history = useHistory();
@@ -85,17 +85,11 @@ const LoginForm = () => {
     setInfoText(text);
   };
 
-  const setUserInLocalStorage = user => {
-    localStorage.setItem('userId', user._id);
-    localStorage.setItem('userEmail', user.email);
-    localStorage.setItem('userPassword', user.password);
-    localStorage.setItem('userLogin', true);
-  };
-
   const loginUser = user => {
     setUser({ ...user });
     setUserInLocalStorage(user);
     setLogin(true);
+    setUserName(getUserName(user.email));
     history.push(main);
   };
 

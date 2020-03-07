@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { setSportRoute } from 'data/routes';
 import Icon from '../atoms/Icon';
+import SportContext from 'contexts/SportContext';
 
 const Wrapper = styled.div`
   margin-bottom: 25px;
@@ -25,12 +26,16 @@ const Wrapper = styled.div`
   }
 `;
 
-const SportIcon = ({ icon, name }) => (
-  <Wrapper>
-    <Link to={setSportRoute(name)}>
-      <Icon icon={icon} />
-    </Link>
-  </Wrapper>
-);
+const SportIcon = ({ icon, name, background }) => {
+  const { setSportBackground } = useContext(SportContext);
+
+  return (
+    <Wrapper onClick={() => setSportBackground(background)}>
+      <Link to={setSportRoute(name)}>
+        <Icon icon={icon} />
+      </Link>
+    </Wrapper>
+  );
+};
 
 export default SportIcon;

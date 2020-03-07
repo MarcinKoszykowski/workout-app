@@ -15,20 +15,20 @@ const Wrapper = styled.div`
   top: 0;
   left: 160px;
   right: 0;
-  height: 80px;
+  height: 70px;
   background-color: ${colorWithOpacity(purple, 0.6)};
   z-index: 1;
 
   @media screen and (max-width: 992px) {
     left: 145px;
-    height: 70px;
+    height: 65px;
     padding-right: 35px;
     padding-left: 30px;
   }
 
   @media screen and (max-width: 768px) {
     left: 130px;
-    height: 60px;
+    height: 55px;
     padding-right: 25px;
     padding-left: 20px;
   }

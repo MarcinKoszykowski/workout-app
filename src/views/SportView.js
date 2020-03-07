@@ -1,6 +1,54 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import styled from 'styled-components';
 import NavigationTemplate from 'templates/NavigationTemplate';
+import SportContext from 'contexts/SportContext';
+import animations from 'styled/animations';
+import { colorWithOpacity, purple } from 'styled/colors';
+import UserContext from 'contexts/UserContext';
+import { useHistory } from 'react-router';
+import { main } from 'data/routes';
 
-const SportView = () => <NavigationTemplate />;
+const Background = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: ${({ sport }) => `url(${sport})`};
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  animation: ${animations.opacityZeroToOne} 0.5s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: ${colorWithOpacity(purple, 0.3)};
+    z-index: 1;
+  }
+`;
+
+const SportView = () => {
+  const { sportBackground } = useContext(SportContext);
+  const { userName } = useContext(UserContext);
+  const history = useHistory();
+
+  const checkUserName = () => {
+    if (!userName) {
+      history.push(main);
+    }
+  };
+
+  useEffect(() => checkUserName());
+
+  return (
+    <>
+      <NavigationTemplate />
+      <Background sport={sportBackground} />
+    </>
+  );
+};
 
 export default SportView;

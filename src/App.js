@@ -8,21 +8,24 @@ import Loader from 'components/Loader/Loader';
 import LoaderContext from 'contexts/LoaderContext';
 import UserProvider from 'providers/UserProvider';
 import SportView from 'views/SportView';
+import SportProvider from 'providers/SportProvider';
 
 const App = () => {
   const { loading } = useContext(LoaderContext);
 
   return (
     <UserProvider>
-      <BrowserRouter>
-        <GlobalStyle />
-        {loading && <Loader />}
-        <Switch>
-          <Route exact path={main} component={MainView} />
-          <Route exact path={login} component={LoginView} />
-          <Route exact path={sport} component={SportView} />
-        </Switch>
-      </BrowserRouter>
+      <SportProvider>
+        <BrowserRouter>
+          <GlobalStyle />
+          {loading && <Loader />}
+          <Switch>
+            <Route exact path={main} component={MainView} />
+            <Route exact path={login} component={LoginView} />
+            <Route exact path={sport} component={SportView} />
+          </Switch>
+        </BrowserRouter>
+      </SportProvider>
     </UserProvider>
   );
 };

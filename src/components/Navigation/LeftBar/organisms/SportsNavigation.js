@@ -11,8 +11,8 @@ const Wrapper = styled.div`
 
 const SportsNavigation = () => (
   <Wrapper>
-    {sports.map(({ icon, name }) => (
-      <SportIcon icon={icon} name={name} key={name} />
+    {sports.map(({ icon, name, background }) => (
+      <SportIcon icon={icon} name={name} key={name} background={background} />
     ))}
   </Wrapper>
 );

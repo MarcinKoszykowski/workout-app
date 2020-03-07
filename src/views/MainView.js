@@ -6,7 +6,7 @@ import UserContext from 'contexts/UserContext';
 import LoaderContext from 'contexts/LoaderContext';
 import { login as loginURL } from 'data/routes';
 import { user as userRoute } from 'data/api_routes';
-import { setUrlAPI } from 'data/functions';
+import { setUrlAPI, getUserName } from 'data/functions';
 import { purple, colorWithOpacity } from 'styled/colors';
 import animations from 'styled/animations';
 import mainImage from 'assets/images/main.jpg';
@@ -33,7 +33,7 @@ const Background = styled.div`
 `;
 
 const MainView = () => {
-  const { setLogin, setUser, login } = useContext(UserContext);
+  const { setLogin, setUser, setUserName, login } = useContext(UserContext);
   const { setLoading } = useContext(LoaderContext);
   const history = useHistory();
 
@@ -82,6 +82,7 @@ const MainView = () => {
   const loginUser = user => {
     setUser({ ...user });
     setLogin(true);
+    setUserName(getUserName(user.email));
   };
 
   const handleCheckLogin = () => checkLogin();

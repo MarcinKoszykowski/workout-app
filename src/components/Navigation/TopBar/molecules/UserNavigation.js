@@ -4,6 +4,8 @@ import UserContext from 'contexts/UserContext';
 import userIcon from 'assets/icons/user-solid.svg';
 import Icon from '../atoms/Icon';
 import Text from '../atoms/Text';
+import { useHistory } from 'react-router';
+import { main } from 'data/routes';
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,10 +35,17 @@ const StyledIcon = styled(Icon)`
 `;
 
 const UserNavigation = () => {
-  const { user } = useContext(UserContext);
+  const { userName } = useContext(UserContext);
+
+  const history = useHistory();
+
+  const userOnClick = () => {
+    history.push(main);
+  };
+
   return (
-    <Wrapper>
-      <Text>{user.email}</Text>
+    <Wrapper onClick={userOnClick}>
+      <Text>{userName}</Text>
       <StyledIcon icon={userIcon} />
     </Wrapper>
   );

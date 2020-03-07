@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { colorWithOpacity, purple } from 'styled/colors';
 import UserNavigation from './molecules/UserNavigation';
 import Logout from './molecules/Logout';
+import DateInfo from './molecules/DateInfo';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -48,6 +49,7 @@ const Wrapper = styled.div`
 const TopBar = () => (
   <Wrapper>
     <UserNavigation />
+    <DateInfo />
     <Logout />
   </Wrapper>
 );

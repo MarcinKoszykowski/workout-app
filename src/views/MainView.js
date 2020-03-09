@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import LoaderContext from 'contexts/LoaderContext';
+import AppContext from 'context';
 import { purple, colorWithOpacity } from 'styled/colors';
 import animations from 'styled/animations';
 import mainImage from 'assets/images/main.jpg';
@@ -27,7 +27,7 @@ const Background = styled.div`
 `;
 
 const MainView = () => {
-  const { setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(AppContext);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);

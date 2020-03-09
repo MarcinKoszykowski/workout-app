@@ -5,16 +5,14 @@ import { main, login as loginURL, sport } from 'data/routes';
 import LoginView from './views/LoginView';
 import MainView from './views/MainView';
 import Loader from 'components/Loader/Loader';
-import LoaderContext from 'contexts/LoaderContext';
+import AppContext from 'context';
 import SportView from 'views/SportView';
-import UserContext from 'contexts/UserContext';
 import axios from 'axios';
 import { setUrlAPI, getUserName } from 'data/functions';
 import { user as userRoute } from 'data/api_routes';
 
 const App = () => {
-  const { setLogin, setUser, setUserName, login } = useContext(UserContext);
-  const { loading } = useContext(LoaderContext);
+  const { setLogin, setUser, setUserName, login, loading } = useContext(AppContext);
   const history = useHistory();
 
   const checkLogin = () => {

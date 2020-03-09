@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import NavigationTemplate from 'templates/NavigationTemplate';
-import SportContext from 'contexts/SportContext';
+import AppContext from 'context';
 import animations from 'styled/animations';
 import { colorWithOpacity, purple } from 'styled/colors';
 import sports from 'data/sports';
+import MainButton from 'components/Navigation/MainButton';
+import { useHistory } from 'react-router';
+import { main } from 'data/routes';
 
 const Background = styled.div`
   position: fixed;
@@ -29,8 +32,13 @@ const Background = styled.div`
 `;
 
 const SportView = () => {
-  const { sportBackground } = useContext(SportContext);
+  const { sportBackground } = useContext(AppContext);
   const location = window.location.href.slice(28);
+  const history = useHistory();
+
+  const mainButtonOnClick = () => {
+    history.push(main);
+  };
 
   const setBackground = () => {
     if (sportBackground) {
@@ -44,6 +52,7 @@ const SportView = () => {
     <>
       <NavigationTemplate />
       <Background sport={setBackground()} />
+      <MainButton onClick={mainButtonOnClick} />
     </>
   );
 };

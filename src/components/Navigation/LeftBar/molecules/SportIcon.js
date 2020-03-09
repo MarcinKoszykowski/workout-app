@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { setSportRoute } from 'data/routes';
 import Icon from '../atoms/Icon';
-import SportContext from 'contexts/SportContext';
+import AppContext from 'context';
 
 const Wrapper = styled.div`
   margin-bottom: 25px;
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
 `;
 
 const SportIcon = ({ icon, name, background }) => {
-  const { setSportBackground } = useContext(SportContext);
+  const { setSportBackground } = useContext(AppContext);
 
   return (
     <Wrapper onClick={() => setSportBackground(background)}>

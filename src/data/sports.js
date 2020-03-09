@@ -5,8 +5,8 @@ import cyclingIcon from 'assets/icons/sports/cycling.svg';
 import dumbbellIcon from 'assets/icons/sports/dumbbell.svg';
 import footballIcon from 'assets/icons/sports/football.svg';
 import hockeyIcon from 'assets/icons/sports/hockey.svg';
+import runningIcon from 'assets/icons/sports/running.svg';
 import skatingIcon from 'assets/icons/sports/skating.svg';
-import stretchingIcon from 'assets/icons/sports/stretching.svg';
 import swimmingIcon from 'assets/icons/sports/swimming.svg';
 import tennisIcon from 'assets/icons/sports/tennis.svg';
 import volleyballIcon from 'assets/icons/sports/volleyball.svg';
@@ -19,8 +19,8 @@ import cyclingImage from 'assets/images/sports/cycling.jpg';
 import dumbbellImage from 'assets/images/sports/dumbbell.jpg';
 import footballImage from 'assets/images/sports/football.jpg';
 import hockeyImage from 'assets/images/sports/hockey.jpg';
+import runningImage from 'assets/images/sports/running.jpg';
 import skatingImage from 'assets/images/sports/skating.jpg';
-import stretchingImage from 'assets/images/sports/stretching.jpg';
 import swimmingImage from 'assets/images/sports/swimming.jpg';
 import tennisImage from 'assets/images/sports/tennis.jpg';
 import volleyballImage from 'assets/images/sports/volleyball.jpg';
@@ -63,14 +63,14 @@ const sports = [
     background: hockeyImage,
   },
   {
+    name: 'running',
+    icon: runningIcon,
+    background: runningImage,
+  },
+  {
     name: 'skating',
     icon: skatingIcon,
     background: skatingImage,
-  },
-  {
-    name: 'stretching',
-    icon: stretchingIcon,
-    background: stretchingImage,
   },
   {
     name: 'swimming',

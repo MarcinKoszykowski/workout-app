@@ -2,20 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import LoaderProvider from 'providers/LoaderProvider';
-import SportProvider from 'providers/SportProvider';
-import UserProvider from 'providers/UserProvider';
+import AppProvider from 'provider';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <BrowserRouter>
-    <UserProvider>
-      <SportProvider>
-        <LoaderProvider>
-          <App />
-        </LoaderProvider>
-      </SportProvider>
-    </UserProvider>
+    <AppProvider>
+      <App />
+    </AppProvider>
   </BrowserRouter>,
   document.getElementById('root'),
 );

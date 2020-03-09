@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
-import UserContext from 'contexts/UserContext';
+import AppContext from 'context';
 import { lightRed } from 'styled/colors';
 import logoutIcon from 'assets/icons/logout.svg';
 import Icon from '../atoms/Icon';
@@ -40,7 +40,7 @@ const StyledIcon = styled(Icon)`
 `;
 
 const Logout = () => {
-  const { setUser, setLogin } = useContext(UserContext);
+  const { setUser, setLogin } = useContext(AppContext);
 
   const history = useHistory();
 

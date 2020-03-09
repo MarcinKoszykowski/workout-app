@@ -6,12 +6,11 @@ import { login } from 'data/value';
 import { user as userRoute } from 'data/api_routes';
 import { setUrlAPI, getUserName, setUserInLocalStorage } from 'data/functions';
 import { colorWithOpacity, lightGrey, red } from 'styled/colors';
-import UserContext from 'contexts/UserContext';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
 import { useHistory } from 'react-router';
 import { main } from 'data/routes';
-import LoaderContext from 'contexts/LoaderContext';
+import AppContext from 'context';
 
 const Wrapper = styled.div`
   margin-top: 20px;
@@ -54,9 +53,7 @@ const LoginForm = () => {
     infoText: { incorrect, error },
   } = login;
 
-  const { setUser, setLogin, setUserName } = useContext(UserContext);
-  const { setLoading } = useContext(LoaderContext);
-
+  const { setUser, setLogin, setUserName, setLoading } = useContext(AppContext);
   const history = useHistory();
 
   const [passwordType, setPasswordType] = useState(true);

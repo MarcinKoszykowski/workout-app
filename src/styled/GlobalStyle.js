@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { purple } from './colors';
 
 const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Major+Mono+Display|Montserrat:100,200,300,400,500,600,700,800,900&display=swap&subset=latin-ext');
@@ -32,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         position: relative;
         overflow-x: hidden;
+        background-color: ${purple};
         min-width: 315px;
         font-weight: 400;
         -webkit-font-smoothing: antialiased;

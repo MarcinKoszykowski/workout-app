@@ -34,7 +34,6 @@ const GlobalStyle = createGlobalStyle`
         position: relative;
         overflow-x: hidden;
         background-color: ${purple};
-        min-width: 315px;
         font-weight: 400;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

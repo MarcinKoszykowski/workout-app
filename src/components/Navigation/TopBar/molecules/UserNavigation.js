@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import userIcon from 'assets/icons/user-solid.svg';
 import Icon from '../atoms/Icon';
 import Text from '../atoms/Text';
-import { useHistory } from 'react-router';
-import { main } from 'data/routes';
+import AppContext from 'context';
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,10 +33,10 @@ const StyledIcon = styled(Icon)`
 `;
 
 const UserNavigation = () => {
-  const history = useHistory();
+  const { setUserPanelVisibility, userPanelVisibility } = useContext(AppContext);
 
   const userOnClick = () => {
-    history.push(main);
+    setUserPanelVisibility(!userPanelVisibility);
   };
 
   return (

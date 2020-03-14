@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import logoImage from 'assets/images/logo.png';
 import { white } from 'styled/colors';
 
-const MainButton = styled.div`
+const Button = styled.div`
   position: fixed;
   right: 15px;
   bottom: 15px;
@@ -45,4 +45,4 @@ const MainButton = styled.div`
   }
 `;
 
-export default MainButton;
+export default Button;

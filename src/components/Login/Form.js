@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import backgroundImage from 'assets/images/background.jpg';
-import { purple, black, colorWithOpacity, lightGrey } from 'styled/colors';
+import { black, colorWithOpacity, lightGrey } from 'styled/colors';
 import { login, register } from 'data/value';
 import Button from './atoms/Button';
 import LoginForm from './organisms/LoginForm';
@@ -42,33 +41,6 @@ const Box = styled.div`
   text-align: center;
 `;
 
-const Background = styled.div`
-  position: absolute;
-  display: none;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url(${backgroundImage}) no-repeat center;
-  background-size: cover;
-  z-index: -1;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: ${colorWithOpacity(purple, 0.6)};
-    z-index: 1;
-  }
-
-  @media screen and (max-width: 768px) {
-    display: block;
-  }
-`;
-
 const StyledButton = styled(Button)`
   margin-bottom: 20px;
 `;
@@ -92,7 +64,6 @@ const Form = () => {
         {formType ? <LoginForm /> : <RegisterForm />}
         <StyledButton onClick={handleButtonOnClick}>{formType ? registerButton : backToLogin}</StyledButton>
       </Box>
-      <Background />
     </Wrapper>
   );
 };

@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 175px;
   padding-right: 45px;
   padding-left: 40px;
   top: 0;

@@ -8,13 +8,14 @@ const AppProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [login, setLogin] = useState(false);
   const [userName, setUserName] = useState();
+  const [userPanelVisibility, setUserPanelVisibility] = useState(false);
 
   const userElement = {
     user,
     setUser,
     userName,
-    setUserName
-  }
+    setUserName,
+  };
 
   const sportElement = {
     sportBackground,
@@ -26,13 +27,15 @@ const AppProvider = ({ children }) => {
     setLoading,
     login,
     setLogin,
+    userPanelVisibility,
+    setUserPanelVisibility,
   };
 
   const contextElement = {
-      ...userElement,
-      ...sportElement,
-      ...otherElement
-  }
+    ...userElement,
+    ...sportElement,
+    ...otherElement,
+  };
 
   return <AppContext.Provider value={contextElement}>{children}</AppContext.Provider>;
 };

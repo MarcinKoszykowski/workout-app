@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { purple, colorWithOpacity, lightGrey } from 'styled/colors';
+import { purple, lightGrey, colorWithOpacity } from 'styled/colors';
 
 const Button = styled.button`
   padding: 10px;
@@ -16,13 +16,22 @@ const Button = styled.button`
   letter-spacing: 1px;
   text-transform: capitalize;
 
-  &:hover {
-    background-color: transparent;
-    color: ${purple};
+  @media screen and (min-width: 1024px) {
+    &:hover {
+      background-color: transparent;
+      color: ${purple};
+    }
+
+    &:active {
+      opacity: 0.8;
+    }
   }
 
-  &:active {
-    opacity: 0.8;
+  @media screen and (max-width: 1024px) {
+    &:active {
+      background-color: transparent;
+      color: ${purple};
+    }
   }
 
   @media screen and (max-width: 768px) {
@@ -30,13 +39,9 @@ const Button = styled.button`
     border-color: ${lightGrey};
     color: ${lightGrey};
 
-    &:hover {
+    &:active {
       background-color: ${colorWithOpacity(lightGrey, 0.2)};
       color: ${lightGrey};
-    }
-
-    &:active {
-      opacity: 0.9;
     }
   }
 `;

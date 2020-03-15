@@ -16,7 +16,6 @@ const StyledText = styled(Text)`
   color: ${white};
   margin-left: 15px;
   margin-right: 0;
-  cursor: default;
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -24,8 +23,6 @@ const StyledText = styled(Text)`
 `;
 
 const StyledIcon = styled(Icon)`
-  cursor: default;
-
   @media screen and (max-width: 768px) {
     display: none;
   }

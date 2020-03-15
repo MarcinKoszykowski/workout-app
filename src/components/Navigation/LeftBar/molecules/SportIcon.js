@@ -27,10 +27,15 @@ const Wrapper = styled.div`
 `;
 
 const SportIcon = ({ icon, name, background }) => {
-  const { setSportBackground } = useContext(AppContext);
+  const { setSportBackground, setUserPanelVisibility } = useContext(AppContext);
+
+  const buttonOnClick = () => {
+    setSportBackground(background);
+    setUserPanelVisibility(false);
+  };
 
   return (
-    <Wrapper onClick={() => setSportBackground(background)}>
+    <Wrapper onClick={buttonOnClick}>
       <Link to={setSportRoute(name)}>
         <Icon icon={icon} />
       </Link>

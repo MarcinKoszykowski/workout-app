@@ -5,7 +5,6 @@ const User = styled.p`
   font-weight: 500;
   color: ${blue};
   margin-right: 15px;
-  cursor: pointer;
   transition: margin 0.3s ease;
 
   @media screen and (max-width: 992px) {

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { colorWithOpacity, white } from 'styled/colors';
 import AppContext from 'context';
+import ExitButton from './atoms/ExitButton';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -44,9 +45,17 @@ const Wrapper = styled.div`
 `;
 
 const UserPanel = () => {
-  const { userPanelVisibility } = useContext(AppContext);
+  const { userPanelVisibility, setUserPanelVisibility } = useContext(AppContext);
 
-  return <Wrapper isVisible={userPanelVisibility}></Wrapper>;
+  const exitButtonOnClick = () => {
+    setUserPanelVisibility(false);
+  };
+
+  return (
+    <Wrapper isVisible={userPanelVisibility}>
+      <ExitButton onClick={exitButtonOnClick} />
+    </Wrapper>
+  );
 };
 
 export default UserPanel;

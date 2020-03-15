@@ -9,12 +9,13 @@ import Wrapper from 'atoms/Wrapper';
 import Button from 'atoms/Button';
 
 const SportView = () => {
-  const { sportBackground } = useContext(AppContext);
+  const { sportBackground, setUserPanelVisibility } = useContext(AppContext);
   const location = window.location.href.slice(28);
   const history = useHistory();
 
   const buttonOnClick = () => {
     history.push(main);
+    setUserPanelVisibility(false);
   };
 
   const setBackground = () => {

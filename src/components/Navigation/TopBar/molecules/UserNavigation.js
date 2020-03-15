@@ -9,9 +9,22 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 
-  &:hover {
-    opacity: 0.8;
+  @media screen and (min-width: 1024px) {
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    &:active {
+      opacity: 0.8;
+    }
   }
 `;
 

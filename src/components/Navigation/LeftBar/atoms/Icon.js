@@ -7,8 +7,20 @@ const Icon = styled.div`
   background-size: contain;
   cursor: pointer;
 
-  &:hover {
-    transform: scale(1.05);
+  @media screen and (min-width: 1024px) {
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(1);
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    &:active {
+      transform: scale(1.05);
+    }
   }
 
   @media screen and (max-width: 992px) {

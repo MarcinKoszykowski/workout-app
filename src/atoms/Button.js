@@ -18,8 +18,20 @@ const Button = styled.div`
   opacity: 0.8;
   z-index: 1;
 
-  &:hover {
-    opacity: 1;
+  @media screen and (min-width: 1024px) {
+    &:hover {
+      opacity: 1;
+    }
+
+    &:active {
+      opacity: 0.8;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    &:active {
+      opacity: 1;
+    }
   }
 
   @media screen and (max-width: 992px) {

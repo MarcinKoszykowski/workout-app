@@ -1,5 +1,5 @@
 {
-  "extends": ["prettier", "prettier/react"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "globals": {
     "document": true,
     "window": true

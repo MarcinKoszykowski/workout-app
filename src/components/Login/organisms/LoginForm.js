@@ -4,13 +4,13 @@ import axios from 'axios';
 import md5 from 'md5';
 import { login } from 'data/value';
 import { user as userRoute } from 'data/api_routes';
-import { setUrlAPI, getUserName, setUserInLocalStorage } from 'data/functions';
+import { setUrlAPI, setUserInLocalStorage } from 'data/functions';
 import { colorWithOpacity, lightGrey, red } from 'styled/colors';
-import FormInput from '../molecules/FormInput';
-import Button from '../atoms/Button';
 import { useHistory } from 'react-router';
 import { main } from 'data/routes';
 import AppContext from 'context';
+import Button from '../atoms/Button';
+import FormInput from '../molecules/FormInput';
 
 const Wrapper = styled.div`
   margin-top: 20px;
@@ -53,7 +53,7 @@ const LoginForm = () => {
     infoText: { incorrect, error },
   } = login;
 
-  const { setUser, setLogin, setUserName, setLoading } = useContext(AppContext);
+  const { setUser, setUserIsLogged, setLoading } = useContext(AppContext);
   const history = useHistory();
 
   const [passwordType, setPasswordType] = useState(true);
@@ -85,8 +85,7 @@ const LoginForm = () => {
   const loginUser = user => {
     setUser({ ...user });
     setUserInLocalStorage(user);
-    setLogin(true);
-    setUserName(getUserName(user.email));
+    setUserIsLogged(true);
     history.push(main);
   };
 
@@ -122,7 +121,7 @@ const LoginForm = () => {
       .then(result => result.data)
       .then(data => checkStatus(data))
       .catch(err => {
-        console.error(err);
+        console.error(err); // eslint-disable-line
         handleStatus(error);
       });
   };

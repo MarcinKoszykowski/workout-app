@@ -1,29 +1,31 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { colorWithOpacity, white } from 'styled/colors';
+import { colorWithOpacity, white, purple } from 'styled/colors';
 import AppContext from 'context';
 import ExitButton from './atoms/ExitButton';
+import UserForm from './organisms/UserForm';
 
 const Wrapper = styled.div`
   position: fixed;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
-  top: 100px;
+  height: auto;
+  top: 50%;
   right: 0;
   left: 160px;
-  bottom: 30px;
   z-index: 2;
-  background-color: ${colorWithOpacity(white, 0.8)};
+  transform: translateY(-50%);
+  background-color: ${colorWithOpacity(white, 0.9)};
+  box-shadow: 0 0 10px 5px ${colorWithOpacity(purple, 0.7)};
+  border-radius: 15px;
   width: 500px;
-  transform: ${({ isVisible }) => `translateY(${isVisible ? 0 : '-300%'})`};
-  transition: transform 0.5s ease;
 
   @media screen and (max-width: 992px) {
     left: 145px;
-    top: 95px;
   }
 
   @media screen and (max-width: 768px) {
-    top: 85px;
     right: 30px;
     left: 160px;
     width: auto;
@@ -32,13 +34,10 @@ const Wrapper = styled.div`
   @media screen and (max-width: 576px) {
     right: 30px;
     left: 30px;
-    top: 30px;
-    background-color: ${colorWithOpacity(white, 0.9)};
+    background-color: ${colorWithOpacity(white, 0.95)};
   }
 
   @media screen and (max-width: 420px) {
-    top: 20px;
-    bottom: 20px;
     left: 20px;
     right: 20px;
   }
@@ -52,9 +51,12 @@ const UserPanel = () => {
   };
 
   return (
-    <Wrapper isVisible={userPanelVisibility}>
-      <ExitButton onClick={exitButtonOnClick} />
-    </Wrapper>
+    userPanelVisibility && (
+      <Wrapper>
+        <ExitButton onClick={exitButtonOnClick} />
+        <UserForm />
+      </Wrapper>
+    )
   );
 };
 

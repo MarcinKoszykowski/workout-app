@@ -1,12 +1,12 @@
 import React from 'react';
 import LeftBar from 'components/Navigation/LeftBar/LeftBar';
-import TopBar from 'components/Navigation/TopBar/TopBar';
 import UserPanel from 'components/UserPanel/UserPanel';
+import RightBar from 'components/Navigation/RightBar/RightBar';
 
 const NavigationTemplate = () => {
   return (
     <>
-      <TopBar />
+      <RightBar />
       <LeftBar />
       <UserPanel />
     </>

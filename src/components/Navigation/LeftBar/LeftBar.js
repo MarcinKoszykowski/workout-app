@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { purple, colorWithOpacity } from 'styled/colors';
+import { colorWithOpacity, white, black } from 'styled/colors';
 import SportsNavigation from './organisms/SportsNavigation';
 
 const Wrapper = styled.div`
@@ -8,30 +8,31 @@ const Wrapper = styled.div`
   padding: 20px 0;
   top: 0;
   bottom: 0;
-  width: 160px;
-  background-color: ${colorWithOpacity(purple, 0.6)};
+  width: 180px;
+  background-color: ${white};
   z-index: 1;
   overflow-y: scroll;
+  box-shadow: 10px 0 35px 0 ${colorWithOpacity(black, 0.7)};
 
   &::-webkit-scrollbar {
     display: none;
   }
 
   @media screen and (max-width: 992px) {
-    width: 145px;
+    width: 160px;
   }
 
   @media screen and (max-width: 768px) {
-    width: 130px;
+    width: 140px;
   }
 
   @media screen and (max-width: 576px) {
-    width: 105px;
+    width: 120px;
     padding: 15px 0;
   }
 
   @media screen and (max-width: 420px) {
-    width: 85px;
+    width: 100px;
   }
 `;
 

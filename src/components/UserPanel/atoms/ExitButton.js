@@ -4,8 +4,7 @@ import { lightRed, colorWithOpacity } from 'styled/colors';
 
 const ExitButton = styled.div`
   float: right;
-  margin-top: 15px;
-  margin-right: 15px;
+  margin: 15px 15px 0 auto;
   width: 35px;
   height: 35px;
   background: url(${icon}) no-repeat center center;

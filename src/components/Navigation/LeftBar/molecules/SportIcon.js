@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { setSportRoute } from 'data/routes';
-import Icon from '../atoms/Icon';
 import AppContext from 'context';
+import Icon from '../atoms/Icon';
 
 const Wrapper = styled.div`
   margin-bottom: 25px;
@@ -14,24 +15,32 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 992px) {
-    margin-bottom: 20px;
+    margin-bottom: 22.5px;
   }
 
   @media screen and (max-width: 768px) {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 576px) {
+    margin-bottom: 17.5px;
   }
 
   @media screen and (max-width: 420px) {
-    margin-bottom: 12.5px;
+    margin-bottom: 15px;
   }
 `;
 
 const SportIcon = ({ icon, name, background }) => {
-  const { setSportBackground, setUserPanelVisibility } = useContext(AppContext);
+  const { setSportBackground, setUserPanelVisibility, mainButtonIsVisibility, setMainButtonIsVisibility } = useContext(AppContext);
 
   const buttonOnClick = () => {
     setSportBackground(background);
     setUserPanelVisibility(false);
+
+    if (!mainButtonIsVisibility) {
+      setMainButtonIsVisibility(true);
+    }
   };
 
   return (
@@ -41,6 +50,12 @@ const SportIcon = ({ icon, name, background }) => {
       </Link>
     </Wrapper>
   );
+};
+
+SportIcon.propTypes = {
+  icon: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  background: PropTypes.string.isRequired,
 };
 
 export default SportIcon;

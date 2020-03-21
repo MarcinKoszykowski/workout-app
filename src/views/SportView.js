@@ -1,36 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import NavigationTemplate from 'templates/NavigationTemplate';
 import AppContext from 'context';
 import sports from 'data/sports';
-import { useHistory } from 'react-router';
-import { main } from 'data/routes';
 import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
-import Button from 'atoms/Button';
 
 const SportView = () => {
-  const { sportBackground, setUserPanelVisibility } = useContext(AppContext);
+  const { sportBackground, mainButtonVisibility, setMainButtonVisibility } = useContext(AppContext);
   const location = window.location.href.slice(28);
-  const history = useHistory();
-
-  const buttonOnClick = () => {
-    history.push(main);
-    setUserPanelVisibility(false);
-  };
 
   const setBackground = () => {
     if (sportBackground) {
       return sportBackground;
-    } else {
+    } 
       return sports.find(item => item.name === location).background;
-    }
+    
   };
+
+  useEffect(() => {
+    if (!mainButtonVisibility) {
+      setMainButtonVisibility(true);
+    }
+  });
 
   return (
     <Wrapper>
       <NavigationTemplate />
       <Background image={setBackground()} />
-      <Button onClick={buttonOnClick} />
     </Wrapper>
   );
 };

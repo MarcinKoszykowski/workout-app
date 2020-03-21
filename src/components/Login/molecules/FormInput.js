@@ -71,6 +71,7 @@ const Input = styled.input`
         background: ${colorWithOpacity(lightGrey, 0.7)};
       }
     }
+
     & + ${Label} {
       top: -20px;
       left: 0;

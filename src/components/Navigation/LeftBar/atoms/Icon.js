@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Icon = styled.div`
-  height: 80px;
-  width: 80px;
+  height: 90px;
+  width: 90px;
   background: ${({ icon }) => `url(${icon})`} no-repeat center;
   background-size: contain;
   cursor: pointer;
@@ -24,23 +24,23 @@ const Icon = styled.div`
   }
 
   @media screen and (max-width: 992px) {
+    height: 80px;
+    width: 80px;
+  }
+
+  @media screen and (max-width: 768px) {
     height: 70px;
     width: 70px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 576px) {
     height: 60px;
     width: 60px;
   }
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 420px) {
     height: 50px;
     width: 50px;
-  }
-
-  @media screen and (max-width: 420px) {
-    height: 40px;
-    width: 40px;
   }
 `;
 

@@ -2,21 +2,44 @@ import React, { useContext, useEffect, useCallback } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import GlobalStyle from 'styled/GlobalStyle';
 import { main, login as loginURL, sport } from 'data/routes';
-import LoginView from './views/LoginView';
-import MainView from './views/MainView';
 import Loader from 'components/Loader/Loader';
 import AppContext from 'context';
 import SportView from 'views/SportView';
 import axios from 'axios';
-import { setUrlAPI, getUserName } from 'data/functions';
+import { setUrlAPI } from 'data/functions';
 import { user as userRoute } from 'data/api_routes';
+import MainView from './views/MainView';
+import LoginView from './views/LoginView';
 
 const App = () => {
-  const { setLogin, setUser, setUserName, login, loading } = useContext(AppContext);
+  const { setUserIsLogged, setUser, userIsLogged, loading } = useContext(AppContext);
   const history = useHistory();
 
+  const checkUser = user => {
+    const { password, email } = user;
+    const passwordLS = localStorage.getItem('userPassword');
+    const emailLS = localStorage.getItem('userEmail');
+
+    return password === passwordLS && email === emailLS;
+  };
+
+  const loginUser = user => {
+    setUser({ ...user });
+    setUserIsLogged(true);
+  };
+
+  const checkStatus = data => {
+    const { status, user } = data;
+
+    if (status === 1 && checkUser(user)) {
+      loginUser(user);
+    } else {
+      history.push(loginURL);
+    }
+  };
+
   const checkLogin = () => {
-    if (localStorage.getItem('userLogin') === 'true') {
+    if (localStorage.getItem('userIsLogged') === 'true') {
       axios
         .post(
           setUrlAPI(userRoute.id),
@@ -39,38 +62,14 @@ const App = () => {
     }
   };
 
-  const checkStatus = data => {
-    const { status, user } = data;
-
-    if (status === 1 && checkUser(user)) {
-      loginUser(user);
-    } else {
-      history.push(loginURL);
-    }
-  };
-
-  const checkUser = user => {
-    const { password, email } = user;
-    const passwordLS = localStorage.getItem('userPassword');
-    const emailLS = localStorage.getItem('userEmail');
-
-    return password === passwordLS && email === emailLS;
-  };
-
-  const loginUser = user => {
-    setUser({ ...user });
-    setLogin(true);
-    setUserName(getUserName(user.email));
-  };
-
   const handleCheckLogin = () => checkLogin();
-  const callbackCheckLogin = useCallback(handleCheckLogin, [login]);
+  const callbackCheckLogin = useCallback(handleCheckLogin, [userIsLogged]);
 
   useEffect(() => {
-    if (!login) {
+    if (!userIsLogged) {
       callbackCheckLogin();
     }
-  }, [callbackCheckLogin, login]);
+  }, [callbackCheckLogin, userIsLogged]);
 
   return (
     <>

@@ -47,4 +47,32 @@ const register = {
   },
 };
 
-export { login, register };
+const user = {
+  button: {
+    save: 'save',
+  },
+  form: {
+    email: {
+      name: 'email',
+      type: 'email',
+    },
+    login: {
+      name: 'login',
+      type: 'text',
+    },
+    age: {
+      name: 'age',
+      type: 'number',
+    },
+    height: {
+      name: 'height',
+      type: 'number',
+    },
+    weight: {
+      name: 'weight',
+      type: 'number',
+    },
+  },
+};
+
+export { login, register, user };

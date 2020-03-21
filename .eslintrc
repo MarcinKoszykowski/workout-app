@@ -2,7 +2,8 @@
   "extends": ["airbnb", "prettier", "prettier/react"],
   "globals": {
     "document": true,
-    "window": true
+    "window": true,
+    "localStorage": true
   },
   "rules": {
     "import/no-unresolved": 1,
@@ -18,7 +19,7 @@
     "import/resolver": {
       "node": {
         "paths": "src",
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".js"]
       }
     }
   }

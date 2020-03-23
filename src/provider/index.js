@@ -6,6 +6,7 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [sportBackground, setSportBackground] = useState();
   const [user, setUser] = useState({});
+  const [details, setDetails] = useState({});
   const [userIsLogged, setUserIsLogged] = useState(false);
   const [userPanelVisibility, setUserPanelVisibility] = useState(false);
   const [mainButtonVisibility, setMainButtonVisibility] = useState(false);
@@ -13,6 +14,8 @@ const AppProvider = ({ children }) => {
   const userElement = {
     user,
     setUser,
+    details,
+    setDetails,
     userIsLogged,
     setUserIsLogged,
   };

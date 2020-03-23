@@ -11,13 +11,14 @@
     "@testing-library/react": "^10.0.1",
     "@testing-library/user-event": "^10.0.0",
     "axios": "^0.19.2",
+    "core-js": "^3.6.4",
     "md5": "^2.2.1",
     "prop-types": "^15.7.2",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
+    "react-scripts": "3.4.1",
     "styled-components": "^5.0.1"
   },
   "scripts": {
@@ -48,10 +49,10 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^2.5.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
-    "prettier": "1.19.1",
+    "prettier": "2.0.1",
     "webpack-env": "^0.8.0"
   },
   "husky": {

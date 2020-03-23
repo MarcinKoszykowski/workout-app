@@ -1,12 +1,12 @@
 const user = {
   register: '/user/register',
   login: '/user/login',
-  id: '/user/id',
-  update: '/user/update',
+  id: '/user/get/id',
 };
 
-const sport = {
-  update: '/sport/update',
+const details = {
+  add: '/details/add',
+  userId: '/details/get/userId',
 };
 
-export { user, sport };
+export { user, details };

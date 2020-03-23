@@ -61,9 +61,19 @@ const Input = styled.input`
   }
 `;
 
-const FormInput = ({ pattern, onChange, value, maxLength, type, name, label }) => (
+const FormInput = ({ onChange, max, value, name, label }) => (
   <Wrapper>
-    <Input pattern={pattern} onChange={onChange} value={value} maxLength={maxLength} type={type} name={name} id={name} placeholder=" " />
+    <Input
+      min="0"
+      max={max}
+      onChange={onChange}
+      value={value}
+      type="number"
+      name={name}
+      id={name}
+      placeholder=" "
+      required
+    />
     <Label htmlFor={name}>{label}</Label>
     <Bar />
   </Wrapper>
@@ -72,18 +82,9 @@ const FormInput = ({ pattern, onChange, value, maxLength, type, name, label }) =
 FormInput.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.string,
-  maxLength: PropTypes.string,
-  value: PropTypes.string,
+  max: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
-  pattern: PropTypes.string,
-};
-
-FormInput.defaultProps = {
-  type: 'text',
-  maxLength: '40',
-  value: null,
-  pattern: null,
 };
 
 export default FormInput;

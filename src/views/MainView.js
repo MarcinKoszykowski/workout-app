@@ -6,15 +6,15 @@ import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
 
 const MainView = () => {
-  const { setLoading, mainButtonIsVisibility, setMainButtonIsVisibility } = useContext(AppContext);
+  const { setLoading, mainButtonVisibility, setMainButtonVisibility } = useContext(AppContext);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
   }, [setLoading]);
 
   useEffect(() => {
-    if (mainButtonIsVisibility) {
-      setMainButtonIsVisibility(false);
+    if (mainButtonVisibility) {
+      setMainButtonVisibility(false);
     }
   });
 

@@ -25,13 +25,13 @@ const StyledButton = styled(Button)`
 `;
 
 const MainButton = () => {
-  const { setUserPanelVisibility, setMainButtonIsVisibility } = useContext(AppContext);
+  const { setUserPanelVisibility, setMainButtonVisibility } = useContext(AppContext);
   const history = useHistory();
 
   const buttonOnClick = () => {
     history.push(main);
     setUserPanelVisibility(false);
-    setMainButtonIsVisibility(false);
+    setMainButtonVisibility(false);
   };
 
   return <StyledButton onClick={buttonOnClick} buttonColor={white} icon={logoImage} />;

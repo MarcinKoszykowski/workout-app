@@ -5,17 +5,16 @@ import { main, login as loginURL, sport } from 'data/routes';
 import Loader from 'components/Loader/Loader';
 import AppContext from 'context';
 import SportView from 'views/SportView';
-import axios from 'axios';
-import { setUrlAPI } from 'data/functions';
-import { user as userRoute } from 'data/api_routes';
+import { checkDetailsInLocalStora, setDetailsInLocalStorage, getDataFromApi } from 'data/functions';
+import { user as userRoute, details as detailsRoute } from 'data/api_routes';
 import MainView from './views/MainView';
 import LoginView from './views/LoginView';
 
 const App = () => {
-  const { setUserIsLogged, setUser, userIsLogged, loading } = useContext(AppContext);
+  const { setUserIsLogged, setUser, userIsLogged, setDetails, loading } = useContext(AppContext);
   const history = useHistory();
 
-  const checkUser = user => {
+  const checkUser = (user) => {
     const { password, email } = user;
     const passwordLS = localStorage.getItem('userPassword');
     const emailLS = localStorage.getItem('userEmail');
@@ -23,12 +22,12 @@ const App = () => {
     return password === passwordLS && email === emailLS;
   };
 
-  const loginUser = user => {
+  const loginUser = (user) => {
     setUser({ ...user });
     setUserIsLogged(true);
   };
 
-  const checkStatus = data => {
+  const checkUserStatus = (data) => {
     const { status, user } = data;
 
     if (status === 1 && checkUser(user)) {
@@ -38,32 +37,51 @@ const App = () => {
     }
   };
 
-  const checkLogin = () => {
+  const setDetailsFromLocalStorage = () => {
+    setDetails({
+      age: localStorage.getItem('userAge'),
+      height: localStorage.getItem('userHeight'),
+      weight: localStorage.getItem('userWeight'),
+    });
+  };
+
+  const checkDetailsStatus = (data) => {
+    const {
+      status,
+      details: { age, height, weight },
+    } = data;
+
+    if (status === 1) {
+      setDetails({ age, height, weight });
+      setDetailsInLocalStorage({ age, height, weight });
+    }
+  };
+
+  const getUserData = () =>
+    getDataFromApi(userRoute.id, { id: localStorage.getItem('userId') }, checkUserStatus);
+
+  const getDetailsData = () => {
+    if (checkDetailsInLocalStora()) {
+      setDetailsFromLocalStorage();
+    } else {
+      getDataFromApi(
+        detailsRoute.userId,
+        { userId: localStorage.getItem('userId') },
+        checkDetailsStatus,
+      );
+    }
+  };
+
+  const handleGetData = () => {
     if (localStorage.getItem('userIsLogged') === 'true') {
-      axios
-        .post(
-          setUrlAPI(userRoute.id),
-          {
-            id: localStorage.getItem('userId'),
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          },
-        )
-        .then(result => result.data)
-        .then(data => checkStatus(data))
-        .catch(err => {
-          console.error(err);
-        });
+      getUserData();
+      getDetailsData();
     } else {
       history.push(loginURL);
     }
   };
 
-  const handleCheckLogin = () => checkLogin();
-  const callbackCheckLogin = useCallback(handleCheckLogin, [userIsLogged]);
+  const callbackCheckLogin = useCallback(handleGetData, [userIsLogged]);
 
   useEffect(() => {
     if (!userIsLogged) {

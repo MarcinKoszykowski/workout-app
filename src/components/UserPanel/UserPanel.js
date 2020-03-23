@@ -11,35 +11,36 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin: 0 auto;
   height: auto;
-  top: 50%;
+  top: 40%;
   right: 0;
-  left: 160px;
+  left: 180px;
   z-index: 2;
   transform: translateY(-50%);
-  background-color: ${colorWithOpacity(white, 0.9)};
+  background-color: ${colorWithOpacity(white, 0.95)};
   box-shadow: 0 0 10px 5px ${colorWithOpacity(purple, 0.7)};
   border-radius: 15px;
-  width: 500px;
+  width: 450px;
 
   @media screen and (max-width: 992px) {
-    left: 145px;
+    left: 160px;
   }
 
   @media screen and (max-width: 768px) {
-    right: 30px;
-    left: 160px;
-    width: auto;
+    left: 140px;
+    width: 400px;
   }
 
   @media screen and (max-width: 576px) {
-    right: 30px;
-    left: 30px;
-    background-color: ${colorWithOpacity(white, 0.95)};
+    right: 0;
+    left: 0;
+    background-color: ${white};
+    width: 380px;
   }
 
   @media screen and (max-width: 420px) {
     left: 20px;
     right: 20px;
+    width: auto;
   }
 `;
 

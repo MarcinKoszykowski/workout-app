@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import md5 from 'md5';
 import { register } from 'data/value';
 import { user as userRoute } from 'data/api_routes';
-import { setUrlAPI } from 'data/functions';
+import { getDataFromApi } from 'data/functions';
 import { colorWithOpacity, red, lightGrey } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
@@ -60,7 +59,7 @@ const RegisterForm = () => {
   const [textIsVisible, setTextIsVisible] = useState(false);
   const [infoText, setInfoText] = useState(registerInfoText);
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const value = {
       ...formNewUser,
       [e.target.name]: e.target.value,
@@ -73,7 +72,7 @@ const RegisterForm = () => {
     setTimeout(() => setTextIsVisible(false), 2000);
   };
 
-  const handleStatus = text => {
+  const handleStatus = (text) => {
     handleTextIsVisible();
     setInfoText(text);
   };
@@ -82,7 +81,7 @@ const RegisterForm = () => {
     return formNewUser.password !== formNewUser.confirm;
   };
 
-  const checkStatus = data => {
+  const checkStatus = (data) => {
     const { status } = data;
 
     if (status === 1) {
@@ -94,31 +93,21 @@ const RegisterForm = () => {
     }
   };
 
-  const handleInputOnSubmit = e => {
+  const handleInputOnSubmit = (e) => {
     e.preventDefault();
 
     if (checkConfirmation()) {
       handleStatus(confirmation);
     } else {
-      axios
-        .post(
-          setUrlAPI(userRoute.register),
-          {
-            email: formNewUser.email,
-            password: md5(formNewUser.password),
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          },
-        )
-        .then(result => result.data)
-        .then(data => checkStatus(data))
-        .catch(err => {
-          console.error(err);
-          handleStatus(error);
-        });
+      getDataFromApi(
+        userRoute.register,
+        {
+          email: formNewUser.email,
+          password: md5(formNewUser.password),
+        },
+        checkStatus,
+        () => handleStatus(error),
+      );
     }
   };
 
@@ -128,10 +117,16 @@ const RegisterForm = () => {
   return (
     <Wrapper>
       <Info isVisibility={textIsVisible}>{infoText}</Info>
-      <FormBox autoComplete="off" onSubmit={e => handleInputOnSubmit(e)}>
-        <FormInput onChange={e => handleInputChange(e)} type={email.type} value={formNewUser.email} name={email.name} label={email.name} />
+      <FormBox autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
-          onChange={e => handleInputChange(e)}
+          onChange={(e) => handleInputChange(e)}
+          type={email.type}
+          value={formNewUser.email}
+          name={email.name}
+          label={email.name}
+        />
+        <FormInput
+          onChange={(e) => handleInputChange(e)}
           value={formNewUser.password}
           eyeOnClick={setPasswordVisibility}
           type={passwordType ? password.type : null}
@@ -142,7 +137,7 @@ const RegisterForm = () => {
           password
         />
         <FormInput
-          onChange={e => handleInputChange(e)}
+          onChange={(e) => handleInputChange(e)}
           value={formNewUser.confirm}
           eyeOnClick={setConfirmVisibility}
           type={confirmType ? confirm.type : null}

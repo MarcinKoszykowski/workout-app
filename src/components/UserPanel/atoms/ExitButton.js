@@ -9,6 +9,7 @@ const ExitButton = styled.div`
   height: 35px;
   background: url(${icon}) no-repeat center center;
   background-color: ${lightRed};
+  border: 3px solid ${lightRed};
   background-size: 45%;
   border-radius: 50%;
   transition: transform 0.2s ease;
@@ -20,7 +21,7 @@ const ExitButton = styled.div`
     }
 
     &:active {
-      background-color: ${colorWithOpacity(lightRed, 0.8)};
+      background-color: ${colorWithOpacity(lightRed, 0.5)};
     }
   }
 
@@ -35,6 +36,7 @@ const ExitButton = styled.div`
     margin-right: 10px;
     width: 30px;
     height: 30px;
+    background-size: 50%;
   }
 `;
 

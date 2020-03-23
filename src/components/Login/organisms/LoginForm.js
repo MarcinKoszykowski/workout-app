@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import md5 from 'md5';
 import { login } from 'data/value';
-import { user as userRoute } from 'data/api_routes';
-import { setUrlAPI, setUserInLocalStorage } from 'data/functions';
+import { user as userRoute, details as detailsRoute } from 'data/api_routes';
+import { setUserInLocalStorage, getDataFromApi, setDetailsInLocalStorage } from 'data/functions';
 import { colorWithOpacity, lightGrey, red } from 'styled/colors';
 import { useHistory } from 'react-router';
 import { main } from 'data/routes';
@@ -53,7 +52,7 @@ const LoginForm = () => {
     infoText: { incorrect, error },
   } = login;
 
-  const { setUser, setUserIsLogged, setLoading } = useContext(AppContext);
+  const { setUser, setUserIsLogged, setLoading, setDetails } = useContext(AppContext);
   const history = useHistory();
 
   const [passwordType, setPasswordType] = useState(true);
@@ -64,7 +63,7 @@ const LoginForm = () => {
   const [textIsVisible, setTextIsVisible] = useState(false);
   const [infoText, setInfoText] = useState(incorrect);
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const value = {
       ...formUser,
       [e.target.name]: e.target.value,
@@ -77,19 +76,35 @@ const LoginForm = () => {
     setTimeout(() => setTextIsVisible(false), 2000);
   };
 
-  const handleStatus = text => {
+  const handleStatus = (text) => {
     handleTextIsVisible();
     setInfoText(text);
   };
 
-  const loginUser = user => {
+  const checkDetailsStatus = (data) => {
+    const {
+      status,
+      details: { age, height, weight },
+    } = data;
+
+    if (status === 1) {
+      setDetails({ age, height, weight });
+      setDetailsInLocalStorage({ age, height, weight });
+    }
+  };
+
+  const getDetailsData = (userId) =>
+    getDataFromApi(detailsRoute.userId, { userId }, checkDetailsStatus);
+
+  const loginUser = (user) => {
     setUser({ ...user });
     setUserInLocalStorage(user);
+    getDetailsData(user._id); // eslint-disable-line
     setUserIsLogged(true);
     history.push(main);
   };
 
-  const checkStatus = data => {
+  const checkStatus = (data) => {
     const { status, user } = data;
 
     if (status === 1) {
@@ -102,28 +117,18 @@ const LoginForm = () => {
     }
   };
 
-  const handleInputOnSubmit = e => {
+  const handleInputOnSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post(
-        setUrlAPI(userRoute.login),
-        {
-          email: formUser.email,
-          password: md5(formUser.password),
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-      .then(result => result.data)
-      .then(data => checkStatus(data))
-      .catch(err => {
-        console.error(err); // eslint-disable-line
-        handleStatus(error);
-      });
+    getDataFromApi(
+      userRoute.login,
+      {
+        email: formUser.email,
+        password: md5(formUser.password),
+      },
+      checkStatus,
+      () => handleStatus(error),
+    );
   };
 
   const setPasswordVisibility = () => setPasswordType(!passwordType);
@@ -131,10 +136,16 @@ const LoginForm = () => {
   return (
     <Wrapper>
       <Info isVisibility={textIsVisible}>{infoText}</Info>
-      <FormBox autoComplete="off" onSubmit={e => handleInputOnSubmit(e)}>
-        <FormInput onChange={e => handleInputChange(e)} type={email.type} value={formUser.email} name={email.name} label={email.name} />
+      <FormBox autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
-          onChange={e => handleInputChange(e)}
+          onChange={(e) => handleInputChange(e)}
+          type={email.type}
+          value={formUser.email}
+          name={email.name}
+          label={email.name}
+        />
+        <FormInput
+          onChange={(e) => handleInputChange(e)}
           value={formUser.password}
           eyeOnClick={setPasswordVisibility}
           type={passwordType ? password.type : null}

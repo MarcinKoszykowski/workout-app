@@ -4,7 +4,6 @@ import logoutIcon from 'assets/icons/logout.svg';
 import { lightRed } from 'styled/colors';
 import AppContext from 'context';
 import { useHistory } from 'react-router';
-import { removeUserFromLocalStorage } from 'data/functions';
 import { login } from 'data/routes';
 import Button from '../atmos/Button';
 
@@ -17,7 +16,7 @@ const Logout = () => {
   const history = useHistory();
 
   const buttonOnClick = () => {
-    removeUserFromLocalStorage();
+    localStorage.clear();
     setUser({});
     setUserIsLogged(false);
     history.push(login);

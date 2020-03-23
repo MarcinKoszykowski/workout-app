@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { user as userValue } from 'data/value';
-import { user as userRoute } from 'data/api_routes';
-import { checkEditInUserForm, setUrlAPI } from 'data/functions';
+import { details as detailsRoute } from 'data/api_routes';
+import { checkEditInUserForm, setDetailsInLocalStorage, getDataFromApi } from 'data/functions';
 import AppContext from 'context';
 import { blue } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
@@ -13,25 +12,41 @@ const Form = styled.form`
   position: relative;
   margin: auto;
   width: 100%;
-  padding: 30px 0;
+  padding: 15px 0 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   @media screen and (max-width: 576px) {
-    padding: 25px 0;
+    padding: 12.5px 0 25px;
   }
 
   @media screen and (max-width: 420px) {
-    padding: 20px 0;
+    padding: 10px 0 20px;
   }
 `;
 
 const FormButton = styled(Button)`
-  margin-top: 50px;
+  margin-top: 40px;
   background-color: ${blue};
   border-color: ${blue};
+
+  @media screen and (min-width: 1024px) {
+    &:hover {
+      color: ${blue};
+    }
+
+    &:active {
+      opacity: 0.8;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    &:active {
+      color: ${blue};
+    }
+  }
 
   @media screen and (max-width: 576px) {
     margin-top: 30px;
@@ -43,21 +58,20 @@ const FormButton = styled(Button)`
 `;
 
 const UserForm = () => {
-  const { user } = useContext(AppContext);
+  const { details, setDetails, user } = useContext(AppContext);
 
   const {
     button: { save },
-    form: { login, age, height, weight },
+    form: { age, height, weight },
   } = userValue;
 
   const [formUser, setFormUser] = useState({
-    login: '',
     age: '',
     height: '',
     weight: '',
   });
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const value = {
       ...formUser,
       [e.target.name]: e.target.value,
@@ -65,80 +79,76 @@ const UserForm = () => {
     setFormUser(value);
   };
 
-  const setValue = value => (value || '');
+  const setValue = (value) => value || '';
 
-  const setUser = () => {
+  const setUserDetails = () => {
     setFormUser({
-      login: setValue(user.login),
-      age: setValue(user.age),
-      height: setValue(user.height),
-      weight: setValue(user.weight),
+      age: setValue(details.age),
+      height: setValue(details.height),
+      weight: setValue(details.weight),
     });
   };
 
-  const checkStatus = data => {
+  const checkStatus = (data) => {
     const { status } = data;
 
     if (status === 1) {
-      console.log('ok'); // eslint-disable-line
+      setDetails({ ...formUser });
+      setDetailsInLocalStorage(formUser);
     } else if (status === 2) {
       console.log('error'); // eslint-disable-line
     }
   };
 
-  const handleInputOnSubmit = e => {
+  const handleInputOnSubmit = (e) => {
     e.preventDefault();
 
-    if (checkEditInUserForm(formUser, user)) {
-      axios
-        .post(
-          setUrlAPI(userRoute.update),
-          {
-            id: user.id,
-            user: {
-              login: formUser.login,
-              age: formUser.age,
-              height: formUser.height,
-              weight: formUser.weight,
-            },
+    if (!checkEditInUserForm(formUser, details)) {
+      getDataFromApi(
+        detailsRoute.add,
+        {
+          userId: user._id, // eslint-disable-line
+          data: {
+            age: formUser.age,
+            height: formUser.height,
+            weight: formUser.weight,
           },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          },
-        )
-        .then(result => result.data)
-        .then(data => checkStatus(data))
-        .catch(err => {
-          console.error(err); // eslint-disable-line
-        });
-    } else {
-      console.log('error'); // eslint-disable-line
+        },
+        checkStatus,
+      );
     }
   };
 
-  const handleCallbackFunction = useCallback(setUser, [0]);
+  const handleCallbackFunction = useCallback(setUserDetails, [
+    details.age,
+    details.weight,
+    details.height,
+  ]);
 
   useEffect(() => {
     handleCallbackFunction();
   }, [handleCallbackFunction]);
 
   return (
-    <Form autoComplete="off" onSubmit={e => handleInputOnSubmit(e)}>
-      <FormInput onChange={e => handleInputChange(e)} type={login.type} value={setValue(formUser.login)} name={login.name} label={login.name} />
-      <FormInput onChange={e => handleInputChange(e)} type={age.type} value={setValue(formUser.age)} name={age.name} label={age.name} />
+    <Form autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
       <FormInput
-        onChange={e => handleInputChange(e)}
-        type={height.type}
-        value={setValue(formUser.height)}
+        onChange={(e) => handleInputChange(e)}
+        max={age.max}
+        value={formUser.age}
+        name={age.name}
+        label={age.name}
+      />
+      <FormInput
+        onChange={(e) => handleInputChange(e)}
+        max={height.max}
+        value={formUser.height}
         name={height.name}
         label={`${height.name} [cm]`}
       />
       <FormInput
-        onChange={e => handleInputChange(e)}
-        type={weight.type}
-        value={setValue(formUser.weight)}
+        onChange={(e) => handleInputChange(e)}
+        max={weight.max}
+        value={formUser.weight}
         name={weight.name}
         label={`${weight.name} [kg]`}
       />

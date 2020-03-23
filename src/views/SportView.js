@@ -12,9 +12,8 @@ const SportView = () => {
   const setBackground = () => {
     if (sportBackground) {
       return sportBackground;
-    } 
-      return sports.find(item => item.name === location).background;
-    
+    }
+    return sports.find((item) => item.name === location).background;
   };
 
   useEffect(() => {

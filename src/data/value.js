@@ -52,25 +52,17 @@ const user = {
     save: 'save',
   },
   form: {
-    email: {
-      name: 'email',
-      type: 'email',
-    },
-    login: {
-      name: 'login',
-      type: 'text',
-    },
     age: {
       name: 'age',
-      type: 'number',
+      max: 130,
     },
     height: {
       name: 'height',
-      type: 'number',
+      max: 250,
     },
     weight: {
       name: 'weight',
-      type: 'number',
+      max: 300,
     },
   },
 };

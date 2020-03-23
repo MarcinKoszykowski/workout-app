@@ -32,14 +32,19 @@ const Wrapper = styled.div`
 `;
 
 const SportIcon = ({ icon, name, background }) => {
-  const { setSportBackground, setUserPanelVisibility, mainButtonIsVisibility, setMainButtonIsVisibility } = useContext(AppContext);
+  const {
+    setSportBackground,
+    setUserPanelVisibility,
+    mainButtonVisibility,
+    setMainButtonVisibility,
+  } = useContext(AppContext);
 
   const buttonOnClick = () => {
     setSportBackground(background);
     setUserPanelVisibility(false);
 
-    if (!mainButtonIsVisibility) {
-      setMainButtonIsVisibility(true);
+    if (!mainButtonVisibility) {
+      setMainButtonVisibility(true);
     }
   };
 

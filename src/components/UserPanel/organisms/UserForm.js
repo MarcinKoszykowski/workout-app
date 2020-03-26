@@ -1,10 +1,17 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { user as userValue } from 'data/value';
 import { details as detailsRoute } from 'data/api_routes';
-import { checkEditInUserForm, setDetailsInLocalStorage, getDataFromApi } from 'data/functions';
+import {
+  checkEditInUserForm,
+  setDetailsInLocalStorage,
+  getDataFromApi,
+  calculateBMI,
+  setBMIInLocalStorage,
+} from 'data/functions';
 import AppContext from 'context';
 import { blue } from 'styled/colors';
+import { useDidMount } from 'beautiful-react-hooks';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
 
@@ -12,18 +19,18 @@ const Form = styled.form`
   position: relative;
   margin: auto;
   width: 100%;
-  padding: 15px 0 30px;
+  padding: 25px 0 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   @media screen and (max-width: 576px) {
-    padding: 12.5px 0 25px;
+    padding: 22.5px 0 25px;
   }
 
   @media screen and (max-width: 420px) {
-    padding: 10px 0 20px;
+    padding: 20px 0 20px;
   }
 `;
 
@@ -58,7 +65,7 @@ const FormButton = styled(Button)`
 `;
 
 const UserForm = () => {
-  const { details, setDetails, user } = useContext(AppContext);
+  const { details, setDetails, user, setUserBMI } = useContext(AppContext);
 
   const {
     button: { save },
@@ -95,6 +102,8 @@ const UserForm = () => {
     if (status === 1) {
       setDetails({ ...formUser });
       setDetailsInLocalStorage(formUser);
+      setUserBMI(calculateBMI(formUser.height, formUser.weight));
+      setBMIInLocalStorage(calculateBMI(formUser.height, formUser.weight));
     } else if (status === 2) {
       console.log('error'); // eslint-disable-line
     }
@@ -119,15 +128,9 @@ const UserForm = () => {
     }
   };
 
-  const handleCallbackFunction = useCallback(setUserDetails, [
-    details.age,
-    details.weight,
-    details.height,
-  ]);
-
-  useEffect(() => {
-    handleCallbackFunction();
-  }, [handleCallbackFunction]);
+  useDidMount(() => {
+    setUserDetails();
+  });
 
   return (
     <Form autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>

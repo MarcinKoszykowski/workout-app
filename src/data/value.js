@@ -40,10 +40,10 @@ const register = {
     },
   },
   infoText: {
-    register: 'User has been registered',
-    confirmation: 'The password and confirmation password do not match',
+    register: 'Success! User has been registered.',
+    confirmation: 'The password and confirmation password do not match.',
     error: 'Server connection ERROR',
-    email: 'Email is alredy taken',
+    email: 'Email is alredy taken.',
   },
 };
 

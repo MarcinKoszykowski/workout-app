@@ -3,10 +3,9 @@ import icon from 'assets/icons/times-solid.svg';
 import { lightRed, colorWithOpacity } from 'styled/colors';
 
 const ExitButton = styled.div`
-  float: right;
-  margin: 15px 15px 0 auto;
   width: 35px;
   height: 35px;
+  flex-shrink: 0;
   background: url(${icon}) no-repeat center center;
   background-color: ${lightRed};
   border: 3px solid ${lightRed};
@@ -32,8 +31,6 @@ const ExitButton = styled.div`
   }
 
   @media screen and (max-width: 420px) {
-    margin-top: 10px;
-    margin-right: 10px;
     width: 30px;
     height: 30px;
     background-size: 50%;

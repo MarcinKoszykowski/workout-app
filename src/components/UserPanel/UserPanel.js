@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { colorWithOpacity, white, purple } from 'styled/colors';
 import AppContext from 'context';
-import ExitButton from './atoms/ExitButton';
 import UserForm from './organisms/UserForm';
+import TopPanel from './organisms/TopPanel';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -45,16 +45,12 @@ const Wrapper = styled.div`
 `;
 
 const UserPanel = () => {
-  const { userPanelVisibility, setUserPanelVisibility } = useContext(AppContext);
-
-  const exitButtonOnClick = () => {
-    setUserPanelVisibility(false);
-  };
+  const { userPanelVisibility } = useContext(AppContext);
 
   return (
     userPanelVisibility && (
       <Wrapper>
-        <ExitButton onClick={exitButtonOnClick} />
+        <TopPanel />
         <UserForm />
       </Wrapper>
     )

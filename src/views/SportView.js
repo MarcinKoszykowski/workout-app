@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import NavigationTemplate from 'templates/NavigationTemplate';
 import AppContext from 'context';
 import sports from 'data/sports';
 import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
+import { useDidMount } from 'beautiful-react-hooks';
 
 const SportView = () => {
   const { sportBackground, mainButtonVisibility, setMainButtonVisibility } = useContext(AppContext);
@@ -16,7 +17,7 @@ const SportView = () => {
     return sports.find((item) => item.name === location).background;
   };
 
-  useEffect(() => {
+  useDidMount(() => {
     if (!mainButtonVisibility) {
       setMainButtonVisibility(true);
     }

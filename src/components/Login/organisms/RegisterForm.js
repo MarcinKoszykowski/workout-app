@@ -4,7 +4,7 @@ import md5 from 'md5';
 import { register } from 'data/value';
 import { user as userRoute } from 'data/api_routes';
 import { getDataFromApi } from 'data/functions';
-import { colorWithOpacity, red, lightGrey } from 'styled/colors';
+import { colorWithOpacity, red, lightGrey, green } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
 
@@ -26,12 +26,12 @@ const FormButton = styled(Button)`
 `;
 
 const Info = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   height: 20px;
   text-align: center;
   font-size: 1rem;
   font-weight: 500;
-  color: ${red};
+  color: ${({ color }) => color};
   opacity: ${({ isVisibility }) => (isVisibility ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
 
@@ -69,7 +69,7 @@ const RegisterForm = () => {
 
   const handleTextIsVisible = () => {
     setTextIsVisible(true);
-    setTimeout(() => setTextIsVisible(false), 2000);
+    setTimeout(() => setTextIsVisible(false), 4000);
   };
 
   const handleStatus = (text) => {
@@ -116,7 +116,9 @@ const RegisterForm = () => {
 
   return (
     <Wrapper>
-      <Info isVisibility={textIsVisible}>{infoText}</Info>
+      <Info color={infoText === registerInfoText ? green : red} isVisibility={textIsVisible}>
+        {infoText}
+      </Info>
       <FormBox autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
           onChange={(e) => handleInputChange(e)}

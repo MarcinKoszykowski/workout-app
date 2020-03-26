@@ -3,7 +3,13 @@ import styled from 'styled-components';
 import md5 from 'md5';
 import { login } from 'data/value';
 import { user as userRoute, details as detailsRoute } from 'data/api_routes';
-import { setUserInLocalStorage, getDataFromApi, setDetailsInLocalStorage } from 'data/functions';
+import {
+  setUserInLocalStorage,
+  getDataFromApi,
+  setDetailsInLocalStorage,
+  setBMIInLocalStorage,
+  calculateBMI,
+} from 'data/functions';
 import { colorWithOpacity, lightGrey, red } from 'styled/colors';
 import { useHistory } from 'react-router';
 import { main } from 'data/routes';
@@ -29,7 +35,7 @@ const FormButton = styled(Button)`
 `;
 
 const Info = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   height: 20px;
   text-align: center;
   font-size: 1rem;
@@ -52,7 +58,7 @@ const LoginForm = () => {
     infoText: { incorrect, error },
   } = login;
 
-  const { setUser, setUserIsLogged, setLoading, setDetails } = useContext(AppContext);
+  const { setUser, setUserIsLogged, setLoading, setDetails, setUserBMI } = useContext(AppContext);
   const history = useHistory();
 
   const [passwordType, setPasswordType] = useState(true);
@@ -73,7 +79,7 @@ const LoginForm = () => {
 
   const handleTextIsVisible = () => {
     setTextIsVisible(true);
-    setTimeout(() => setTextIsVisible(false), 2000);
+    setTimeout(() => setTextIsVisible(false), 4000);
   };
 
   const handleStatus = (text) => {
@@ -90,6 +96,8 @@ const LoginForm = () => {
     if (status === 1) {
       setDetails({ age, height, weight });
       setDetailsInLocalStorage({ age, height, weight });
+      setUserBMI(calculateBMI(height, weight));
+      setBMIInLocalStorage(calculateBMI(height, weight));
     }
   };
 

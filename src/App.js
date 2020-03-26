@@ -1,17 +1,26 @@
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { useContext } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import GlobalStyle from 'styled/GlobalStyle';
 import { main, login as loginURL, sport } from 'data/routes';
 import Loader from 'components/Loader/Loader';
 import AppContext from 'context';
 import SportView from 'views/SportView';
-import { checkDetailsInLocalStora, setDetailsInLocalStorage, getDataFromApi } from 'data/functions';
+import {
+  checkDetailsInLocalStora,
+  setDetailsInLocalStorage,
+  getDataFromApi,
+  calculateBMI,
+  setBMIInLocalStorage,
+} from 'data/functions';
 import { user as userRoute, details as detailsRoute } from 'data/api_routes';
+import { useDidMount } from 'beautiful-react-hooks';
 import MainView from './views/MainView';
 import LoginView from './views/LoginView';
 
 const App = () => {
-  const { setUserIsLogged, setUser, userIsLogged, setDetails, loading } = useContext(AppContext);
+  const { setUserIsLogged, setUser, userIsLogged, setUserBMI, setDetails, loading } = useContext(
+    AppContext,
+  );
   const history = useHistory();
 
   const checkUser = (user) => {
@@ -54,6 +63,8 @@ const App = () => {
     if (status === 1) {
       setDetails({ age, height, weight });
       setDetailsInLocalStorage({ age, height, weight });
+      setUserBMI(calculateBMI(height, weight));
+      setBMIInLocalStorage(calculateBMI(height, weight));
     }
   };
 
@@ -63,6 +74,7 @@ const App = () => {
   const getDetailsData = () => {
     if (checkDetailsInLocalStora()) {
       setDetailsFromLocalStorage();
+      setUserBMI(localStorage.getItem('userBMI'));
     } else {
       getDataFromApi(
         detailsRoute.userId,
@@ -81,13 +93,11 @@ const App = () => {
     }
   };
 
-  const callbackCheckLogin = useCallback(handleGetData, [userIsLogged]);
-
-  useEffect(() => {
+  useDidMount(() => {
     if (!userIsLogged) {
-      callbackCheckLogin();
+      handleGetData();
     }
-  }, [callbackCheckLogin, userIsLogged]);
+  });
 
   return (
     <>

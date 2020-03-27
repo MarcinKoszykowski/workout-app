@@ -5,6 +5,11 @@ import sports from 'data/sports';
 import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
 import { useDidMount } from 'beautiful-react-hooks';
+import styled from 'styled-components';
+
+const StyledBackground = styled(Background)`
+  background-position: center center;
+`;
 
 const SportView = () => {
   const { sportBackground, mainButtonVisibility, setMainButtonVisibility } = useContext(AppContext);
@@ -26,7 +31,7 @@ const SportView = () => {
   return (
     <Wrapper>
       <NavigationTemplate />
-      <Background image={setBackground()} />
+      <StyledBackground image={setBackground()} />
     </Wrapper>
   );
 };

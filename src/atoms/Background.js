@@ -10,7 +10,6 @@ const Background = styled.div`
   right: 0;
   background-image: ${({ image }) => `url(${image})`};
   background-repeat: no-repeat;
-  background-position: ${({ main }) => (main ? `top left` : `center center`)};
   background-size: cover;
   animation: ${animations.opacityZeroToOne} 0.5s ease;
 

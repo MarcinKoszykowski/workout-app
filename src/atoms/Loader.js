@@ -40,9 +40,9 @@ const LoaderRing = styled.div`
 
 const Loader = () => (
   <LoaderRing>
-    <div></div>
-    <div></div>
-    <div></div>
+    <div />
+    <div />
+    <div />
   </LoaderRing>
 );
 

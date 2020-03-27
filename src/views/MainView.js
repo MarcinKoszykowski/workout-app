@@ -5,6 +5,11 @@ import NavigationTemplate from 'templates/NavigationTemplate';
 import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
 import { useDidMount } from 'beautiful-react-hooks';
+import styled from 'styled-components';
+
+const StyledBackground = styled(Background)`
+  background-position: top left;
+`;
 
 const MainView = () => {
   const { setLoading, mainButtonVisibility, setMainButtonVisibility } = useContext(AppContext);
@@ -19,7 +24,7 @@ const MainView = () => {
   return (
     <Wrapper>
       <NavigationTemplate />
-      <Background main image={mainImage} />
+      <StyledBackground image={mainImage} />
     </Wrapper>
   );
 };

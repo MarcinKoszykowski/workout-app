@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import backgroundImage from 'assets/images/background.jpg';
-import Background from 'components/Login/Background';
+import Background from 'components/Login/atoms/Background';
 import MobileBackground from 'atoms/Background';
 import Form from 'components/Login/Form';
 import { colorWithOpacity, purple } from 'styled/colors';

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import GlobalStyle from 'styled/GlobalStyle';
 import { main, login as loginURL, sport } from 'data/routes';
-import Loader from 'components/Loader/Loader';
+import Loader from 'atoms/Loader';
 import AppContext from 'context';
 import SportView from 'views/SportView';
 import {

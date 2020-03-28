@@ -5,9 +5,9 @@ import bowlingIcon from 'assets/icons/sports/bowling.svg';
 import boxIcon from 'assets/icons/sports/box.svg';
 import cardioIcon from 'assets/icons/sports/cardio.svg';
 import cyclingIcon from 'assets/icons/sports/cycling.svg';
-import dumbbellIcon from 'assets/icons/sports/dumbbell.svg';
 import footballIcon from 'assets/icons/sports/football.svg';
 import golfIcon from 'assets/icons/sports/golf.svg';
+import gymIcon from 'assets/icons/sports/gym.svg';
 import hockeyIcon from 'assets/icons/sports/hockey.svg';
 import runningIcon from 'assets/icons/sports/running.svg';
 import skatingIcon from 'assets/icons/sports/skating.svg';
@@ -24,9 +24,9 @@ import bowlingImage from 'assets/images/sports/bowling.jpg';
 import boxImage from 'assets/images/sports/box.jpg';
 import cardioImage from 'assets/images/sports/cardio.jpg';
 import cyclingImage from 'assets/images/sports/cycling.jpg';
-import dumbbellImage from 'assets/images/sports/dumbbell.jpg';
 import footballImage from 'assets/images/sports/football.jpg';
 import golfImage from 'assets/images/sports/golf.jpg';
+import gymImage from 'assets/images/sports/gym.jpg';
 import hockeyImage from 'assets/images/sports/hockey.jpg';
 import runningImage from 'assets/images/sports/running.jpg';
 import skatingImage from 'assets/images/sports/skating.jpg';
@@ -84,12 +84,6 @@ const sports = [
     high: 1.4,
   },
   {
-    name: 'dumbbell',
-    icon: dumbbellIcon,
-    background: dumbbellImage,
-    kcal: 6,
-  },
-  {
     name: 'football',
     icon: footballIcon,
     background: footballImage,
@@ -100,6 +94,12 @@ const sports = [
     icon: golfIcon,
     background: golfImage,
     kcal: 4.5,
+  },
+  {
+    name: 'gym',
+    icon: gymIcon,
+    background: gymImage,
+    kcal: 6,
   },
   {
     name: 'hockey',

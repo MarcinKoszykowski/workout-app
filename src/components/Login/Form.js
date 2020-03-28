@@ -8,6 +8,7 @@ import RegisterForm from './organisms/RegisterForm';
 
 const Wrapper = styled.div`
   position: relative;
+  display: flex;
   align-items: center;
   flex: 1;
   max-width: 600px;
@@ -30,14 +31,12 @@ const Wrapper = styled.div`
     max-width: none;
     box-shadow: none;
     background-color: transparent;
+    margin-top: -50px;
   }
 `;
 
 const Box = styled.div`
-  position: absolute;
-  top: 50%;
   width: 100%;
-  transform: translateY(-50%);
   text-align: center;
 `;
 
@@ -62,7 +61,9 @@ const Form = () => {
     <Wrapper>
       <Box>
         {formType ? <LoginForm /> : <RegisterForm />}
-        <StyledButton onClick={handleButtonOnClick}>{formType ? registerButton : backToLogin}</StyledButton>
+        <StyledButton onClick={handleButtonOnClick}>
+          {formType ? registerButton : backToLogin}
+        </StyledButton>
       </Box>
     </Wrapper>
   );

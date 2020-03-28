@@ -34,16 +34,18 @@ const Button = styled.div`
   @media screen and (max-width: 768px) {
     height: 70px;
     width: 70px;
+    border-width: 4px;
   }
 
   @media screen and (max-width: 576px) {
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
+    border-width: 3px;
   }
 
   @media screen and (max-width: 420px) {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
   }
 `;
 

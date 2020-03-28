@@ -4,8 +4,10 @@ import styled from 'styled-components';
 import AppContext from 'context';
 import sports from 'data/sports';
 import NavigationTemplate from 'templates/NavigationTemplate';
+import Sport from 'components/Sport/Sport';
 import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
+import { setSportTitle } from 'helpers/functions';
 
 const StyledBackground = styled(Background)`
   background-position: center center;
@@ -32,6 +34,7 @@ const SportView = () => {
     <Wrapper>
       <NavigationTemplate />
       <StyledBackground image={setBackground()} />
+      <Sport title={setSportTitle(location)} />
     </Wrapper>
   );
 };

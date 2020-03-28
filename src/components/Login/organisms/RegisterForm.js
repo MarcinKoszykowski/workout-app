@@ -8,10 +8,6 @@ import { colorWithOpacity, red, lightGrey, green } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
 
-const Wrapper = styled.div`
-  margin-top: 20px;
-`;
-
 const FormBox = styled.form`
   position: relative;
   margin-bottom: 20px;
@@ -115,7 +111,7 @@ const RegisterForm = () => {
   const setConfirmVisibility = () => setConfirmType(!confirmType);
 
   return (
-    <Wrapper>
+    <>
       <Info color={infoText === registerInfoText ? green : red} isVisibility={textVisibility}>
         {infoText}
       </Info>
@@ -150,7 +146,7 @@ const RegisterForm = () => {
         />
         <FormButton>{registerButton}</FormButton>
       </FormBox>
-    </Wrapper>
+    </>
   );
 };
 

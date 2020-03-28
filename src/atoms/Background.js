@@ -12,6 +12,7 @@ const Background = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   animation: ${animations.opacityZeroToOne} 0.5s ease;
+  z-index: -1;
 
   &::after {
     content: '';
@@ -21,7 +22,6 @@ const Background = styled.div`
     width: 100%;
     height: 100%;
     background-color: ${colorWithOpacity(purple, 0.5)};
-    z-index: 1;
   }
 `;
 

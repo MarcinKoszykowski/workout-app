@@ -20,15 +20,17 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 576px) {
+    flex-direction: row;
     top: 20px;
-    bottom: 20px;
-    right: 30px;
+    left: 145px;
+    right: 25px;
+    bottom: auto;
   }
 
   @media screen and (max-width: 420px) {
     right: 20px;
+    left: 120px;
     top: 15px;
-    bottom: 15px;
   }
 `;
 

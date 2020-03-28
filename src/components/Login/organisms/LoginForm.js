@@ -17,10 +17,6 @@ import { colorWithOpacity, lightGrey, red } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
 
-const Wrapper = styled.div`
-  margin-top: 20px;
-`;
-
 const FormBox = styled.form`
   position: relative;
   margin-bottom: 20px;
@@ -147,7 +143,7 @@ const LoginForm = () => {
   const setPasswordVisibility = () => setPasswordType(!passwordType);
 
   return (
-    <Wrapper>
+    <>
       <Info isVisibility={textVisibility}>{infoText}</Info>
       <FormBox autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
@@ -169,7 +165,7 @@ const LoginForm = () => {
         />
         <FormButton>{loginButton}</FormButton>
       </FormBox>
-    </Wrapper>
+    </>
   );
 };
 

@@ -22,6 +22,14 @@ const StyledButton = styled(Button)`
       background-color: ${colorWithOpacity(white, 0.2)};
     }
   }
+
+  @media screen and (max-width: 768px) {
+    background-size: 75%;
+  }
+
+  @media screen and (max-width: 576px) {
+    background-size: 70%;
+  }
 `;
 
 const MainButton = () => {

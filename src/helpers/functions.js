@@ -48,4 +48,13 @@ const calculateCalories = (time, kcal, weight, bmi, intensity = 1) => {
   return (time / 60) * kcal * weight * indexBMI * intensity;
 };
 
-export { setColorBMI, checkEditInUserForm, calculateBMI, calculateIndexBMI, calculateCalories };
+const setSportTitle = (title) => title.replace('-', ' ');
+
+export {
+  setColorBMI,
+  checkEditInUserForm,
+  calculateBMI,
+  calculateIndexBMI,
+  calculateCalories,
+  setSportTitle,
+};

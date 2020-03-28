@@ -34,13 +34,13 @@ const Icon = styled.div`
   }
 
   @media screen and (max-width: 576px) {
-    height: 60px;
-    width: 60px;
+    height: 55px;
+    width: 55px;
   }
 
   @media screen and (max-width: 420px) {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
   }
 `;
 

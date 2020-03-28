@@ -28,12 +28,12 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 576px) {
-    width: 120px;
+    width: 100px;
     padding: 15px 0;
   }
 
   @media screen and (max-width: 420px) {
-    width: 100px;
+    width: 75px;
   }
 `;
 

@@ -23,11 +23,11 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 576px) {
-    margin-bottom: 17.5px;
+    margin-bottom: 15px;
   }
 
   @media screen and (max-width: 420px) {
-    margin-bottom: 15px;
+    margin-bottom: 12.5px;
   }
 `;
 

@@ -16,21 +16,24 @@ const Wrapper = styled.div`
   z-index: 1;
 
   @media screen and (max-width: 768px) {
-    right: 40px;
-  }
-
-  @media screen and (max-width: 576px) {
     flex-direction: row;
+    right: 30px;
     top: 20px;
-    left: 145px;
-    right: 25px;
+    left: 170px;
     bottom: auto;
   }
 
-  @media screen and (max-width: 420px) {
-    right: 20px;
-    left: 120px;
+  @media screen and (max-width: 576px) {
     top: 15px;
+    left: 115px;
+    right: 15px;
+  }
+
+  @media screen and (max-width: 420px) {
+    min-width: 215px;
+    right: 15px;
+    left: 90px;
+    top: 12.5px;
   }
 `;
 

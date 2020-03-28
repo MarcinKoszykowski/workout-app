@@ -15,7 +15,7 @@ const Title = styled.h2`
   }
 
   @media screen and (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 2.1rem;
   }
 
   @media screen and (max-width: 576px) {
@@ -25,7 +25,7 @@ const Title = styled.h2`
   }
 
   @media screen and (max-width: 420px) {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 `;
 

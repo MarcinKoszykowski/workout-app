@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
-import logoutIcon from 'assets/icons/logout.svg';
-import { lightRed } from 'styled/colors';
-import AppContext from 'context';
 import { useHistory } from 'react-router';
+import styled from 'styled-components';
+import AppContext from 'context';
 import { login } from 'data/routes';
-import Button from '../atmos/Button';
+import { lightRed } from 'styled/colors';
+import logoutIcon from 'assets/icons/logout.svg';
+import Button from '../atoms/Button';
 
 const StyledButton = styled(Button)`
   background-size: 60%;

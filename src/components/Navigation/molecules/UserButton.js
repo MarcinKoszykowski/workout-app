@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import userIcon from 'assets/icons/user-solid.svg';
-import { blue } from 'styled/colors';
 import AppContext from 'context';
-import Button from '../atmos/Button';
+import { blue } from 'styled/colors';
+import userIcon from 'assets/icons/user-solid.svg';
+import Button from '../atoms/Button';
 
 const UserButton = () => {
   const { setUserPanelVisibility, userPanelVisibility } = useContext(AppContext);

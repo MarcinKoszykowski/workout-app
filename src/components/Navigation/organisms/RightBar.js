@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import AppContext from 'context';
-import Logout from './molecules/Logout';
-import UserButton from './molecules/UserButton';
-import MainButton from './molecules/MainButton';
+import Logout from '../molecules/Logout';
+import UserButton from '../molecules/UserButton';
+import MainButton from '../molecules/MainButton';
 
 const Wrapper = styled.div`
   position: fixed;

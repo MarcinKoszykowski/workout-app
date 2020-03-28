@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { purple } from 'styled/colors';
-import { setColorBMI } from 'data/functions';
 import AppContext from 'context';
+import { setColorBMI } from 'helpers/functions';
+import { purple } from 'styled/colors';
 import Text from '../atoms/Text';
 
 const Wrapper = styled.div`

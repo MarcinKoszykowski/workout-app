@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import animations from 'styled/animations';
 import { colorWithOpacity, white, purple } from 'styled/colors';
+import animations from 'styled/animations';
 
 const LoaderRing = styled.div`
   display: flex;

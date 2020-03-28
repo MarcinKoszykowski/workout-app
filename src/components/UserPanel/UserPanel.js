@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { colorWithOpacity, white, purple } from 'styled/colors';
 import AppContext from 'context';
+import { colorWithOpacity, white, purple } from 'styled/colors';
 import UserForm from './organisms/UserForm';
 import TopPanel from './organisms/TopPanel';
 

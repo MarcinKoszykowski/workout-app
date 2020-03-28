@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import md5 from 'md5';
+import getDataFromAPI from 'helpers/api_functions';
 import { register } from 'data/value';
 import { user as userRoute } from 'data/api_routes';
-import { getDataFromApi } from 'data/functions';
 import { colorWithOpacity, red, lightGrey, green } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
@@ -99,7 +99,7 @@ const RegisterForm = () => {
     if (checkConfirmation()) {
       handleStatus(confirmation);
     } else {
-      getDataFromApi(
+      getDataFromAPI(
         userRoute.register,
         {
           email: formNewUser.email,

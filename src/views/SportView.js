@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import NavigationTemplate from 'templates/NavigationTemplate';
-import AppContext from 'context';
-import sports from 'data/sports';
-import Background from 'atoms/Background';
-import Wrapper from 'atoms/Wrapper';
 import { useDidMount } from 'beautiful-react-hooks';
 import styled from 'styled-components';
+import AppContext from 'context';
+import sports from 'data/sports';
+import NavigationTemplate from 'templates/NavigationTemplate';
+import Background from 'atoms/Background';
+import Wrapper from 'atoms/Wrapper';
 
 const StyledBackground = styled(Background)`
   background-position: center center;

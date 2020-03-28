@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import sports from 'data/sports';
 import { colorWithOpacity, white, black } from 'styled/colors';
-import SportsNavigation from './organisms/SportsNavigation';
+import SportIcon from '../molecules/SportIcon';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -36,9 +37,19 @@ const Wrapper = styled.div`
   }
 `;
 
+const SportIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
 const LeftBar = () => (
   <Wrapper>
-    <SportsNavigation />
+    <SportIconWrapper>
+      {sports.map(({ icon, name, background }) => (
+        <SportIcon icon={icon} name={name} key={name} background={background} />
+      ))}
+    </SportIconWrapper>
   </Wrapper>
 );
 

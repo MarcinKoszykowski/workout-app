@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import logoImage from 'assets/images/logo.png';
-import { white, colorWithOpacity } from 'styled/colors';
-import AppContext from 'context';
 import { useHistory } from 'react-router';
-import { main } from 'data/routes';
 import styled from 'styled-components';
-import Button from '../atmos/Button';
+import AppContext from 'context';
+import { main } from 'data/routes';
+import { white, colorWithOpacity } from 'styled/colors';
+import logoImage from 'assets/images/logo.png';
+import Button from '../atoms/Button';
 
 const StyledButton = styled(Button)`
   background-size: 80%;

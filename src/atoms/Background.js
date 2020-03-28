@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import animations from 'styled/animations';
 import { colorWithOpacity, purple } from 'styled/colors';
+import animations from 'styled/animations';
 
 const Background = styled.div`
   position: fixed;

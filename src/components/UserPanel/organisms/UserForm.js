@@ -1,19 +1,15 @@
 import React, { useState, useContext } from 'react';
+import { useDidMount } from 'beautiful-react-hooks';
 import styled from 'styled-components';
+import AppContext from 'context';
+import getDataFromAPI from 'helpers/api_functions';
+import { calculateBMI, checkEditInUserForm } from 'helpers/functions';
+import { setDetailsInLocalStorage, setBMIInLocalStorage } from 'helpers/local_storage_functions';
 import { user as userValue } from 'data/value';
 import { details as detailsRoute } from 'data/api_routes';
-import {
-  checkEditInUserForm,
-  setDetailsInLocalStorage,
-  getDataFromApi,
-  calculateBMI,
-  setBMIInLocalStorage,
-} from 'data/functions';
-import AppContext from 'context';
 import { blue } from 'styled/colors';
-import { useDidMount } from 'beautiful-react-hooks';
-import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
+import FormInput from '../molecules/FormInput';
 
 const Form = styled.form`
   position: relative;
@@ -113,7 +109,7 @@ const UserForm = () => {
     e.preventDefault();
 
     if (!checkEditInUserForm(formUser, details)) {
-      getDataFromApi(
+      getDataFromAPI(
         detailsRoute.add,
         {
           userId: user._id, // eslint-disable-line
@@ -124,6 +120,7 @@ const UserForm = () => {
           },
         },
         checkStatus,
+        () => console.log('error'), // eslint-disable-line
       );
     }
   };

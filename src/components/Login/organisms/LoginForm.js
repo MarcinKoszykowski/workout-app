@@ -1,21 +1,21 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import md5 from 'md5';
-import { login } from 'data/value';
-import { user as userRoute, details as detailsRoute } from 'data/api_routes';
+import AppContext from 'context';
+import getDataFromAPI from 'helpers/api_functions';
 import {
-  setUserInLocalStorage,
-  getDataFromApi,
   setDetailsInLocalStorage,
   setBMIInLocalStorage,
-  calculateBMI,
-} from 'data/functions';
-import { colorWithOpacity, lightGrey, red } from 'styled/colors';
-import { useHistory } from 'react-router';
+  setUserInLocalStorage,
+} from 'helpers/local_storage_functions';
+import { calculateBMI } from 'helpers/functions';
+import { login } from 'data/value';
+import { user as userRoute, details as detailsRoute } from 'data/api_routes';
 import { main } from 'data/routes';
-import AppContext from 'context';
-import Button from '../atoms/Button';
+import { colorWithOpacity, lightGrey, red } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
+import Button from '../atoms/Button';
 
 const Wrapper = styled.div`
   margin-top: 20px;
@@ -102,7 +102,12 @@ const LoginForm = () => {
   };
 
   const getDetailsData = (userId) =>
-    getDataFromApi(detailsRoute.userId, { userId }, checkDetailsStatus);
+    getDataFromAPI(
+      detailsRoute.userId,
+      { userId },
+      checkDetailsStatus,
+      () => console.log('error'), // eslint-disable-line
+    );
 
   const loginUser = (user) => {
     setUser({ ...user });
@@ -128,7 +133,7 @@ const LoginForm = () => {
   const handleInputOnSubmit = (e) => {
     e.preventDefault();
 
-    getDataFromApi(
+    getDataFromAPI(
       userRoute.login,
       {
         email: formUser.email,

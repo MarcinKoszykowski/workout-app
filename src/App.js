@@ -1,19 +1,19 @@
 import React, { useContext } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
-import GlobalStyle from 'styled/GlobalStyle';
-import { main, login as loginURL, sport } from 'data/routes';
-import Loader from 'atoms/Loader';
+import { useDidMount } from 'beautiful-react-hooks';
 import AppContext from 'context';
-import SportView from 'views/SportView';
+import getDataFromAPI from 'helpers/api_functions';
+import { calculateBMI } from 'helpers/functions';
 import {
   checkDetailsInLocalStora,
   setDetailsInLocalStorage,
-  getDataFromApi,
-  calculateBMI,
   setBMIInLocalStorage,
-} from 'data/functions';
+} from 'helpers/local_storage_functions';
+import { main, login as loginURL, sport } from 'data/routes';
 import { user as userRoute, details as detailsRoute } from 'data/api_routes';
-import { useDidMount } from 'beautiful-react-hooks';
+import GlobalStyle from 'styled/GlobalStyle';
+import SportView from 'views/SportView';
+import Loader from 'atoms/Loader';
 import MainView from './views/MainView';
 import LoginView from './views/LoginView';
 
@@ -69,17 +69,23 @@ const App = () => {
   };
 
   const getUserData = () =>
-    getDataFromApi(userRoute.id, { id: localStorage.getItem('userId') }, checkUserStatus);
+    getDataFromAPI(
+      userRoute.id,
+      { id: localStorage.getItem('userId') },
+      checkUserStatus,
+      () => console.log('error'), // eslint-disable-line
+    );
 
   const getDetailsData = () => {
     if (checkDetailsInLocalStora()) {
       setDetailsFromLocalStorage();
       setUserBMI(localStorage.getItem('userBMI'));
     } else {
-      getDataFromApi(
+      getDataFromAPI(
         detailsRoute.userId,
         { userId: localStorage.getItem('userId') },
         checkDetailsStatus,
+        () => console.log('error'), // eslint-disable-line
       );
     }
   };

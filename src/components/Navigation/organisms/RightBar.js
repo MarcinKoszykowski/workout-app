@@ -15,6 +15,10 @@ const Wrapper = styled.div`
   right: 50px;
   z-index: 1;
 
+  @media screen and (max-width: 992px) {
+    right: 40px;
+  }
+
   @media screen and (max-width: 768px) {
     flex-direction: row;
     right: 30px;

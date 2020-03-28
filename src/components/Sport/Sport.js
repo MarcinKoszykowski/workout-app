@@ -43,7 +43,7 @@ const Box = styled.div`
   @media screen and (max-width: 992px) {
     top: 115px;
     left: 200px;
-    right: 170px;
+    right: 150px;
   }
 
   @media screen and (max-width: 768px) {

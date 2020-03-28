@@ -66,7 +66,7 @@ const LoginForm = () => {
     email: '',
     password: '',
   });
-  const [textIsVisible, setTextIsVisible] = useState(false);
+  const [textVisibility, setTextVisibility] = useState(false);
   const [infoText, setInfoText] = useState(incorrect);
 
   const handleInputChange = (e) => {
@@ -77,13 +77,13 @@ const LoginForm = () => {
     setFormUser(value);
   };
 
-  const handleTextIsVisible = () => {
-    setTextIsVisible(true);
-    setTimeout(() => setTextIsVisible(false), 4000);
+  const handletextVisibility = () => {
+    setTextVisibility(true);
+    setTimeout(() => setTextVisibility(false), 4000);
   };
 
   const handleStatus = (text) => {
-    handleTextIsVisible();
+    handletextVisibility();
     setInfoText(text);
   };
 
@@ -148,7 +148,7 @@ const LoginForm = () => {
 
   return (
     <Wrapper>
-      <Info isVisibility={textIsVisible}>{infoText}</Info>
+      <Info isVisibility={textVisibility}>{infoText}</Info>
       <FormBox autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
           onChange={(e) => handleInputChange(e)}

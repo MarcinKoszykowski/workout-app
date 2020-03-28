@@ -56,7 +56,7 @@ const RegisterForm = () => {
     password: '',
     confirm: '',
   });
-  const [textIsVisible, setTextIsVisible] = useState(false);
+  const [textVisibility, setTextVisibility] = useState(false);
   const [infoText, setInfoText] = useState(registerInfoText);
 
   const handleInputChange = (e) => {
@@ -67,13 +67,13 @@ const RegisterForm = () => {
     setFormNewUser(value);
   };
 
-  const handleTextIsVisible = () => {
-    setTextIsVisible(true);
-    setTimeout(() => setTextIsVisible(false), 4000);
+  const handletextVisibility = () => {
+    setTextVisibility(true);
+    setTimeout(() => setTextVisibility(false), 4000);
   };
 
   const handleStatus = (text) => {
-    handleTextIsVisible();
+    handletextVisibility();
     setInfoText(text);
   };
 
@@ -116,7 +116,7 @@ const RegisterForm = () => {
 
   return (
     <Wrapper>
-      <Info color={infoText === registerInfoText ? green : red} isVisibility={textIsVisible}>
+      <Info color={infoText === registerInfoText ? green : red} isVisibility={textVisibility}>
         {infoText}
       </Info>
       <FormBox autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>

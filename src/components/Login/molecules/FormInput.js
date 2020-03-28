@@ -33,8 +33,8 @@ const Bar = styled.div`
   width: 100%;
   height: 1px;
   margin-top: 1px;
-  background: ${colorWithOpacity(purple, 0.6)};
-  transition: background 0.2s ease;
+  background-color: ${colorWithOpacity(purple, 0.6)};
+  transition: background-color 0.2s ease;
 
   @media screen and (max-width: 768px) {
     background: ${lightGrey};
@@ -65,10 +65,10 @@ const Input = styled.input`
     outline: none;
 
     & ~ ${Bar} {
-      background: ${colorWithOpacity(purple, 0.8)};
+      background-color: ${colorWithOpacity(purple, 0.8)};
 
       @media screen and (max-width: 768px) {
-        background: ${colorWithOpacity(lightGrey, 0.7)};
+        background-color: ${colorWithOpacity(lightGrey, 0.7)};
       }
     }
 
@@ -98,9 +98,30 @@ const EyeIcon = styled.div`
   }
 `;
 
-const FormInput = ({ pattern, onChange, value, maxLength, type, name, label, eyeOnClick, slash, password }) => (
+const FormInput = ({
+  pattern,
+  onChange,
+  value,
+  maxLength,
+  type,
+  name,
+  label,
+  eyeOnClick,
+  slash,
+  password,
+}) => (
   <Wrapper>
-    <Input pattern={pattern} onChange={onChange} value={value} maxLength={maxLength} type={type} name={name} id={name} required placeholder=" " />
+    <Input
+      pattern={pattern}
+      onChange={onChange}
+      value={value}
+      maxLength={maxLength}
+      type={type}
+      name={name}
+      id={name}
+      required
+      placeholder=" "
+    />
     <Label htmlFor={name}>{label}</Label>
     <Bar />
     {password && <EyeIcon slash={slash} onClick={eyeOnClick} />}

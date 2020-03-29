@@ -8,8 +8,8 @@ import { setDetailsInLocalStorage, setBMIInLocalStorage } from 'helpers/local_st
 import { user as userValue } from 'data/value';
 import { details as detailsRoute } from 'data/api_routes';
 import { blue } from 'styled/colors';
-import Button from '../atoms/Button';
 import FormInput from '../molecules/FormInput';
+import Button from '../atoms/Button';
 
 const Form = styled.form`
   position: relative;

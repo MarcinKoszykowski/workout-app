@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import AppContext from 'context';
-import ExitButton from '../atoms/ExitButton';
 import UserDetails from '../molecules/UserDetails';
+import ExitButton from '../atoms/ExitButton';
 
 const Wrapper = styled.div`
   display: flex;

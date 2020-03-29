@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { black, colorWithOpacity, lightGrey } from 'styled/colors';
 import { login, register } from 'data/value';
-import Button from './atoms/Button';
+import { black, colorWithOpacity, lightGrey } from 'styled/colors';
 import LoginForm from './organisms/LoginForm';
 import RegisterForm from './organisms/RegisterForm';
+import Button from './atoms/Button';
 
 const Wrapper = styled.div`
   position: relative;

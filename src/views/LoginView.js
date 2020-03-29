@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import AppContext from 'context';
 import { colorWithOpacity, purple } from 'styled/colors';
 import backgroundImage from 'assets/images/background.jpg';
-import MobileBackground from 'atoms/Background';
-import Wrapper from 'atoms/Wrapper';
 import Background from 'components/Login/atoms/Background';
 import Form from 'components/Login/Form';
+import MobileBackground from 'atoms/Background';
+import Wrapper from 'atoms/Wrapper';
 
 const StyledWrapper = styled(Wrapper)`
   height: 100vh;

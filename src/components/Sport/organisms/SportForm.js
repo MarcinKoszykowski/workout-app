@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import AppContext from 'context';
 import { colorWithOpacity, white, blue, green, orange, lightRed } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
 import FormButton from '../atoms/FormButton';
@@ -33,6 +34,7 @@ const Form = styled.form`
 `;
 
 const SportForm = () => {
+  const { sport } = useContext(AppContext);
   const [traningTime, setTraningTime] = useState(0);
   const [intensityButtonColor, setIntensityButtonColor] = useState(orange);
 
@@ -52,7 +54,9 @@ const SportForm = () => {
 
   return (
     <Wrapper>
-      <IntensityButton onClick={intensityButtonOnClick} color={intensityButtonColor} />
+      {sport.high && (
+        <IntensityButton onClick={intensityButtonOnClick} color={intensityButtonColor} />
+      )}
       <Form autoComplete="off">
         <FormInput
           onChange={(e) => handleInputChange(e)}

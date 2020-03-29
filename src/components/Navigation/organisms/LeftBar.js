@@ -46,8 +46,8 @@ const SportIconWrapper = styled.div`
 const LeftBar = () => (
   <Wrapper>
     <SportIconWrapper>
-      {sports.map(({ icon, name, background }) => (
-        <SportIcon icon={icon} name={name} key={name} background={background} />
+      {sports.map((sport) => (
+        <SportIcon sport={sport} key={sport.name} />
       ))}
     </SportIconWrapper>
   </Wrapper>

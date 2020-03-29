@@ -1,6 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import AppContext from 'context';
+import { setSportTitle } from 'helpers/functions';
 import Training from './organisms/Training';
 import SportForm from './organisms/SportForm';
 import Title from './atoms/Title';
@@ -32,18 +33,18 @@ const TopWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Sport = ({ title }) => (
-  <Wrapper>
-    <TopWrapper>
-      <Title>{title}</Title>
-      <SportForm />
-    </TopWrapper>
-    <Training />
-  </Wrapper>
-);
+const Sport = () => {
+  const { sport } = useContext(AppContext);
 
-Sport.propTypes = {
-  title: PropTypes.string.isRequired,
+  return (
+    <Wrapper>
+      <TopWrapper>
+        <Title>{setSportTitle(sport.name)}</Title>
+        <SportForm />
+      </TopWrapper>
+      <Training />
+    </Wrapper>
+  );
 };
 
 export default Sport;

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { blue, white } from 'styled/colors';
-import animations from 'styled/animations';
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,7 +10,6 @@ const Wrapper = styled.div`
   margin-right: 15px;
   flex-direction: column;
   justify-content: space-between;
-  animation: ${animations.opacityZeroToOne} 0.3s ease-in-out;
 
   @media screen and (max-width: 992px) {
     margin-right: 10px;

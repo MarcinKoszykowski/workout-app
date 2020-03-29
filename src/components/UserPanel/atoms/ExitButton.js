@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import icon from 'assets/icons/times-solid.svg';
 import { lightRed, colorWithOpacity } from 'styled/colors';
+import icon from 'assets/icons/times-solid.svg';
 
 const ExitButton = styled.div`
   width: 35px;

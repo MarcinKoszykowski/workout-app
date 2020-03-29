@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { purple, colorWithOpacity } from 'styled/colors';
 import animations from 'styled/animations';
+import { purple, colorWithOpacity } from 'styled/colors';
 
 const Wrapper = styled.div`
   position: relative;

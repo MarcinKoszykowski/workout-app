@@ -4,15 +4,15 @@ import styled from 'styled-components';
 import md5 from 'md5';
 import AppContext from 'context';
 import getDataFromAPI from 'helpers/api_functions';
+import { calculateBMI } from 'helpers/functions';
 import {
   setDetailsInLocalStorage,
   setBMIInLocalStorage,
   setUserInLocalStorage,
 } from 'helpers/local_storage_functions';
-import { calculateBMI } from 'helpers/functions';
-import { login } from 'data/value';
 import { user as userRoute, details as detailsRoute } from 'data/api_routes';
 import { main } from 'data/routes';
+import { login } from 'data/value';
 import { colorWithOpacity, lightGrey, red } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';

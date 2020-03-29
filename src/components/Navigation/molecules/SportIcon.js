@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { setSportRoute } from 'data/routes';
 import AppContext from 'context';
+import { setSportRoute } from 'data/routes';
 import Icon from '../atoms/Icon';
 
 const Wrapper = styled.div`
@@ -31,16 +31,16 @@ const Wrapper = styled.div`
   }
 `;
 
-const SportIcon = ({ icon, name, background }) => {
+const SportIcon = ({ sport }) => {
   const {
-    setSportBackground,
+    setSport,
     setUserPanelVisibility,
     mainButtonVisibility,
     setMainButtonVisibility,
   } = useContext(AppContext);
 
   const buttonOnClick = () => {
-    setSportBackground(background);
+    setSport(sport);
     setUserPanelVisibility(false);
 
     if (!mainButtonVisibility) {
@@ -50,17 +50,22 @@ const SportIcon = ({ icon, name, background }) => {
 
   return (
     <Wrapper onClick={buttonOnClick}>
-      <Link to={setSportRoute(name)}>
-        <Icon icon={icon} />
+      <Link to={setSportRoute(sport.name)}>
+        <Icon icon={sport.icon} />
       </Link>
     </Wrapper>
   );
 };
 
 SportIcon.propTypes = {
-  icon: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  background: PropTypes.string.isRequired,
+  sport: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    kcal: PropTypes.number.isRequired,
+    low: PropTypes.number,
+    high: PropTypes.number,
+  }).isRequired,
 };
 
 export default SportIcon;

@@ -4,7 +4,7 @@ import AppContext from 'context';
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-  const [sportBackground, setSportBackground] = useState();
+  const [sport, setSport] = useState({});
   const [user, setUser] = useState({});
   const [userBMI, setUserBMI] = useState(0);
   const [details, setDetails] = useState({});
@@ -24,8 +24,8 @@ const AppProvider = ({ children }) => {
   };
 
   const sportElement = {
-    sportBackground,
-    setSportBackground,
+    sport,
+    setSport,
     mainButtonVisibility,
     setMainButtonVisibility,
   };

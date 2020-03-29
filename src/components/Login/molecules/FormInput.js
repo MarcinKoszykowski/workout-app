@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import animations from 'styled/animations';
+import { purple, colorWithOpacity, lightGrey } from 'styled/colors';
 import eyeIcon from 'assets/icons/eye.svg';
 import eyeSlashIcon from 'assets/icons/eye-slash.svg';
 import eyeIconWhite from 'assets/icons/eye-white.svg';
 import eyeSlashIconWhite from 'assets/icons/eye-slash-white.svg';
-import { purple, colorWithOpacity, lightGrey } from 'styled/colors';
-import animations from 'styled/animations';
 
 const Wrapper = styled.div`
   position: relative;

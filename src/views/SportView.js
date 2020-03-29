@@ -7,34 +7,31 @@ import NavigationTemplate from 'templates/NavigationTemplate';
 import Sport from 'components/Sport/Sport';
 import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
-import { setSportTitle } from 'helpers/functions';
+import Loader from 'atoms/Loader';
 
 const StyledBackground = styled(Background)`
   background-position: center center;
 `;
 
 const SportView = () => {
-  const { sportBackground, mainButtonVisibility, setMainButtonVisibility } = useContext(AppContext);
-  const location = window.location.href.slice(28);
-
-  const setBackground = () => {
-    if (sportBackground) {
-      return sportBackground;
-    }
-    return sports.find((item) => item.name === location).background;
-  };
+  const { sport, setSport, mainButtonVisibility, setMainButtonVisibility } = useContext(AppContext);
 
   useDidMount(() => {
     if (!mainButtonVisibility) {
       setMainButtonVisibility(true);
+    }
+
+    if (!sport.name) {
+      setSport(sports.find((item) => item.name === window.location.pathname.slice(7)));
     }
   });
 
   return (
     <Wrapper>
       <NavigationTemplate />
-      <StyledBackground image={setBackground()} />
-      <Sport title={setSportTitle(location)} />
+      <StyledBackground image={sport.background} />
+      {sport.name && <Sport />}
+      {!sport.background && <Loader />}
     </Wrapper>
   );
 };

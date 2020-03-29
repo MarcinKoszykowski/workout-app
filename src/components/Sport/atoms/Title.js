@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { white, blue, colorWithOpacity } from 'styled/colors';
 
 const Title = styled.h2`
-  font-size: 2.6rem;
+  font-size: 2.5rem;
+  margin-top: auto;
   padding: 0 10px;
   display: inline-block;
   color: ${white};
@@ -11,22 +12,23 @@ const Title = styled.h2`
   border-bottom: 4px solid ${blue};
 
   @media screen and (max-width: 992px) {
-    font-size: 2.2rem;
-  }
-
-  @media screen and (max-width: 768px) {
-    font-size: 2.1rem;
+    font-size: 1.9rem;
     padding: 0 8px;
   }
 
+  @media screen and (max-width: 768px) {
+    font-size: 1.6rem;
+    padding: 0 6px;
+  }
+
   @media screen and (max-width: 576px) {
-    font-size: 1.55rem;
-    padding: 0 5px;
+    font-size: 1.2rem;
+    padding: 0 4px;
     border-bottom: 3px solid ${blue};
   }
 
   @media screen and (max-width: 420px) {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
   }
 `;
 

@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { colorWithOpacity, white, blue } from 'styled/colors';
+import { colorWithOpacity, white, blue, green, orange, lightRed } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
 import FormButton from '../atoms/FormButton';
+import IntensityButton from '../atoms/IntensityButton';
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const Form = styled.form`
   display: flex;
@@ -18,31 +24,45 @@ const Form = styled.form`
   }
 
   @media screen and (max-width: 576px) {
-    padding: 3px 3px 3px 4px;
+    padding: 2px 2px 2px 3px;
   }
 
   @media screen and (max-width: 420px) {
-    padding: 1px 2px 1px 3px;
+    padding: 0 1px 0 2px;
   }
 `;
 
 const SportForm = () => {
   const [traningTime, setTraningTime] = useState(0);
+  const [intensityButtonColor, setIntensityButtonColor] = useState(orange);
 
   const handleInputChange = (e) => {
     setTraningTime(e.target.value);
   };
 
+  const intensityButtonOnClick = () => {
+    if (intensityButtonColor === orange) {
+      setIntensityButtonColor(lightRed);
+    } else if (intensityButtonColor === lightRed) {
+      setIntensityButtonColor(green);
+    } else {
+      setIntensityButtonColor(orange);
+    }
+  };
+
   return (
-    <Form autoComplete="off">
-      <FormInput
-        onChange={(e) => handleInputChange(e)}
-        value={Number(traningTime)}
-        name="traningTime"
-        label="traning time"
-      />
-      <FormButton />
-    </Form>
+    <Wrapper>
+      <IntensityButton onClick={intensityButtonOnClick} color={intensityButtonColor} />
+      <Form autoComplete="off">
+        <FormInput
+          onChange={(e) => handleInputChange(e)}
+          value={Number(traningTime)}
+          name="traningTime"
+          label="traning time"
+        />
+        <FormButton />
+      </Form>
+    </Wrapper>
   );
 };
 

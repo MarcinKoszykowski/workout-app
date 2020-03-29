@@ -68,14 +68,21 @@ const Input = styled.input`
     display: none;
   }
 
+  @media screen and (max-width: 992px) {
+    line-height: 1.3rem;
+    font-size: 1rem;
+  }
+
   @media screen and (max-width: 576px) {
-    line-height: 1rem;
-    font-size: 0.75rem;
+    line-height: 1.1rem;
+    font-size: 0.85rem;
     width: 75%;
   }
 
   @media screen and (max-width: 420px) {
     width: 95%;
+    line-height: 1rem;
+    font-size: 0.75rem;
   }
 `;
 

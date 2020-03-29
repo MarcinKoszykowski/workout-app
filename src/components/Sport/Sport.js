@@ -15,15 +15,15 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    padding: 115px 30px 0 170px;
+    padding: 120px 30px 0 170px;
   }
 
   @media screen and (max-width: 576px) {
-    padding: 100px 15px 0 115px;
+    padding: 102.5px 15px 0 120px;
   }
 
   @media screen and (max-width: 420px) {
-    padding: 92.5px 10px 0 85px;
+    padding: 92.5px 5px 0 85px;
   }
 `;
 

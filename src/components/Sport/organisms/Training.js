@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 576px) {
     top: 140px;
-    left: 115px;
+    left: 120px;
     right: 15px;
     bottom: 15px;
   }
@@ -34,7 +34,7 @@ const Wrapper = styled.div`
   @media screen and (max-width: 420px) {
     top: 122.5px;
     left: 85px;
-    right: 10px;
+    right: 5px;
   }
 
   &::after {

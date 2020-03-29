@@ -16,16 +16,17 @@ const Title = styled.h2`
 
   @media screen and (max-width: 768px) {
     font-size: 2.1rem;
+    padding: 0 8px;
   }
 
   @media screen and (max-width: 576px) {
-    font-size: 1.8rem;
+    font-size: 1.55rem;
     padding: 0 5px;
     border-bottom: 3px solid ${blue};
   }
 
   @media screen and (max-width: 420px) {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 `;
 

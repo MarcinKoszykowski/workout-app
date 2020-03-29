@@ -69,9 +69,9 @@ const UserForm = () => {
   } = userValue;
 
   const [formUser, setFormUser] = useState({
-    age: '',
-    height: '',
-    weight: '',
+    age: 0,
+    height: 0,
+    weight: 0,
   });
 
   const handleInputChange = (e) => {
@@ -82,7 +82,7 @@ const UserForm = () => {
     setFormUser(value);
   };
 
-  const setValue = (value) => value || '';
+  const setValue = (value) => value || 0;
 
   const setUserDetails = () => {
     setFormUser({
@@ -134,21 +134,21 @@ const UserForm = () => {
       <FormInput
         onChange={(e) => handleInputChange(e)}
         max={age.max}
-        value={formUser.age}
+        value={Number(formUser.age)}
         name={age.name}
         label={age.name}
       />
       <FormInput
         onChange={(e) => handleInputChange(e)}
         max={height.max}
-        value={formUser.height}
+        value={Number(formUser.height)}
         name={height.name}
         label={`${height.name} [cm]`}
       />
       <FormInput
         onChange={(e) => handleInputChange(e)}
         max={weight.max}
-        value={formUser.weight}
+        value={Number(formUser.weight)}
         name={weight.name}
         label={`${weight.name} [kg]`}
       />

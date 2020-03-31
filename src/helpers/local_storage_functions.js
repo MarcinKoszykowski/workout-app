@@ -20,9 +20,14 @@ const setBMIInLocalStorage = (bmi) => {
   localStorage.setItem('userBMI', bmi);
 };
 
+const setTokenInLocalStorage = (token) => {
+  localStorage.setItem('userToken', token);
+};
+
 export {
   setUserInLocalStorage,
   setDetailsInLocalStorage,
   setBMIInLocalStorage,
+  setTokenInLocalStorage,
   checkDetailsInLocalStora,
 };

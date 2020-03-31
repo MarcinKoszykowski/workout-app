@@ -11,6 +11,7 @@ const AppProvider = ({ children }) => {
   const [userIsLogged, setUserIsLogged] = useState(false);
   const [userPanelVisibility, setUserPanelVisibility] = useState(false);
   const [mainButtonVisibility, setMainButtonVisibility] = useState(false);
+  const [token, setToken] = useState('');
 
   const userElement = {
     user,
@@ -31,6 +32,8 @@ const AppProvider = ({ children }) => {
   };
 
   const otherElement = {
+    token,
+    setToken,
     loading,
     setLoading,
     userPanelVisibility,

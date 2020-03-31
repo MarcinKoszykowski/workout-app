@@ -9,4 +9,9 @@ const details = {
   userId: '/details/get/userId',
 };
 
-export { user, details };
+const training = {
+  add: '/training/add',
+  delete: '/training/delete',
+};
+
+export { user, details, training };

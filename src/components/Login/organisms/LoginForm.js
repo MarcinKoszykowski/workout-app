@@ -9,6 +9,7 @@ import {
   setDetailsInLocalStorage,
   setBMIInLocalStorage,
   setUserInLocalStorage,
+  setTokenInLocalStorage,
 } from 'helpers/local_storage_functions';
 import { user as userRoute, details as detailsRoute } from 'data/api_routes';
 import { main } from 'data/routes';
@@ -54,7 +55,9 @@ const LoginForm = () => {
     infoText: { incorrect, error },
   } = login;
 
-  const { setUser, setUserIsLogged, setLoading, setDetails, setUserBMI } = useContext(AppContext);
+  const { setToken, setUser, setUserIsLogged, setLoading, setDetails, setUserBMI } = useContext(
+    AppContext,
+  );
   const history = useHistory();
 
   const [passwordType, setPasswordType] = useState(true);
@@ -97,28 +100,35 @@ const LoginForm = () => {
     }
   };
 
-  const getDetailsData = (userId) =>
+  const getDetailsData = (userId, token) =>
     getDataFromAPI(
       detailsRoute.userId,
       { userId },
       checkDetailsStatus,
       () => console.log('error'), // eslint-disable-line
+      token,
     );
 
-  const loginUser = (user) => {
+  const loginUser = (user, token) => {
     setUser({ ...user });
     setUserInLocalStorage(user);
-    getDetailsData(user._id); // eslint-disable-line
+    getDetailsData(user._id, token); // eslint-disable-line
     setUserIsLogged(true);
     history.push(main);
   };
 
+  const setUserToken = (token) => {
+    setToken(token);
+    setTokenInLocalStorage(token);
+  };
+
   const checkStatus = (data) => {
-    const { status, user } = data;
+    const { status, user, token } = data;
 
     if (status === 1) {
       setLoading(true);
-      loginUser(user);
+      setUserToken(token);
+      loginUser(user, token);
     } else if (status === 2 || status === 3) {
       handleStatus(incorrect);
     } else if (status === 4) {

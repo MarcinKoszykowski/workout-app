@@ -18,9 +18,15 @@ import MainView from './views/MainView';
 import LoginView from './views/LoginView';
 
 const App = () => {
-  const { setUserIsLogged, setUser, userIsLogged, setUserBMI, setDetails, loading } = useContext(
-    AppContext,
-  );
+  const {
+    setUserIsLogged,
+    setToken,
+    setUser,
+    userIsLogged,
+    setUserBMI,
+    setDetails,
+    loading,
+  } = useContext(AppContext);
   const history = useHistory();
 
   const checkUser = (user) => {
@@ -74,6 +80,7 @@ const App = () => {
       { id: localStorage.getItem('userId') },
       checkUserStatus,
       () => console.log('error'), // eslint-disable-line
+      localStorage.getItem('userToken'),
     );
 
   const getDetailsData = () => {
@@ -86,6 +93,7 @@ const App = () => {
         { userId: localStorage.getItem('userId') },
         checkDetailsStatus,
         () => console.log('error'), // eslint-disable-line
+        localStorage.getItem('userToken'),
       );
     }
   };
@@ -94,6 +102,7 @@ const App = () => {
     if (localStorage.getItem('userIsLogged') === 'true') {
       getUserData();
       getDetailsData();
+      setToken(localStorage.getItem('userToken'));
     } else {
       history.push(loginURL);
     }

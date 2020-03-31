@@ -1,7 +1,10 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import AppContext from 'context';
+import { training as trainingRoute } from 'data/api_routes';
 import { colorWithOpacity, white, blue, green, orange, lightRed } from 'styled/colors';
+import getDataFromAPI from 'helpers/api_functions';
+import { calculateCalories } from 'helpers/functions';
 import FormInput from '../molecules/FormInput';
 import FormButton from '../atoms/FormButton';
 import IntensityButton from '../atoms/IntensityButton';
@@ -34,7 +37,7 @@ const Form = styled.form`
 `;
 
 const SportForm = () => {
-  const { sport } = useContext(AppContext);
+  const { sport, user, details, userBMI } = useContext(AppContext);
   const [traningTime, setTraningTime] = useState(0);
   const [intensityButtonColor, setIntensityButtonColor] = useState(orange);
 
@@ -52,12 +55,45 @@ const SportForm = () => {
     }
   };
 
+  const setIntensity = () => {
+    if (intensityButtonColor === orange) {
+      return 1;
+    } if (intensityButtonColor === lightRed) {
+      return sport.high;
+    } 
+      return sport.low;
+    
+  };
+
+  const checkStatus = (data) => {
+    console.log(data); // eslint-disable-line
+  };
+
+  const handleInputOnSubmit = (e) => {
+    e.preventDefault();
+
+    getDataFromAPI(
+      trainingRoute.add,
+      {
+        training: {
+          userId: user._id, // eslint-disable-line
+          sport: sport.name,
+          kcal: calculateCalories(traningTime, sport.kcal, details.weight, userBMI, setIntensity()),
+          time: traningTime,
+        },
+      },
+      checkStatus,
+      () => console.log('error'), // eslint-disable-line
+      localStorage.getItem('userToken'),
+    );
+  };
+
   return (
     <Wrapper>
       {sport.high && (
         <IntensityButton onClick={intensityButtonOnClick} color={intensityButtonColor} />
       )}
-      <Form autoComplete="off">
+      <Form autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
           onChange={(e) => handleInputChange(e)}
           value={Number(traningTime)}

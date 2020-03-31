@@ -121,6 +121,7 @@ const UserForm = () => {
         },
         checkStatus,
         () => console.log('error'), // eslint-disable-line
+        localStorage.getItem('userToken'),
       );
     }
   };

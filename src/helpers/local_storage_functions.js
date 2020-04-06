@@ -1,5 +1,5 @@
 const setUserInLocalStorage = (user) => {
-  localStorage.setItem('userId', user._id); // eslint-disable-line
+  localStorage.setItem('userId', user._id);
   localStorage.setItem('userEmail', user.email);
   localStorage.setItem('userPassword', user.password);
   localStorage.setItem('userIsLogged', true);

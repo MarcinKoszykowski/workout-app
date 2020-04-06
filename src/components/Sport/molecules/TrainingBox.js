@@ -52,7 +52,7 @@ const Wrapper = styled.div`
 
 const TrainingBox = ({ item }) => {
   const { userTraining, setUserTraining, setDeleteSportTraining } = useContext(AppContext);
-  const { date, time, kcal, _id } = item; // eslint-disable-line
+  const { date, time, kcal, _id } = item;
 
   const checkStatus = (data) => {
     const { status } = data;
@@ -62,7 +62,7 @@ const TrainingBox = ({ item }) => {
 
   const trainingBoxOnClick = () => {
     const array = userTraining;
-    array.map((arrayItem, index) => (arrayItem._id === _id ? array.splice(index, 1) : null)); // eslint-disable-line
+    array.map((arrayItem, index) => (arrayItem._id === _id ? array.splice(index, 1) : null));
 
     setUserTraining(array);
     setDeleteSportTraining(true);
@@ -86,9 +86,9 @@ const TrainingBox = ({ item }) => {
 
 TrainingBox.propTypes = {
   item: PropTypes.shape({
-    _id: PropTypes.string.isRequired, // eslint-disable-line
+    _id: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
+    time: PropTypes.number.isRequired,
     kcal: PropTypes.number.isRequired,
   }).isRequired,
 };

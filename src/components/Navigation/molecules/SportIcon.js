@@ -49,8 +49,8 @@ const SportIcon = ({ sport }) => {
       setMainButtonVisibility(true);
     }
 
-    if (calendarButtonVisibility) {
-      setCalendarButtonVisibility(false);
+    if (!calendarButtonVisibility) {
+      setCalendarButtonVisibility(true);
     }
   };
 

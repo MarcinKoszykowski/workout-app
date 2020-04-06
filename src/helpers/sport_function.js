@@ -7,7 +7,8 @@ const getTrainingBySportName = (array, sport) => {
   return arrayTraining;
 };
 
-const setSportDate = (date) => date.substring(0, 10);
+const setSportDate = (date) =>
+  `${date.substring(8, 10)}.${date.substring(5, 7)}.${date.substring(0, 4)}`;
 const setSportTime = (time) => `${time} min`;
 const setSportKcal = (kcal) => `${kcal.toFixed(2)} kcal`;
 

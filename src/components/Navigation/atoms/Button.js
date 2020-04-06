@@ -49,8 +49,8 @@ const Button = styled.div`
   }
 
   @media screen and (max-width: 420px) {
-    height: 45px;
-    width: 45px;
+    height: ${({ smallButton }) => (smallButton ? `37.5px` : `45px`)};
+    width: ${({ smallButton }) => (smallButton ? `37.5px` : `45px`)};
   }
 `;
 

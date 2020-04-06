@@ -28,8 +28,8 @@ const SportView = () => {
       setMainButtonVisibility(true);
     }
 
-    if (calendarButtonVisibility) {
-      setCalendarButtonVisibility(false);
+    if (!calendarButtonVisibility) {
+      setCalendarButtonVisibility(true);
     }
 
     if (!sport.name) {
@@ -39,7 +39,7 @@ const SportView = () => {
 
   return (
     <Wrapper>
-      <NavigationTemplate />
+      <NavigationTemplate four />
       <StyledBackground image={sport.background} />
       {sport.name && <Sport />}
       {!sport.background && <Loader />}

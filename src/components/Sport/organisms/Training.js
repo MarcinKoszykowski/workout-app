@@ -96,7 +96,7 @@ const Training = () => {
     <Wrapper>
       <Box>
         {userSportTraining.map((item) => (
-          <TrainingBox item={item} key={item._id} /> // eslint-disable-line
+          <TrainingBox item={item} key={item._id} />
         ))}
       </Box>
     </Wrapper>

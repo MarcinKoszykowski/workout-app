@@ -6,6 +6,7 @@ import calendarImage from 'assets/images/calendar.jpg';
 import NavigationTemplate from 'templates/NavigationTemplate';
 import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
+import Calendar from 'components/Calendar/Calendar';
 
 const StyledBackground = styled(Background)`
   background-position: top left;
@@ -32,6 +33,7 @@ const CalendarView = () => {
   return (
     <Wrapper>
       <NavigationTemplate />
+      <Calendar />
       <StyledBackground image={calendarImage} />
     </Wrapper>
   );

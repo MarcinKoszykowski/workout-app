@@ -112,7 +112,7 @@ const UserForm = () => {
       getDataFromAPI(
         detailsRoute.add,
         {
-          userId: user._id, // eslint-disable-line
+          userId: user._id,
           data: {
             age: formUser.age,
             height: formUser.height,

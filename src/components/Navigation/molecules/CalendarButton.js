@@ -16,6 +16,7 @@ const CalendarButton = () => {
     setUserPanelVisibility,
     calendarButtonVisibility,
     setCalendarButtonVisibility,
+    mainButtonVisibility,
   } = useContext(AppContext);
   const history = useHistory();
 
@@ -28,7 +29,14 @@ const CalendarButton = () => {
     }
   };
 
-  return <StyledButton onClick={buttonOnClick} buttonColor={orange} icon={logoImage} />;
+  return (
+    <StyledButton
+      smallButton={mainButtonVisibility && calendarButtonVisibility}
+      onClick={buttonOnClick}
+      buttonColor={orange}
+      icon={logoImage}
+    />
+  );
 };
 
 export default CalendarButton;

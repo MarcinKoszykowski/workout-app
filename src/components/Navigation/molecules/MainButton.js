@@ -33,7 +33,12 @@ const StyledButton = styled(Button)`
 `;
 
 const MainButton = () => {
-  const { setUserPanelVisibility, setMainButtonVisibility } = useContext(AppContext);
+  const {
+    setUserPanelVisibility,
+    setMainButtonVisibility,
+    mainButtonVisibility,
+    calendarButtonVisibility,
+  } = useContext(AppContext);
   const history = useHistory();
 
   const buttonOnClick = () => {
@@ -42,7 +47,14 @@ const MainButton = () => {
     setMainButtonVisibility(false);
   };
 
-  return <StyledButton onClick={buttonOnClick} buttonColor={white} icon={logoImage} />;
+  return (
+    <StyledButton
+      smallButton={mainButtonVisibility && calendarButtonVisibility}
+      onClick={buttonOnClick}
+      buttonColor={white}
+      icon={logoImage}
+    />
+  );
 };
 
 export default MainButton;

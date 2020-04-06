@@ -112,7 +112,7 @@ const LoginForm = () => {
   const loginUser = (user, token) => {
     setUser({ ...user });
     setUserInLocalStorage(user);
-    getDetailsData(user._id, token); // eslint-disable-line
+    getDetailsData(user._id, token);
     setUserIsLogged(true);
     history.push(main);
   };

@@ -58,11 +58,11 @@ const SportForm = () => {
   const setIntensity = () => {
     if (intensityButtonColor === green) {
       return sport.low;
-    } if (intensityButtonColor === lightRed) {
+    }
+    if (intensityButtonColor === lightRed) {
       return sport.high;
-    } 
-      return 1;
-    
+    }
+    return 1;
   };
 
   const checkStatus = (data) => {
@@ -80,7 +80,7 @@ const SportForm = () => {
       trainingRoute.add,
       {
         training: {
-          userId: user._id, // eslint-disable-line
+          userId: user._id,
           sport: sport.name,
           kcal: calculateCalories(traningTime, sport.kcal, details.weight, userBMI, setIntensity()),
           time: traningTime,

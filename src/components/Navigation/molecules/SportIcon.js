@@ -37,6 +37,8 @@ const SportIcon = ({ sport }) => {
     setUserPanelVisibility,
     mainButtonVisibility,
     setMainButtonVisibility,
+    calendarButtonVisibility,
+    setCalendarButtonVisibility,
   } = useContext(AppContext);
 
   const buttonOnClick = () => {
@@ -45,6 +47,10 @@ const SportIcon = ({ sport }) => {
 
     if (!mainButtonVisibility) {
       setMainButtonVisibility(true);
+    }
+
+    if (calendarButtonVisibility) {
+      setCalendarButtonVisibility(false);
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import AppContext from 'context';
 import { training as trainingRoute } from 'data/api_routes';
@@ -37,7 +37,7 @@ const Form = styled.form`
 `;
 
 const SportForm = () => {
-  const { sport, user, details, userBMI } = useContext(AppContext);
+  const { sport, user, details, userBMI, setUserTraining, userTraining } = useContext(AppContext);
   const [traningTime, setTraningTime] = useState(0);
   const [intensityButtonColor, setIntensityButtonColor] = useState(orange);
 
@@ -56,17 +56,21 @@ const SportForm = () => {
   };
 
   const setIntensity = () => {
-    if (intensityButtonColor === orange) {
-      return 1;
+    if (intensityButtonColor === green) {
+      return sport.low;
     } if (intensityButtonColor === lightRed) {
       return sport.high;
     } 
-      return sport.low;
+      return 1;
     
   };
 
   const checkStatus = (data) => {
-    console.log(data); // eslint-disable-line
+    const { status, training } = data;
+
+    if (status === 1) {
+      setUserTraining([training, ...userTraining]);
+    }
   };
 
   const handleInputOnSubmit = (e) => {
@@ -86,7 +90,13 @@ const SportForm = () => {
       () => console.log('error'), // eslint-disable-line
       localStorage.getItem('userToken'),
     );
+
+    setTraningTime(0);
   };
+
+  useEffect(() => {
+    setTraningTime(0);
+  }, [sport]);
 
   return (
     <Wrapper>
@@ -100,7 +110,7 @@ const SportForm = () => {
           name="traningTime"
           label="traning time"
         />
-        <FormButton />
+        <FormButton disabled={!traningTime} />
       </Form>
     </Wrapper>
   );

@@ -4,6 +4,7 @@ import AppContext from 'context';
 import Logout from '../molecules/Logout';
 import UserButton from '../molecules/UserButton';
 import MainButton from '../molecules/MainButton';
+import CalendarButton from '../molecules/CalendarButton';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -42,12 +43,13 @@ const Wrapper = styled.div`
 `;
 
 const RightBar = () => {
-  const { mainButtonVisibility } = useContext(AppContext);
+  const { mainButtonVisibility, calendarButtonVisibility } = useContext(AppContext);
 
   return (
     <Wrapper>
       <UserButton />
       {mainButtonVisibility && <MainButton />}
+      {calendarButtonVisibility && <CalendarButton />}
       <Logout />
     </Wrapper>
   );

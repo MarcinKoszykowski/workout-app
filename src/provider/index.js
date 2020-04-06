@@ -12,6 +12,10 @@ const AppProvider = ({ children }) => {
   const [userPanelVisibility, setUserPanelVisibility] = useState(false);
   const [mainButtonVisibility, setMainButtonVisibility] = useState(false);
   const [token, setToken] = useState('');
+  const [userTraining, setUserTraining] = useState([]);
+  const [userSportTraining, setUserSportTraining] = useState([]);
+  const [deleteSportTraining, setDeleteSportTraining] = useState(false);
+  const [calendarButtonVisibility, setCalendarButtonVisibility] = useState(false);
 
   const userElement = {
     user,
@@ -27,8 +31,12 @@ const AppProvider = ({ children }) => {
   const sportElement = {
     sport,
     setSport,
-    mainButtonVisibility,
-    setMainButtonVisibility,
+    userTraining,
+    setUserTraining,
+    userSportTraining,
+    setUserSportTraining,
+    deleteSportTraining,
+    setDeleteSportTraining,
   };
 
   const otherElement = {
@@ -38,6 +46,10 @@ const AppProvider = ({ children }) => {
     setLoading,
     userPanelVisibility,
     setUserPanelVisibility,
+    mainButtonVisibility,
+    setMainButtonVisibility,
+    calendarButtonVisibility,
+    setCalendarButtonVisibility,
   };
 
   const contextElement = {

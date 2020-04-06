@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import AppContext from 'context';
-import { setSportTitle } from 'helpers/functions';
+import { setSportTitle, getTrainingBySportName } from 'helpers/sport_function';
 import Training from './organisms/Training';
 import SportForm from './organisms/SportForm';
 import Title from './atoms/Title';
@@ -34,7 +34,28 @@ const TopWrapper = styled.div`
 `;
 
 const Sport = () => {
-  const { sport } = useContext(AppContext);
+  const {
+    userTraining,
+    sport,
+    setUserSportTraining,
+    setDeleteSportTraining,
+    deleteSportTraining,
+  } = useContext(AppContext);
+
+  const handleSetUserSportTraining = () =>
+    setUserSportTraining(getTrainingBySportName(userTraining, sport));
+
+  const handleSetDeleteSportTraining = () => setDeleteSportTraining(false);
+
+  const callbackUserSportTraining = useCallback(handleSetUserSportTraining, [userTraining, sport]);
+  const callbackDeleteSportTraining = useCallback(handleSetDeleteSportTraining, [
+    deleteSportTraining,
+  ]);
+
+  useEffect(() => {
+    callbackUserSportTraining();
+    callbackDeleteSportTraining();
+  }, [callbackDeleteSportTraining, callbackUserSportTraining]);
 
   return (
     <Wrapper>

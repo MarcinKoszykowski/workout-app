@@ -2,21 +2,17 @@ import React, { useContext } from 'react';
 import { useDidMount } from 'beautiful-react-hooks';
 import styled from 'styled-components';
 import AppContext from 'context';
-import sports from 'data/sports';
+import calendarImage from 'assets/images/calendar.jpg';
 import NavigationTemplate from 'templates/NavigationTemplate';
-import Sport from 'components/Sport/Sport';
 import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
-import Loader from 'atoms/Loader';
 
 const StyledBackground = styled(Background)`
-  background-position: center center;
+  background-position: top left;
 `;
 
-const SportView = () => {
+const CalendarView = () => {
   const {
-    sport,
-    setSport,
     calendarButtonVisibility,
     setCalendarButtonVisibility,
     mainButtonVisibility,
@@ -31,20 +27,14 @@ const SportView = () => {
     if (calendarButtonVisibility) {
       setCalendarButtonVisibility(false);
     }
-
-    if (!sport.name) {
-      setSport(sports.find((item) => item.name === window.location.pathname.slice(7)));
-    }
   });
 
   return (
     <Wrapper>
       <NavigationTemplate />
-      <StyledBackground image={sport.background} />
-      {sport.name && <Sport />}
-      {!sport.background && <Loader />}
+      <StyledBackground image={calendarImage} />
     </Wrapper>
   );
 };
 
-export default SportView;
+export default CalendarView;

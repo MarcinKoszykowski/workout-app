@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import AppContext from 'context';
 import { colorWithOpacity, white, blue } from 'styled/colors';
+import TrainingBox from '../molecules/TrainingBox';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -60,6 +62,45 @@ const Wrapper = styled.div`
   }
 `;
 
-const Training = () => <Wrapper />;
+const Box = styled.div`
+  position: absolute;
+  left: 17.5px;
+  right: 17.5px;
+  top: 15px;
+  bottom: 15px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (max-width: 576px) {
+    left: 12.5px;
+    right: 12.5px;
+    top: 10px;
+    bottom: 10px;
+  }
+
+  @media screen and (max-width: 420px) {
+    left: 7.5px;
+    right: 7.5px;
+    top: 5px;
+    bottom: 5px;
+  }
+`;
+
+const Training = () => {
+  const { userSportTraining } = useContext(AppContext);
+
+  return (
+    <Wrapper>
+      <Box>
+        {userSportTraining.map((item) => (
+          <TrainingBox item={item} key={item._id} /> // eslint-disable-line
+        ))}
+      </Box>
+    </Wrapper>
+  );
+};
 
 export default Training;

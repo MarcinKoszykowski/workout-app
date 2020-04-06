@@ -9,17 +9,23 @@ import {
   setDetailsInLocalStorage,
   setBMIInLocalStorage,
 } from 'helpers/local_storage_functions';
-import { main, login as loginURL, sport } from 'data/routes';
-import { user as userRoute, details as detailsRoute } from 'data/api_routes';
+import { main, login as loginURL, sport, calendar } from 'data/routes';
+import {
+  user as userRoute,
+  details as detailsRoute,
+  training as trainingRoute,
+} from 'data/api_routes';
 import GlobalStyle from 'styled/GlobalStyle';
 import SportView from 'views/SportView';
 import Loader from 'atoms/Loader';
+import CalendarView from 'views/CalendarView';
 import MainView from './views/MainView';
 import LoginView from './views/LoginView';
 
 const App = () => {
   const {
     setUserIsLogged,
+    setUserTraining,
     setToken,
     setUser,
     userIsLogged,
@@ -74,6 +80,14 @@ const App = () => {
     }
   };
 
+  const checkTrainingStatus = (trainingData) => {
+    const { status, userTraining } = trainingData;
+
+    if (status === 1) {
+      setUserTraining(userTraining.reverse());
+    }
+  };
+
   const getUserData = () =>
     getDataFromAPI(
       userRoute.id,
@@ -98,11 +112,22 @@ const App = () => {
     }
   };
 
+  const getTrainingData = () => {
+    getDataFromAPI(
+      trainingRoute.getByUserId,
+      { userId: localStorage.getItem('userId') },
+      checkTrainingStatus,
+      () => console.log('error'), // eslint-disable-line
+      localStorage.getItem('userToken'),
+    );
+  };
+
   const handleGetData = () => {
     if (localStorage.getItem('userIsLogged') === 'true') {
       getUserData();
       getDetailsData();
       setToken(localStorage.getItem('userToken'));
+      getTrainingData();
     } else {
       history.push(loginURL);
     }
@@ -122,6 +147,7 @@ const App = () => {
         <Route exact path={main} component={MainView} />
         <Route exact path={loginURL} component={LoginView} />
         <Route exact path={sport} component={SportView} />
+        <Route exact path={calendar} component={CalendarView} />
       </Switch>
     </>
   );

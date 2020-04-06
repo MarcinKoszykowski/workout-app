@@ -11,6 +11,7 @@ const details = {
 
 const training = {
   add: '/training/add',
+  getByUserId: '/training/get/userId',
   delete: '/training/delete',
 };
 

@@ -1,10 +1,23 @@
 import React, { useContext } from 'react';
+import styled from 'styled-components';
 import AppContext from 'context';
 import { training as trainingRoute } from 'data/api_routes';
 import getDataFromAPI from 'helpers/api_functions';
 import { red } from 'styled/colors';
 import trashIcon from 'assets/icons/trash.svg';
 import Button from '../atoms/Button';
+
+const StyledButton = styled(Button)`
+  @media screen and (max-width: 576px) {
+    height: 50px;
+    width: 50px;
+  }
+
+  @media screen and (max-width: 420px) {
+    height: 45px;
+    width: 45px;
+  }
+`;
 
 const DeleteButton = () => {
   const { training, setTraining, setVisibility } = useContext(AppContext);
@@ -32,7 +45,7 @@ const DeleteButton = () => {
     setVisibility((prevState) => ({ ...prevState, modal: false }));
   };
 
-  return <Button buttonColor={red} icon={trashIcon} onClick={deleteButtonOnClick} />;
+  return <StyledButton buttonColor={red} icon={trashIcon} onClick={deleteButtonOnClick} />;
 };
 
 export default DeleteButton;

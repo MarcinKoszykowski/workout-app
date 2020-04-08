@@ -33,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         position: relative;
         overflow-x: hidden;
+        overflow-y: scroll;
         background-color: ${colorWithOpacity(purple, 0.3)};
         font-weight: 400;
         -webkit-font-smoothing: antialiased;

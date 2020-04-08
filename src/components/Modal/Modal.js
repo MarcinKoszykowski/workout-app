@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import AppContext from 'context';
 import animations from 'styled/animations';
-import { white, colorWithOpacity, black } from 'styled/colors';
+import { white, colorWithOpacity } from 'styled/colors';
+import CoverBackground from 'atoms/CoverBackground';
 import DeleteButton from './molecules/DeleteButton';
 import ExitButton from './molecules/ExitButton';
 import Text from './atoms/Text';
@@ -18,24 +19,13 @@ const Wrapper = styled.div`
   z-index: 5;
 `;
 
-const Background = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: ${colorWithOpacity(black, 0.5)};
-  animation: ${animations.opacityZeroToOne} 0.5s ease;
-  z-index: 4;
-`;
-
 const Modal = () => {
   const { visibility } = useContext(AppContext);
 
   return (
     visibility.modal && (
       <>
-        <Background />
+        <CoverBackground />
         <Wrapper>
           <ExitButton />
           <DeleteButton />

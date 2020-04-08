@@ -61,7 +61,7 @@ const FormButton = styled(Button)`
 `;
 
 const UserForm = () => {
-  const { details, setDetails, user, setUserBMI } = useContext(AppContext);
+  const { userDetails, user, setUserDetails } = useContext(AppContext);
 
   const {
     button: { save },
@@ -84,11 +84,11 @@ const UserForm = () => {
 
   const setValue = (value) => value || 0;
 
-  const setUserDetails = () => {
+  const setUserData = () => {
     setFormUser({
-      age: setValue(details.age),
-      height: setValue(details.height),
-      weight: setValue(details.weight),
+      age: setValue(userDetails.data.age),
+      height: setValue(userDetails.data.height),
+      weight: setValue(userDetails.data.weight),
     });
   };
 
@@ -96,9 +96,12 @@ const UserForm = () => {
     const { status } = data;
 
     if (status === 1) {
-      setDetails({ ...formUser });
       setDetailsInLocalStorage(formUser);
-      setUserBMI(calculateBMI(formUser.height, formUser.weight));
+      setUserDetails((prevState) => ({
+        ...prevState,
+        data: { ...formUser },
+        bmi: calculateBMI(formUser.height, formUser.weight),
+      }));
       setBMIInLocalStorage(calculateBMI(formUser.height, formUser.weight));
     } else if (status === 2) {
       console.log('error'); // eslint-disable-line
@@ -108,7 +111,7 @@ const UserForm = () => {
   const handleInputOnSubmit = (e) => {
     e.preventDefault();
 
-    if (!checkEditInUserForm(formUser, details)) {
+    if (!checkEditInUserForm(formUser, userDetails.data)) {
       getDataFromAPI(
         detailsRoute.add,
         {
@@ -127,7 +130,7 @@ const UserForm = () => {
   };
 
   useDidMount(() => {
-    setUserDetails();
+    setUserData();
   });
 
   return (

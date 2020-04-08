@@ -1,12 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { setSportDate, setSportTime, setSportKcal } from 'helpers/sport_function';
-import { white, colorWithOpacity, lightRed } from 'styled/colors';
 import AppContext from 'context';
-import getDataFromAPI from 'helpers/api_functions';
-import { training } from 'data/api_routes';
+import { setSportDate, setSportTime, setSportKcal } from 'helpers/sport_function';
 import animations from 'styled/animations';
+import { white, colorWithOpacity, purple } from 'styled/colors';
 import Text from '../atoms/Text';
 
 const Wrapper = styled.div`
@@ -25,17 +23,17 @@ const Wrapper = styled.div`
 
   @media screen and (min-width: 1024px) {
     &:hover {
-      background-color: ${colorWithOpacity(lightRed, 0.3)};
+      background-color: ${colorWithOpacity(purple, 0.25)};
     }
 
     &:active {
-      background-color: ${colorWithOpacity(lightRed, 0.4)};
+      background-color: ${colorWithOpacity(purple, 0.35)};
     }
   }
 
   @media screen and (max-width: 1024px) {
     &:active {
-      background-color: ${colorWithOpacity(lightRed, 0.3)};
+      background-color: ${colorWithOpacity(purple, 0.25)};
     }
   }
 
@@ -51,28 +49,12 @@ const Wrapper = styled.div`
 `;
 
 const TrainingBox = ({ item }) => {
-  const { userTraining, setUserTraining, setDeleteSportTraining } = useContext(AppContext);
+  const { setTraining, setVisibility } = useContext(AppContext);
   const { date, time, kcal, _id } = item;
 
-  const checkStatus = (data) => {
-    const { status } = data;
-
-    console.log(status); // eslint-disable-line
-  };
-
   const trainingBoxOnClick = () => {
-    const array = userTraining;
-    array.map((arrayItem, index) => (arrayItem._id === _id ? array.splice(index, 1) : null));
-
-    setUserTraining(array);
-    setDeleteSportTraining(true);
-    getDataFromAPI(
-      training.delete,
-      { id: _id },
-      checkStatus,
-      () => console.log('error'), // eslint-disable-line
-      localStorage.getItem('userToken'),
-    );
+    setTraining((prevState) => ({ ...prevState, sportId: _id }));
+    setVisibility((prevState) => ({ ...prevState, modal: true }));
   };
 
   return (

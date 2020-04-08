@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import AppContext from 'context';
 import { colorWithOpacity, white, blue } from 'styled/colors';
+import Modal from 'components/Modal/Modal';
 import TrainingBox from '../molecules/TrainingBox';
 
 const Wrapper = styled.div`
@@ -90,15 +91,16 @@ const Box = styled.div`
 `;
 
 const Training = () => {
-  const { userSportTraining } = useContext(AppContext);
+  const { training } = useContext(AppContext);
 
   return (
     <Wrapper>
       <Box>
-        {userSportTraining.map((item) => (
+        {training.sportData.map((item) => (
           <TrainingBox item={item} key={item._id} />
         ))}
       </Box>
+      <Modal />
     </Wrapper>
   );
 };

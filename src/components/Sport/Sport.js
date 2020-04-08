@@ -34,33 +34,29 @@ const TopWrapper = styled.div`
 `;
 
 const Sport = () => {
-  const {
-    userTraining,
-    sport,
-    setUserSportTraining,
-    setDeleteSportTraining,
-    deleteSportTraining,
-  } = useContext(AppContext);
+  const { training, setTraining } = useContext(AppContext);
 
-  const handleSetUserSportTraining = () =>
-    setUserSportTraining(getTrainingBySportName(userTraining, sport));
+  const setTrainingData = () =>
+    setTraining((prevState) => ({
+      ...prevState,
+      sportData: getTrainingBySportName(training.data, training.sport),
+      delete: false,
+    }));
 
-  const handleSetDeleteSportTraining = () => setDeleteSportTraining(false);
-
-  const callbackUserSportTraining = useCallback(handleSetUserSportTraining, [userTraining, sport]);
-  const callbackDeleteSportTraining = useCallback(handleSetDeleteSportTraining, [
-    deleteSportTraining,
+  const handleSetTrainingData = useCallback(setTrainingData, [
+    training.data,
+    training.sport,
+    training.delete,
   ]);
 
   useEffect(() => {
-    callbackUserSportTraining();
-    callbackDeleteSportTraining();
-  }, [callbackDeleteSportTraining, callbackUserSportTraining]);
+    handleSetTrainingData();
+  }, [handleSetTrainingData]);
 
   return (
     <Wrapper>
       <TopWrapper>
-        <Title>{setSportTitle(sport.name)}</Title>
+        <Title>{setSportTitle(training.sport.name)}</Title>
         <SportForm />
       </TopWrapper>
       <Training />

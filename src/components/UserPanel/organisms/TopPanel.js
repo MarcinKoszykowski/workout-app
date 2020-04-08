@@ -20,10 +20,10 @@ const Wrapper = styled.div`
 `;
 
 const TopPanel = () => {
-  const { setUserPanelVisibility } = useContext(AppContext);
+  const { setVisibility } = useContext(AppContext);
 
   const exitButtonOnClick = () => {
-    setUserPanelVisibility(false);
+    setVisibility((prevState) => ({ ...prevState, userPanel: false }));
   };
 
   return (

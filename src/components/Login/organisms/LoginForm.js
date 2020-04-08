@@ -55,9 +55,7 @@ const LoginForm = () => {
     infoText: { incorrect, error },
   } = login;
 
-  const { setToken, setUser, setUserIsLogged, setLoading, setDetails, setUserBMI } = useContext(
-    AppContext,
-  );
+  const { setToken, setUser, setUserDetails, setLoading, setIsLogged } = useContext(AppContext);
   const history = useHistory();
 
   const [passwordType, setPasswordType] = useState(true);
@@ -93,9 +91,12 @@ const LoginForm = () => {
     } = data;
 
     if (status === 1) {
-      setDetails({ age, height, weight });
       setDetailsInLocalStorage({ age, height, weight });
-      setUserBMI(calculateBMI(height, weight));
+      setUserDetails((prevState) => ({
+        ...prevState,
+        data: { age, height, weight },
+        bmi: calculateBMI(height, weight),
+      }));
       setBMIInLocalStorage(calculateBMI(height, weight));
     }
   };
@@ -113,7 +114,7 @@ const LoginForm = () => {
     setUser({ ...user });
     setUserInLocalStorage(user);
     getDetailsData(user._id, token);
-    setUserIsLogged(true);
+    setIsLogged(true);
     history.push(main);
   };
 

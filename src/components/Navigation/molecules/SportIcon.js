@@ -32,26 +32,16 @@ const Wrapper = styled.div`
 `;
 
 const SportIcon = ({ sport }) => {
-  const {
-    setSport,
-    setUserPanelVisibility,
-    mainButtonVisibility,
-    setMainButtonVisibility,
-    calendarButtonVisibility,
-    setCalendarButtonVisibility,
-  } = useContext(AppContext);
+  const { setTraining, setVisibility } = useContext(AppContext);
 
   const buttonOnClick = () => {
-    setSport(sport);
-    setUserPanelVisibility(false);
-
-    if (!mainButtonVisibility) {
-      setMainButtonVisibility(true);
-    }
-
-    if (!calendarButtonVisibility) {
-      setCalendarButtonVisibility(true);
-    }
+    setTraining((prevState) => ({ ...prevState, sport }));
+    setVisibility({
+      userPanel: false,
+      mainButton: true,
+      calendarButton: true,
+      modal: false,
+    });
   };
 
   return (

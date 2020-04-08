@@ -14,35 +14,30 @@ const StyledBackground = styled(Background)`
 `;
 
 const SportView = () => {
-  const {
-    sport,
-    setSport,
-    calendarButtonVisibility,
-    setCalendarButtonVisibility,
-    mainButtonVisibility,
-    setMainButtonVisibility,
-  } = useContext(AppContext);
+  const { setTraining, training, setVisibility } = useContext(AppContext);
 
   useDidMount(() => {
-    if (!mainButtonVisibility) {
-      setMainButtonVisibility(true);
-    }
+    setVisibility((prevState) => ({
+      ...prevState,
+      mainButton: true,
+      calendarButton: true,
+      modal: false,
+    }));
 
-    if (!calendarButtonVisibility) {
-      setCalendarButtonVisibility(true);
-    }
-
-    if (!sport.name) {
-      setSport(sports.find((item) => item.name === window.location.pathname.slice(7)));
+    if (!training.sport.name) {
+      setTraining((prevState) => ({
+        ...prevState,
+        sport: sports.find((item) => item.name === window.location.pathname.slice(7)),
+      }));
     }
   });
 
   return (
     <Wrapper>
       <NavigationTemplate four />
-      <StyledBackground image={sport.background} />
-      {sport.name && <Sport />}
-      {!sport.background && <Loader />}
+      <StyledBackground image={training.sport.background} />
+      {training.sport.name && <Sport />}
+      {!training.sport.background && <Loader />}
     </Wrapper>
   );
 };

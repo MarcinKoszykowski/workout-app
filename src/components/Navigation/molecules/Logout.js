@@ -12,21 +12,19 @@ const StyledButton = styled(Button)`
 `;
 
 const Logout = () => {
-  const { setUser, setUserIsLogged, mainButtonVisibility, calendarButtonVisibility } = useContext(
-    AppContext,
-  );
+  const { setUser, setIsLogged, visibility } = useContext(AppContext);
   const history = useHistory();
 
   const buttonOnClick = () => {
     localStorage.clear();
     setUser({});
-    setUserIsLogged(false);
+    setIsLogged(false);
     history.push(login);
   };
 
   return (
     <StyledButton
-      smallButton={mainButtonVisibility && calendarButtonVisibility}
+      smallButton={visibility.mainButton && visibility.calendarButton}
       onClick={buttonOnClick}
       buttonColor={lightRed}
       icon={logoutIcon}

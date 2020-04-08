@@ -33,23 +33,22 @@ const StyledButton = styled(Button)`
 `;
 
 const MainButton = () => {
-  const {
-    setUserPanelVisibility,
-    setMainButtonVisibility,
-    mainButtonVisibility,
-    calendarButtonVisibility,
-  } = useContext(AppContext);
+  const { visibility, setVisibility } = useContext(AppContext);
   const history = useHistory();
 
   const buttonOnClick = () => {
     history.push(main);
-    setUserPanelVisibility(false);
-    setMainButtonVisibility(false);
+    setVisibility((prevState) => ({
+      ...prevState,
+      userPanel: false,
+      mainButton: false,
+      modal: false,
+    }));
   };
 
   return (
     <StyledButton
-      smallButton={mainButtonVisibility && calendarButtonVisibility}
+      smallButton={visibility.mainButton && visibility.calendarButton}
       onClick={buttonOnClick}
       buttonColor={white}
       icon={logoImage}

@@ -45,10 +45,10 @@ const Wrapper = styled.div`
 `;
 
 const UserPanel = () => {
-  const { userPanelVisibility } = useContext(AppContext);
+  const { visibility } = useContext(AppContext);
 
   return (
-    userPanelVisibility && (
+    visibility.userPanel && (
       <Wrapper>
         <TopPanel />
         <UserForm />

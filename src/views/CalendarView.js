@@ -13,21 +13,15 @@ const StyledBackground = styled(Background)`
 `;
 
 const CalendarView = () => {
-  const {
-    calendarButtonVisibility,
-    setCalendarButtonVisibility,
-    mainButtonVisibility,
-    setMainButtonVisibility,
-  } = useContext(AppContext);
+  const { setVisibility } = useContext(AppContext);
 
   useDidMount(() => {
-    if (!mainButtonVisibility) {
-      setMainButtonVisibility(true);
-    }
-
-    if (calendarButtonVisibility) {
-      setCalendarButtonVisibility(false);
-    }
+    setVisibility((prevState) => ({
+      ...prevState,
+      mainButton: true,
+      calendarButton: false,
+      modal: false,
+    }));
   });
 
   return (

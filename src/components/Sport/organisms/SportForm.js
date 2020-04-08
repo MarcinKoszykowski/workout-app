@@ -37,7 +37,7 @@ const Form = styled.form`
 `;
 
 const SportForm = () => {
-  const { sport, user, details, userBMI, setUserTraining, userTraining } = useContext(AppContext);
+  const { training, user, details, userDetails, setTraining } = useContext(AppContext);
   const [traningTime, setTraningTime] = useState(0);
   const [intensityButtonColor, setIntensityButtonColor] = useState(orange);
 
@@ -57,19 +57,19 @@ const SportForm = () => {
 
   const setIntensity = () => {
     if (intensityButtonColor === green) {
-      return sport.low;
+      return training.sport.low;
     }
     if (intensityButtonColor === lightRed) {
-      return sport.high;
+      return training.sport.high;
     }
     return 1;
   };
 
   const checkStatus = (data) => {
-    const { status, training } = data;
+    const { status, training: trainingData } = data;
 
     if (status === 1) {
-      setUserTraining([training, ...userTraining]);
+      setTraining((prevState) => ({ ...prevState, data: [trainingData, ...prevState.data] }));
     }
   };
 
@@ -81,8 +81,14 @@ const SportForm = () => {
       {
         training: {
           userId: user._id,
-          sport: sport.name,
-          kcal: calculateCalories(traningTime, sport.kcal, details.weight, userBMI, setIntensity()),
+          sport: training.sport.name,
+          kcal: calculateCalories(
+            traningTime,
+            training.sport.kcal,
+            details.weight,
+            userDetails.bmi,
+            setIntensity(),
+          ),
           time: traningTime,
         },
       },
@@ -96,11 +102,11 @@ const SportForm = () => {
 
   useEffect(() => {
     setTraningTime(0);
-  }, [sport]);
+  }, [training.sport]);
 
   return (
     <Wrapper>
-      {sport.high && (
+      {training.sport.high && (
         <IntensityButton onClick={intensityButtonOnClick} color={intensityButtonColor} />
       )}
       <Form autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>

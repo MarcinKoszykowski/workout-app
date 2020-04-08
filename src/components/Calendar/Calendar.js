@@ -96,20 +96,19 @@ const Box = styled.div`
 `;
 
 const Calendar = () => {
-  const { userTraining } = useContext(AppContext);
+  const { training } = useContext(AppContext);
 
   return (
     <Wrapper>
       <Box>
-        {userTraining.map((item, index, array) => {
+        {training.data.map((item, index, array) => {
           if (
             index !== 0 &&
             array[index].date.substring(0, 10) === array[index - 1].date.substring(0, 10)
           ) {
             return <TrainingBox item={item} key={item._id} />;
-          } 
-            return <TrainingBoxWithDate item={item} key={item._id} />;
-          
+          }
+          return <TrainingBoxWithDate item={item} key={item._id} />;
         })}
       </Box>
     </Wrapper>

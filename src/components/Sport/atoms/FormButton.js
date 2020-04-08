@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { green, colorWithOpacity } from 'styled/colors';
-import icon from 'assets/icons/times-solid.svg';
+import icon from 'assets/icons/times.svg';
 
 const FormButton = styled.button`
   width: 25px;

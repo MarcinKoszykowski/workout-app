@@ -34,13 +34,15 @@ const StyledEmailText = styled(Text)`
 `;
 
 const UserDetails = () => {
-  const { userBMI } = useContext(AppContext);
+  const { userDetails } = useContext(AppContext);
   const email = localStorage.getItem('userEmail');
 
   return (
     <Wrapper>
       <StyledEmailText color={purple}>{email}</StyledEmailText>
-      {userBMI !== 0 && <StyledText color={setColorBMI(userBMI)}>{`BMI: ${userBMI}`}</StyledText>}
+      {userDetails.bmi !== 0 && (
+        <StyledText color={setColorBMI(userDetails.bmi)}>{`BMI: ${userDetails.bmi}`}</StyledText>
+      )}
     </Wrapper>
   );
 };

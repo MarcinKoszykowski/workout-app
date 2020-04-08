@@ -24,13 +24,12 @@ import LoginView from './views/LoginView';
 
 const App = () => {
   const {
-    setUserIsLogged,
-    setUserTraining,
+    setIsLogged,
+    isLogged,
+    setUserDetails,
+    setTraining,
     setToken,
     setUser,
-    userIsLogged,
-    setUserBMI,
-    setDetails,
     loading,
   } = useContext(AppContext);
   const history = useHistory();
@@ -45,7 +44,7 @@ const App = () => {
 
   const loginUser = (user) => {
     setUser({ ...user });
-    setUserIsLogged(true);
+    setIsLogged(true);
   };
 
   const checkUserStatus = (data) => {
@@ -59,11 +58,14 @@ const App = () => {
   };
 
   const setDetailsFromLocalStorage = () => {
-    setDetails({
-      age: localStorage.getItem('userAge'),
-      height: localStorage.getItem('userHeight'),
-      weight: localStorage.getItem('userWeight'),
-    });
+    setUserDetails((prevState) => ({
+      ...prevState,
+      data: {
+        age: localStorage.getItem('userAge'),
+        height: localStorage.getItem('userHeight'),
+        weight: localStorage.getItem('userWeight'),
+      },
+    }));
   };
 
   const checkDetailsStatus = (data) => {
@@ -73,9 +75,12 @@ const App = () => {
     } = data;
 
     if (status === 1) {
-      setDetails({ age, height, weight });
       setDetailsInLocalStorage({ age, height, weight });
-      setUserBMI(calculateBMI(height, weight));
+      setUserDetails((prevState) => ({
+        ...prevState,
+        data: { age, height, weight },
+        bmi: calculateBMI(height, weight),
+      }));
       setBMIInLocalStorage(calculateBMI(height, weight));
     }
   };
@@ -84,7 +89,7 @@ const App = () => {
     const { status, userTraining } = trainingData;
 
     if (status === 1) {
-      setUserTraining(userTraining.reverse());
+      setTraining((prevState) => ({ ...prevState, data: userTraining.reverse() }));
     }
   };
 
@@ -100,7 +105,7 @@ const App = () => {
   const getDetailsData = () => {
     if (checkDetailsInLocalStora()) {
       setDetailsFromLocalStorage();
-      setUserBMI(localStorage.getItem('userBMI'));
+      setUserDetails((prevState) => ({ ...prevState, bmi: localStorage.getItem('userBMI') }));
     } else {
       getDataFromAPI(
         detailsRoute.userId,
@@ -134,7 +139,7 @@ const App = () => {
   };
 
   useDidMount(() => {
-    if (!userIsLogged) {
+    if (!isLogged) {
       handleGetData();
     }
   });

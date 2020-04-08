@@ -4,39 +4,37 @@ import AppContext from 'context';
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-  const [sport, setSport] = useState({});
   const [user, setUser] = useState({});
-  const [userBMI, setUserBMI] = useState(0);
-  const [details, setDetails] = useState({});
-  const [userIsLogged, setUserIsLogged] = useState(false);
-  const [userPanelVisibility, setUserPanelVisibility] = useState(false);
-  const [mainButtonVisibility, setMainButtonVisibility] = useState(false);
+  const [userDetails, setUserDetails] = useState({
+    bmi: 0,
+    data: {},
+  });
+  const [isLogged, setIsLogged] = useState(false);
   const [token, setToken] = useState('');
-  const [userTraining, setUserTraining] = useState([]);
-  const [userSportTraining, setUserSportTraining] = useState([]);
-  const [deleteSportTraining, setDeleteSportTraining] = useState(false);
-  const [calendarButtonVisibility, setCalendarButtonVisibility] = useState(false);
+  const [training, setTraining] = useState({
+    data: [],
+    sportId: '',
+    sportData: [],
+    delete: false,
+    sport: {},
+  });
+  const [visibility, setVisibility] = useState({
+    userPanel: false,
+    mainButton: false,
+    calendarButton: false,
+    modal: false,
+  });
 
   const userElement = {
     user,
     setUser,
-    userBMI,
-    setUserBMI,
-    details,
-    setDetails,
-    userIsLogged,
-    setUserIsLogged,
+    userDetails,
+    setUserDetails,
   };
 
   const sportElement = {
-    sport,
-    setSport,
-    userTraining,
-    setUserTraining,
-    userSportTraining,
-    setUserSportTraining,
-    deleteSportTraining,
-    setDeleteSportTraining,
+    training,
+    setTraining,
   };
 
   const otherElement = {
@@ -44,12 +42,10 @@ const AppProvider = ({ children }) => {
     setToken,
     loading,
     setLoading,
-    userPanelVisibility,
-    setUserPanelVisibility,
-    mainButtonVisibility,
-    setMainButtonVisibility,
-    calendarButtonVisibility,
-    setCalendarButtonVisibility,
+    visibility,
+    setVisibility,
+    isLogged,
+    setIsLogged,
   };
 
   const contextElement = {

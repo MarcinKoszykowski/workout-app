@@ -43,13 +43,13 @@ const Wrapper = styled.div`
 `;
 
 const RightBar = () => {
-  const { mainButtonVisibility, calendarButtonVisibility } = useContext(AppContext);
+  const { visibility } = useContext(AppContext);
 
   return (
     <Wrapper>
       <UserButton />
-      {mainButtonVisibility && <MainButton />}
-      {calendarButtonVisibility && <CalendarButton />}
+      {visibility.mainButton && <MainButton />}
+      {visibility.calendarButton && <CalendarButton />}
       <Logout />
     </Wrapper>
   );

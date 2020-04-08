@@ -37,11 +37,20 @@ const Modal = () => {
     }
   };
 
+  const removeClickOutside = () => {
+    document.removeEventListener('click', clickOutside);
+  };
+
   const callbackClickOutside = useCallback(clickOutside, [visibility.modal]);
+  const callbackRemoveClickOutside = useCallback(removeClickOutside, [visibility.modal]);
 
   useEffect(() => {
     document.addEventListener('click', callbackClickOutside);
-  }, [callbackClickOutside]);
+
+    return () => {
+      callbackRemoveClickOutside();
+    };
+  }, [callbackClickOutside, callbackRemoveClickOutside]);
 
   return (
     visibility.modal && (

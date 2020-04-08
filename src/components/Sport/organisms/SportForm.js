@@ -37,7 +37,7 @@ const Form = styled.form`
 `;
 
 const SportForm = () => {
-  const { training, user, details, userDetails, setTraining } = useContext(AppContext);
+  const { training, user, userDetails, setTraining } = useContext(AppContext);
   const [traningTime, setTraningTime] = useState(0);
   const [intensityButtonColor, setIntensityButtonColor] = useState(orange);
 
@@ -85,7 +85,7 @@ const SportForm = () => {
           kcal: calculateCalories(
             traningTime,
             training.sport.kcal,
-            details.weight,
+            userDetails.data.weight,
             userDetails.bmi,
             setIntensity(),
           ),

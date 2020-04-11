@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import AppContext from 'context';
 import { setSportDate, setSportTime, setSportKcal } from 'helpers/sport_function';
 import animations from 'styled/animations';
-import { white, colorWithOpacity, purple, lightRed } from 'styled/colors';
+import { white, colorWithOpacity, purple } from 'styled/colors';
 import Text from '../atoms/Text';
 
 const Wrapper = styled.div`
@@ -12,8 +12,7 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: ${({ deleteButton }) =>
-    deleteButton ? colorWithOpacity(lightRed, 0.5) : colorWithOpacity(white, 0.5)};
+  background-color: ${colorWithOpacity(white, 0.7)};
   cursor: pointer;
   transition: background-color 0.3 ease;
   animation: ${animations.opacityZeroToOne} 1s ease;

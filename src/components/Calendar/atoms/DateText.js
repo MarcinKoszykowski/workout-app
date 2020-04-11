@@ -3,7 +3,7 @@ import { purple, white, colorWithOpacity } from 'styled/colors';
 
 const DateText = styled.p`
   font-size: 1.2rem;
-  color: ${colorWithOpacity(white, 0.7)};
+  color: ${colorWithOpacity(white, 0.9)};
   margin-bottom: 3px;
   padding: 0 0 2.5px 10px;
   border-bottom: 3px solid ${purple};

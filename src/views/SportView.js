@@ -7,7 +7,6 @@ import NavigationTemplate from 'templates/NavigationTemplate';
 import Sport from 'components/Sport/Sport';
 import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
-import Loader from 'atoms/Loader';
 
 const StyledBackground = styled(Background)`
   background-position: center center;
@@ -37,7 +36,6 @@ const SportView = () => {
       <NavigationTemplate four />
       <StyledBackground image={training.sport.background} />
       {training.sport.name && <Sport />}
-      {!training.sport.background && <Loader />}
     </Wrapper>
   );
 };

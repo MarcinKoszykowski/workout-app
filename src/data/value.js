@@ -45,6 +45,9 @@ const register = {
     error: 'Server connection ERROR',
     email: 'Email is alredy taken.',
   },
+  errorText: {
+    password: 'upper case, lower case, number, symbol and min 8 chars.',
+  },
 };
 
 const user = {

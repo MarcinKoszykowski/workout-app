@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 10px;
   margin-bottom: 3px;
-  background-color: ${colorWithOpacity(white, 0.5)};
+  background-color: ${colorWithOpacity(white, 0.7)};
   animation: ${animations.opacityZeroToOne} 1s ease;
 
   &:last-child {

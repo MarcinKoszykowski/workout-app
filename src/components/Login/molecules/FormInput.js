@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import animations from 'styled/animations';
-import { purple, colorWithOpacity, lightGrey } from 'styled/colors';
+import { purple, colorWithOpacity, lightGrey, lightRed, red } from 'styled/colors';
 import eyeIcon from 'assets/icons/eye.svg';
 import eyeSlashIcon from 'assets/icons/eye-slash.svg';
 import eyeIconWhite from 'assets/icons/eye-white.svg';
@@ -84,6 +84,23 @@ const Input = styled.input`
   }
 `;
 
+const ErrorText = styled.span`
+  position: absolute;
+  left: 5px;
+  bottom: -11px;
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: ${lightRed};
+
+  @media screen and (max-width: 768px) {
+    color: ${red};
+  }
+
+  @media screen and (max-width: 420px) {
+    font-size: 0.45rem;
+  }
+`;
+
 const EyeIcon = styled.div`
   position: absolute;
   top: 0;
@@ -99,7 +116,6 @@ const EyeIcon = styled.div`
 `;
 
 const FormInput = ({
-  pattern,
   onChange,
   value,
   maxLength,
@@ -109,24 +125,35 @@ const FormInput = ({
   eyeOnClick,
   slash,
   password,
-}) => (
-  <Wrapper>
-    <Input
-      pattern={pattern}
-      onChange={onChange}
-      value={value}
-      maxLength={maxLength}
-      type={type}
-      name={name}
-      id={name}
-      required
-      placeholder=" "
-    />
-    <Label htmlFor={name}>{label}</Label>
-    <Bar />
-    {password && <EyeIcon slash={slash} onClick={eyeOnClick} />}
-  </Wrapper>
-);
+  errorText,
+}) => {
+  const [errorVisibility, setErrorVisibility] = useState(false);
+
+  const handleOnInvalid = () => {
+    setErrorVisibility(true);
+    setTimeout(() => setErrorVisibility(false), 4000);
+  };
+
+  return (
+    <Wrapper>
+      <Input
+        onChange={onChange}
+        value={value}
+        maxLength={maxLength}
+        type={type}
+        name={name}
+        id={name}
+        onInvalid={handleOnInvalid}
+        required
+        placeholder=" "
+      />
+      <Label htmlFor={name}>{label}</Label>
+      <Bar />
+      {password && <EyeIcon slash={slash} onClick={eyeOnClick} />}
+      {errorVisibility && <ErrorText>{errorText}</ErrorText>}
+    </Wrapper>
+  );
+};
 
 FormInput.propTypes = {
   label: PropTypes.string.isRequired,
@@ -138,7 +165,7 @@ FormInput.propTypes = {
   maxLength: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  pattern: PropTypes.string,
+  errorText: PropTypes.string,
 };
 
 FormInput.defaultProps = {
@@ -148,7 +175,7 @@ FormInput.defaultProps = {
   password: false,
   maxLength: '40',
   value: null,
-  pattern: null,
+  errorText: '',
 };
 
 export default FormInput;

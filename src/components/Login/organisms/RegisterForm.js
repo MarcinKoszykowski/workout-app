@@ -23,18 +23,32 @@ const FormButton = styled(Button)`
 
 const Info = styled.div`
   margin-bottom: 15px;
-  height: 20px;
+  padding: 0 30px;
+  margin-bottom: 30px;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: ${({ color }) => color};
   opacity: ${({ isVisibility }) => (isVisibility ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
 
+  @media screen and (max-width: 992px) {
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+  }
+
   @media screen and (max-width: 768px) {
-    padding: 5px 0;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    padding: 7.5px 25px;
     color: ${colorWithOpacity(red, 0.8)};
     background-color: ${colorWithOpacity(lightGrey, 0.8)};
+  }
+
+  @media screen and (max-width: 420px) {
+    font-size: 0.8rem;
+    padding: 7.5px 15px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -43,6 +57,7 @@ const RegisterForm = () => {
     button: { register: registerButton },
     form: { email, password, confirm },
     infoText: { confirmation, error, email: emailInfoText, register: registerInfoText },
+    errorText: { password: passwordErrorText },
   } = register;
 
   const [passwordType, setPasswordType] = useState(true);
@@ -63,18 +78,23 @@ const RegisterForm = () => {
     setFormNewUser(value);
   };
 
-  const handletextVisibility = () => {
+  const handleTextVisibility = () => {
     setTextVisibility(true);
     setTimeout(() => setTextVisibility(false), 4000);
   };
 
   const handleStatus = (text) => {
-    handletextVisibility();
+    handleTextVisibility();
     setInfoText(text);
   };
 
-  const checkConfirmation = () => {
-    return formNewUser.password !== formNewUser.confirm;
+  const chechPasswordConfirmation = () => {
+    if (formNewUser.password !== formNewUser.confirm) {
+      handleStatus(confirmation);
+      return false;
+    } 
+      return true;
+    
   };
 
   const checkStatus = (data) => {
@@ -92,9 +112,7 @@ const RegisterForm = () => {
   const handleInputOnSubmit = (e) => {
     e.preventDefault();
 
-    if (checkConfirmation()) {
-      handleStatus(confirmation);
-    } else {
+    if (chechPasswordConfirmation()) {
       getDataFromAPI(
         userRoute.register,
         {
@@ -131,7 +149,7 @@ const RegisterForm = () => {
           name={password.name}
           label={password.name}
           slash={passwordType}
-          pattern={password.pattern}
+          errorText={passwordErrorText}
           password
         />
         <FormInput

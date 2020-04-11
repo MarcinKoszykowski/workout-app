@@ -17,8 +17,8 @@ import {
 } from 'data/api_routes';
 import GlobalStyle from 'styled/GlobalStyle';
 import SportView from 'views/SportView';
-import Loader from 'atoms/Loader';
 import CalendarView from 'views/CalendarView';
+import LoadingTemplates from 'templates/LoadingTemplates';
 import MainView from './views/MainView';
 import LoginView from './views/LoginView';
 
@@ -31,6 +31,7 @@ const App = () => {
     setToken,
     setUser,
     loading,
+    setLoading,
   } = useContext(AppContext);
   const history = useHistory();
 
@@ -133,6 +134,7 @@ const App = () => {
       getDetailsData();
       setToken(localStorage.getItem('userToken'));
       getTrainingData();
+      setLoading(false);
     } else {
       history.push(loginURL);
     }
@@ -147,7 +149,7 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      {loading && <Loader />}
+      {loading && <LoadingTemplates />}
       <Switch>
         <Route exact path={main} component={MainView} />
         <Route exact path={loginURL} component={LoginView} />

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import AppContext from 'context';
-import { colorWithOpacity, white, purple } from 'styled/colors';
+import { colorWithOpacity, white, black } from 'styled/colors';
 import CoverBackground from 'atoms/CoverBackground';
 import UserForm from './organisms/UserForm';
 import TopPanel from './organisms/TopPanel';
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   z-index: 5;
   transform: translateY(-50%);
   background-color: ${colorWithOpacity(white, 0.95)};
-  box-shadow: 0 0 10px 5px ${colorWithOpacity(purple, 0.7)};
+  box-shadow: 0 0 10px 5px ${colorWithOpacity(black, 0.3)};
   border-radius: 15px;
   width: 450px;
   min-width: 280px;

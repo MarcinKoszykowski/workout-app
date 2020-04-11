@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import AppContext from 'context';
 
 const AppProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
   const [userDetails, setUserDetails] = useState({
     bmi: 0,

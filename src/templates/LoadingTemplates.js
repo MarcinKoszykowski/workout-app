@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { purple } from 'styled/colors';
 import Loading from 'components/Loading/Loading';
@@ -17,10 +18,15 @@ const Wrapper = styled.div`
   z-index: 999;
 `;
 
-const LoadingTemplates = () => (
-  <Wrapper>
-    <Loading />
-  </Wrapper>
-);
+const LoadingTemplates = ({ isVisibility }) =>
+  isVisibility && (
+    <Wrapper>
+      <Loading />
+    </Wrapper>
+  );
+
+LoadingTemplates.propTypes = {
+  isVisibility: PropTypes.bool.isRequired,
+};
 
 export default LoadingTemplates;

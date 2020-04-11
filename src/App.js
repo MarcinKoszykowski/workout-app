@@ -149,7 +149,7 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      {loading && <LoadingTemplates />}
+      <LoadingTemplates isVisibility={loading} />
       <Switch>
         <Route exact path={main} component={MainView} />
         <Route exact path={loginURL} component={LoginView} />

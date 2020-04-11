@@ -21,6 +21,7 @@ import CalendarView from 'views/CalendarView';
 import LoadingTemplates from 'templates/LoadingTemplates';
 import MainView from './views/MainView';
 import LoginView from './views/LoginView';
+import NotFoundView from './views/NotFoundView';
 
 const App = () => {
   const {
@@ -155,6 +156,7 @@ const App = () => {
         <Route exact path={loginURL} component={LoginView} />
         <Route exact path={sport} component={SportView} />
         <Route exact path={calendar} component={CalendarView} />
+        <Route component={NotFoundView} />
       </Switch>
     </>
   );

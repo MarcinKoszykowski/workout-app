@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { purple } from 'styled/colors';
 import Loading from 'components/Loading/Loading';
+import Wrapper from 'atoms/Wrapper';
 
-const Wrapper = styled.div`
+const StyledWrapper = styled(Wrapper)`
   position: fixed;
   display: flex;
   align-items: center;
   text-align: center;
-  min-width: 320px;
   top: 0;
   bottom: 0;
   left: 0;
@@ -20,9 +20,9 @@ const Wrapper = styled.div`
 
 const LoadingTemplates = ({ isVisibility }) =>
   isVisibility && (
-    <Wrapper>
+    <StyledWrapper>
       <Loading />
-    </Wrapper>
+    </StyledWrapper>
   );
 
 LoadingTemplates.propTypes = {

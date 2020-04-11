@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { app } from 'data/value';
 import Loader from './molecules/Loader';
 import Background from './atoms/Background';
 import Text from './atoms/Text';
@@ -17,7 +18,7 @@ const Loading = () => (
   <>
     <Background />
     <Box>
-      <Text>workout app</Text>
+      <Text>{app.name}</Text>
       <Loader />
     </Box>
   </>

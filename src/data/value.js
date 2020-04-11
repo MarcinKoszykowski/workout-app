@@ -70,4 +70,12 @@ const user = {
   },
 };
 
-export { login, register, user };
+const app = {
+  name: 'workout app',
+  404: {
+    text: `404`,
+    sub: 'page not found',
+  },
+};
+
+export { login, register, user, app };

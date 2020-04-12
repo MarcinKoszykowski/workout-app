@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router';
 import { useDidMount } from 'beautiful-react-hooks';
 import styled from 'styled-components';
 import AppContext from 'context';
 import sports from 'data/sports';
+import { page404 } from 'data/routes';
 import NavigationTemplate from 'templates/NavigationTemplate';
 import Sport from 'components/Sport/Sport';
 import Background from 'atoms/Background';
@@ -14,6 +16,7 @@ const StyledBackground = styled(Background)`
 
 const SportView = () => {
   const { setTraining, training, setVisibility } = useContext(AppContext);
+  const history = useHistory();
 
   useDidMount(() => {
     setVisibility((prevState) => ({
@@ -24,10 +27,14 @@ const SportView = () => {
     }));
 
     if (!training.sport.name) {
-      setTraining((prevState) => ({
-        ...prevState,
-        sport: sports.find((item) => item.name === window.location.pathname.slice(7)),
-      }));
+      if (sports.find((item) => item.name === window.location.pathname.slice(7))) {
+        setTraining((prevState) => ({
+          ...prevState,
+          sport: sports.find((item) => item.name === window.location.pathname.slice(7)),
+        }));
+      } else {
+        history.push(page404);
+      }
     }
   });
 

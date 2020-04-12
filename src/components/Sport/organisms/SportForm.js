@@ -4,7 +4,7 @@ import AppContext from 'context';
 import { training as trainingRoute } from 'data/api_routes';
 import { colorWithOpacity, white, blue, green, orange, lightRed } from 'styled/colors';
 import getDataFromAPI from 'helpers/api_functions';
-import { calculateCalories } from 'helpers/functions';
+import { calculateCalories, removeFirstZero } from 'helpers/functions';
 import FormInput from '../molecules/FormInput';
 import FormButton from '../atoms/FormButton';
 import IntensityButton from '../atoms/IntensityButton';
@@ -38,11 +38,15 @@ const Form = styled.form`
 
 const SportForm = () => {
   const { training, user, userDetails, setTraining } = useContext(AppContext);
-  const [traningTime, setTraningTime] = useState(0);
+  const [trainingTime, setTrainingTime] = useState('0');
   const [intensityButtonColor, setIntensityButtonColor] = useState(orange);
 
   const handleInputChange = (e) => {
-    setTraningTime(e.target.value);
+    if (Number.isNaN(e.target.value)) {
+      setTrainingTime((prevState) => prevState);
+    } else {
+      setTrainingTime(removeFirstZero(e.target.value));
+    }
   };
 
   const intensityButtonOnClick = () => {
@@ -83,13 +87,13 @@ const SportForm = () => {
           userId: user._id,
           sport: training.sport.name,
           kcal: calculateCalories(
-            traningTime,
+            trainingTime,
             training.sport.kcal,
             userDetails.data.weight,
             userDetails.bmi,
             setIntensity(),
           ),
-          time: traningTime,
+          time: trainingTime,
         },
       },
       checkStatus,
@@ -97,11 +101,11 @@ const SportForm = () => {
       localStorage.getItem('userToken'),
     );
 
-    setTraningTime(0);
+    setTrainingTime('0');
   };
 
   useEffect(() => {
-    setTraningTime(0);
+    setTrainingTime('0');
   }, [training.sport]);
 
   return (
@@ -112,11 +116,11 @@ const SportForm = () => {
       <Form autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
           onChange={(e) => handleInputChange(e)}
-          value={Number(traningTime)}
-          name="traningTime"
-          label="traning time"
+          value={trainingTime}
+          name="trainingTime"
+          label="training time"
         />
-        <FormButton disabled={!traningTime} />
+        <FormButton disabled={!trainingTime} />
       </Form>
     </Wrapper>
   );

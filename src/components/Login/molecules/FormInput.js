@@ -91,6 +91,8 @@ const ErrorText = styled.span`
   font-size: 0.5rem;
   font-weight: 600;
   color: ${lightRed};
+  opacity: ${({ isVisibility }) => (isVisibility ? 1 : 0)};
+  transition: opacity 0.3s ease-in-out;
 
   @media screen and (max-width: 768px) {
     color: ${red};
@@ -125,11 +127,18 @@ const FormInput = ({
   eyeOnClick,
   slash,
   password,
+  pattern,
   errorText,
 }) => {
   const [errorVisibility, setErrorVisibility] = useState(false);
 
   const handleOnInvalid = () => {
+    if (value.length === 0) {
+      setErrorVisibility(true);
+      setTimeout(() => setErrorVisibility(false), 4000);
+      return;
+    }
+
     setErrorVisibility(true);
     setTimeout(() => setErrorVisibility(false), 4000);
   };
@@ -143,6 +152,7 @@ const FormInput = ({
         type={type}
         name={name}
         id={name}
+        pattern={pattern}
         onInvalid={handleOnInvalid}
         required
         placeholder=" "
@@ -150,7 +160,7 @@ const FormInput = ({
       <Label htmlFor={name}>{label}</Label>
       <Bar />
       {password && <EyeIcon slash={slash} onClick={eyeOnClick} />}
-      {errorVisibility && <ErrorText>{errorText}</ErrorText>}
+      <ErrorText isVisibility={errorVisibility}>{errorText}</ErrorText>
     </Wrapper>
   );
 };
@@ -166,6 +176,7 @@ FormInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   errorText: PropTypes.string,
+  pattern: PropTypes.string,
 };
 
 FormInput.defaultProps = {
@@ -175,7 +186,8 @@ FormInput.defaultProps = {
   password: false,
   maxLength: '40',
   value: null,
-  errorText: '',
+  errorText: 'empty',
+  pattern: null,
 };
 
 export default FormInput;

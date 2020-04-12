@@ -48,4 +48,20 @@ const calculateCalories = (time, kcal, weight, bmi, intensity = 1) => {
   return ((time / 60) * kcal * weight * indexBMI * intensity).toFixed(2);
 };
 
-export { setColorBMI, checkEditInUserForm, calculateBMI, calculateIndexBMI, calculateCalories };
+const removeWhitespace = (value) => value.replace(' ', '');
+const removeFirstZero = (value) => {
+  if (value.length > 1 && value.charAt(0) === '0') {
+    return value.replace(/^0+/, '');
+  }
+  return value;
+};
+
+export {
+  setColorBMI,
+  removeWhitespace,
+  removeFirstZero,
+  checkEditInUserForm,
+  calculateBMI,
+  calculateIndexBMI,
+  calculateCalories,
+};

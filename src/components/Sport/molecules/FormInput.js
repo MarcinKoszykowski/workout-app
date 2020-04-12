@@ -6,13 +6,14 @@ import { blue, white } from 'styled/colors';
 const Wrapper = styled.div`
   display: flex;
   height: 100%;
-  width: auto;
+  width: 100px;
   margin-right: 15px;
   flex-direction: column;
   justify-content: space-between;
 
   @media screen and (max-width: 992px) {
     margin-right: 10px;
+    width: 90px;
   }
 
   @media screen and (max-width: 768px) {
@@ -88,14 +89,13 @@ const FormInput = ({ onChange, value, name, label }) => (
   <Wrapper>
     <Label htmlFor={name}>{label}</Label>
     <Input
-      min="0"
-      max="999"
       onChange={onChange}
       value={value}
-      type="number"
+      type="text"
       name={name}
       id={name}
       placeholder=" "
+      pattern="[1-9][0-9][0-9]|[1-9][0-9]|[1-9]"
       required
     />
   </Wrapper>
@@ -104,7 +104,7 @@ const FormInput = ({ onChange, value, name, label }) => (
 FormInput.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

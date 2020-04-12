@@ -5,6 +5,7 @@ import getDataFromAPI from 'helpers/api_functions';
 import { register } from 'data/value';
 import { user as userRoute } from 'data/api_routes';
 import { colorWithOpacity, red, lightGrey, green } from 'styled/colors';
+import { removeWhitespace } from 'helpers/functions';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
 
@@ -57,7 +58,6 @@ const RegisterForm = () => {
     button: { register: registerButton },
     form: { email, password, confirm },
     infoText: { confirmation, error, email: emailInfoText, register: registerInfoText },
-    errorText: { password: passwordErrorText },
   } = register;
 
   const [passwordType, setPasswordType] = useState(true);
@@ -73,7 +73,7 @@ const RegisterForm = () => {
   const handleInputChange = (e) => {
     const value = {
       ...formNewUser,
-      [e.target.name]: e.target.value,
+      [e.target.name]: removeWhitespace(e.target.value),
     };
     setFormNewUser(value);
   };
@@ -92,9 +92,8 @@ const RegisterForm = () => {
     if (formNewUser.password !== formNewUser.confirm) {
       handleStatus(confirmation);
       return false;
-    } 
-      return true;
-    
+    }
+    return true;
   };
 
   const checkStatus = (data) => {
@@ -136,10 +135,11 @@ const RegisterForm = () => {
       <FormBox autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
           onChange={(e) => handleInputChange(e)}
-          type={email.type}
           value={formNewUser.email}
           name={email.name}
           label={email.name}
+          pattern={email.pattern}
+          errorText={email.errorText}
         />
         <FormInput
           onChange={(e) => handleInputChange(e)}
@@ -149,7 +149,8 @@ const RegisterForm = () => {
           name={password.name}
           label={password.name}
           slash={passwordType}
-          errorText={passwordErrorText}
+          pattern={password.pattern}
+          errorText={password.errorText}
           password
         />
         <FormInput

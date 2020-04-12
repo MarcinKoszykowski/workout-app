@@ -6,7 +6,9 @@ const login = {
   form: {
     email: {
       name: 'email',
-      type: 'email',
+      pattern:
+        "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+      errorText: 'wrong email format',
     },
     password: {
       name: 'password',
@@ -27,12 +29,15 @@ const register = {
   form: {
     email: {
       name: 'email',
-      type: 'email',
+      pattern:
+        "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+      errorText: 'wrong email format',
     },
     password: {
       name: 'password',
       type: 'password',
       pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@[-`{-~]).{8,40}$',
+      errorText: 'upper case, lower case, number, symbol and min 8 chars',
     },
     confirm: {
       name: 'confirm',
@@ -44,9 +49,6 @@ const register = {
     confirmation: 'The password and confirmation password do not match.',
     error: 'Server connection ERROR',
     email: 'Email is alredy taken.',
-  },
-  errorText: {
-    password: 'upper case, lower case, number, symbol and min 8 chars.',
   },
 };
 

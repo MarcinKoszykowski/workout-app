@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import md5 from 'md5';
 import AppContext from 'context';
 import getDataFromAPI from 'helpers/api_functions';
-import { calculateBMI } from 'helpers/functions';
+import { calculateBMI, removeWhitespace } from 'helpers/functions';
 import {
   setDetailsInLocalStorage,
   setBMIInLocalStorage,
@@ -69,7 +69,7 @@ const LoginForm = () => {
   const handleInputChange = (e) => {
     const value = {
       ...formUser,
-      [e.target.name]: e.target.value,
+      [e.target.name]: removeWhitespace(e.target.value),
     };
     setFormUser(value);
   };
@@ -159,10 +159,11 @@ const LoginForm = () => {
       <FormBox autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
           onChange={(e) => handleInputChange(e)}
-          type={email.type}
           value={formUser.email}
           name={email.name}
           label={email.name}
+          pattern={email.pattern}
+          errorText={email.errorText}
         />
         <FormInput
           onChange={(e) => handleInputChange(e)}

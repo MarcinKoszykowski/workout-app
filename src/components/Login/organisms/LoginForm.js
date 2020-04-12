@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
+import { useDidMount, useWillUnmount } from 'beautiful-react-hooks';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import md5 from 'md5';
@@ -11,7 +12,11 @@ import {
   setUserInLocalStorage,
   setTokenInLocalStorage,
 } from 'helpers/local_storage_functions';
-import { user as userRoute, details as detailsRoute } from 'data/api_routes';
+import {
+  user as userRoute,
+  details as detailsRoute,
+  training as trainingRoute,
+} from 'data/api_routes';
 import { main } from 'data/routes';
 import { login, app } from 'data/value';
 import { colorWithOpacity, lightGrey, red } from 'styled/colors';
@@ -53,9 +58,15 @@ const LoginForm = () => {
     infoText: { incorrect, error },
   } = login;
 
-  const { setToken, setUser, setErrorBar, setUserDetails, setLoading, setIsLogged } = useContext(
-    AppContext,
-  );
+  const {
+    setToken,
+    setUser,
+    setTraining,
+    setErrorBar,
+    setUserDetails,
+    setLoading,
+    setIsLogged,
+  } = useContext(AppContext);
   const history = useHistory();
 
   const [passwordType, setPasswordType] = useState(true);
@@ -65,6 +76,7 @@ const LoginForm = () => {
   });
   const [textVisibility, setTextVisibility] = useState(false);
   const [infoText, setInfoText] = useState(incorrect);
+  const formRef = useRef();
 
   const handleInputChange = (e) => {
     const value = {
@@ -74,13 +86,13 @@ const LoginForm = () => {
     setFormUser(value);
   };
 
-  const handletextVisibility = () => {
+  const handleTextVisibility = () => {
     setTextVisibility(true);
-    setTimeout(() => setTextVisibility(false), 4000);
+    setTimeout(() => setTextVisibility(false), 3000);
   };
 
   const handleStatus = (text) => {
-    handletextVisibility();
+    handleTextVisibility();
     setInfoText(text);
   };
 
@@ -108,6 +120,26 @@ const LoginForm = () => {
     }
   };
 
+  const checkTrainingStatus = (trainingData) => {
+    const { status, userTraining } = trainingData;
+
+    if (status === 1) {
+      setTraining((prevState) => ({ ...prevState, data: userTraining.reverse() }));
+    } else if (status === 3) {
+      errorFunction();
+    }
+  };
+
+  const getTrainingData = (userId, token) => {
+    getDataFromAPI(
+      trainingRoute.getByUserId,
+      { userId },
+      checkTrainingStatus,
+      errorFunction,
+      token,
+    );
+  };
+
   const getDetailsData = (userId, token) =>
     getDataFromAPI(detailsRoute.userId, { userId }, checkDetailsStatus, errorFunction, token);
 
@@ -115,6 +147,7 @@ const LoginForm = () => {
     setUser({ ...user });
     setUserInLocalStorage(user);
     getDetailsData(user._id, token);
+    getTrainingData(user._id, token);
     setIsLogged(true);
     history.push(main);
   };
@@ -154,17 +187,27 @@ const LoginForm = () => {
 
   const setPasswordVisibility = () => setPasswordType(!passwordType);
 
+  useDidMount(() => {
+    if (formRef.current) {
+      formRef.current.addEventListener('invalid', (e) => e.preventDefault(), true);
+    }
+  });
+
+  useWillUnmount(() => {
+    formRef.current.removeEventListener('invalid', (e) => e.preventDefault(), true);
+  });
+
   return (
     <>
       <Info isVisibility={textVisibility}>{infoText}</Info>
-      <FormBox autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
+      <FormBox ref={formRef} autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
           onChange={(e) => handleInputChange(e)}
           value={formUser.email}
           name={email.name}
           label={email.name}
-          pattern={email.pattern}
           errorText={email.errorText}
+          type={email.type}
         />
         <FormInput
           onChange={(e) => handleInputChange(e)}

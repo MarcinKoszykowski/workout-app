@@ -38,7 +38,9 @@ const Form = styled.form`
 `;
 
 const SportForm = () => {
-  const { training, user, setErrorBar, userDetails, setTraining } = useContext(AppContext);
+  const { training, user, setErrorBar, userDetails, setTraining, setVisibility } = useContext(
+    AppContext,
+  );
   const [trainingTime, setTrainingTime] = useState('0');
   const [intensityButtonColor, setIntensityButtonColor] = useState(orange);
 
@@ -90,28 +92,35 @@ const SportForm = () => {
   const handleInputOnSubmit = (e) => {
     e.preventDefault();
 
-    getDataFromAPI(
-      trainingRoute.add,
-      {
-        training: {
-          userId: user._id,
-          sport: training.sport.name,
-          kcal: calculateCalories(
-            trainingTime,
-            training.sport.kcal,
-            userDetails.data.weight,
-            userDetails.bmi,
-            setIntensity(),
-          ),
-          time: trainingTime,
+    if (userDetails.data.weight && userDetails.bmi) {
+      getDataFromAPI(
+        trainingRoute.add,
+        {
+          training: {
+            userId: user._id,
+            sport: training.sport.name,
+            kcal: calculateCalories(
+              trainingTime,
+              training.sport.kcal,
+              userDetails.data.weight,
+              userDetails.bmi,
+              setIntensity(),
+            ),
+            time: trainingTime,
+          },
         },
-      },
-      checkStatus,
-      () => errorFunction(app.error.addTraingin),
-      localStorage.getItem('userToken'),
-    );
+        checkStatus,
+        () => errorFunction(app.error.addTraingin),
+        localStorage.getItem('userToken'),
+      );
 
-    setTrainingTime('0');
+      setTrainingTime('0');
+    } else {
+      setVisibility((prevState) => ({
+        ...prevState,
+        userPanel: true,
+      }));
+    }
   };
 
   useEffect(() => {

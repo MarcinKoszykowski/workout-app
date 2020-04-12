@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import sports from 'data/sports';
-import { colorWithOpacity, white, black } from 'styled/colors';
+import { colorWithOpacity, white, black, lightGrey, blue } from 'styled/colors';
 import SportIcon from '../molecules/SportIcon';
 
 const Wrapper = styled.div`
@@ -15,8 +15,24 @@ const Wrapper = styled.div`
   overflow-y: scroll;
   box-shadow: 10px 0 35px 0 ${colorWithOpacity(black, 0.7)};
 
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px ${colorWithOpacity(black, 0.1)};
+    background-color: ${lightGrey};
+  }
+
   &::-webkit-scrollbar {
-    display: none;
+    width: 12.5px;
+    background-color: ${lightGrey};
+
+    @media screen and (max-width: 576px) {
+      width: 10px;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${colorWithOpacity(blue, 0.7)};
+    border: 1px solid ${colorWithOpacity(blue, 0.7)};
+    border-radius: 2px;
   }
 
   @media screen and (max-width: 992px) {

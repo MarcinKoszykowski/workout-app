@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { useDidMount } from 'beautiful-react-hooks';
+import React, { useState, useContext, useRef } from 'react';
+import { useDidMount, useWillUnmount } from 'beautiful-react-hooks';
 import styled from 'styled-components';
 import AppContext from 'context';
 import getDataFromAPI from 'helpers/api_functions';
@@ -73,6 +73,7 @@ const UserForm = () => {
     height: '0',
     weight: '0',
   });
+  const formRef = useRef();
 
   const handleInputChange = (e) => {
     if (Number.isNaN(Number(e.target.value))) {
@@ -80,20 +81,18 @@ const UserForm = () => {
     } else {
       const value = {
         ...formUser,
-        [e.target.name]: e.target.value,
+        [e.target.name]: removeFirstZero(e.target.value),
       };
-      setFormUser(removeFirstZero(value));
+      setFormUser(value);
     }
   };
 
-  const setValue = (value) => value || '0';
-
   const setUserData = () => {
-    setFormUser({
-      age: setValue(userDetails.data.age),
-      height: setValue(userDetails.data.height),
-      weight: setValue(userDetails.data.weight),
-    });
+    setFormUser((prevState) => ({
+      age: userDetails.data.age ? userDetails.data.age.toString() : prevState.age,
+      height: userDetails.data.height ? userDetails.data.height.toString() : prevState.height,
+      weight: userDetails.data.weight ? userDetails.data.weight.toString() : prevState.weight,
+    }));
   };
 
   const errorFunction = (errorText) => {
@@ -142,10 +141,17 @@ const UserForm = () => {
 
   useDidMount(() => {
     setUserData();
+    if (formRef.current) {
+      formRef.current.addEventListener('invalid', (e) => e.preventDefault(), true);
+    }
+  });
+
+  useWillUnmount(() => {
+    formRef.current.removeEventListener('invalid', (e) => e.preventDefault(), true);
   });
 
   return (
-    <Form autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
+    <Form ref={formRef} autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
       <FormInput
         onChange={(e) => handleInputChange(e)}
         pattern={age.pattern}

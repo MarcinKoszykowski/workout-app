@@ -12,12 +12,17 @@ const StyledButton = styled(Button)`
 `;
 
 const Logout = () => {
-  const { setUser, setIsLogged, visibility } = useContext(AppContext);
+  const { setUser, setToken, setIsLogged, setTraining, setUserDetails, visibility } = useContext(
+    AppContext,
+  );
   const history = useHistory();
 
   const buttonOnClick = () => {
     localStorage.clear();
     setUser({});
+    setUserDetails({ bmi: 0, data: {} });
+    setToken('');
+    setTraining({ data: [], sportId: '', sportData: [], delete: false, sport: {} });
     setIsLogged(false);
     history.push(login);
   };

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useDidMount, useWillUnmount } from 'beautiful-react-hooks';
 import styled from 'styled-components';
 import md5 from 'md5';
 import getDataFromAPI from 'helpers/api_functions';
@@ -68,6 +69,7 @@ const RegisterForm = () => {
   });
   const [textVisibility, setTextVisibility] = useState(false);
   const [infoText, setInfoText] = useState(registerInfoText);
+  const formRef = useRef();
 
   const handleInputChange = (e) => {
     const value = {
@@ -79,7 +81,7 @@ const RegisterForm = () => {
 
   const handleTextVisibility = () => {
     setTextVisibility(true);
-    setTimeout(() => setTextVisibility(false), 4000);
+    setTimeout(() => setTextVisibility(false), 3000);
   };
 
   const handleStatus = (text) => {
@@ -126,19 +128,29 @@ const RegisterForm = () => {
   const setPasswordVisibility = () => setPasswordType(!passwordType);
   const setConfirmVisibility = () => setConfirmType(!confirmType);
 
+  useDidMount(() => {
+    if (formRef.current) {
+      formRef.current.addEventListener('invalid', (e) => e.preventDefault(), true);
+    }
+  });
+
+  useWillUnmount(() => {
+    formRef.current.removeEventListener('invalid', (e) => e.preventDefault(), true);
+  });
+
   return (
     <>
       <Info color={infoText === registerInfoText ? green : red} isVisibility={textVisibility}>
         {infoText}
       </Info>
-      <FormBox autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
+      <FormBox ref={formRef} autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
         <FormInput
           onChange={(e) => handleInputChange(e)}
           value={formNewUser.email}
           name={email.name}
           label={email.name}
-          pattern={email.pattern}
           errorText={email.errorText}
+          type={email.type}
         />
         <FormInput
           onChange={(e) => handleInputChange(e)}

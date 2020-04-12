@@ -27,11 +27,22 @@ const StyledMobileBackground = styled(MobileBackground)`
 `;
 
 const LoginView = () => {
-  const { setUser, setIsLogged, loading, setLoading } = useContext(AppContext);
+  const {
+    setUser,
+    setUserDetails,
+    setToken,
+    setTraining,
+    setIsLogged,
+    loading,
+    setLoading,
+  } = useContext(AppContext);
 
   useDidMount(() => {
     localStorage.clear();
     setUser({});
+    setUserDetails({ bmi: 0, data: {} });
+    setToken('');
+    setTraining({ data: [], sportId: '', sportData: [], delete: false, sport: {} });
     setIsLogged(false);
     if (loading) {
       setLoading(false);

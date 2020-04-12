@@ -25,6 +25,11 @@ const AppProvider = ({ children }) => {
     modal: false,
   });
 
+  const [errorBar, setErrorBar] = useState({
+    visibility: false,
+    text: '',
+  });
+
   const userElement = {
     user,
     setUser,
@@ -46,6 +51,8 @@ const AppProvider = ({ children }) => {
     setVisibility,
     isLogged,
     setIsLogged,
+    errorBar,
+    setErrorBar,
   };
 
   const contextElement = {

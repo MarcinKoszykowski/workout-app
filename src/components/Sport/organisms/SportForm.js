@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import AppContext from 'context';
+import { app } from 'data/value';
 import { training as trainingRoute } from 'data/api_routes';
 import { colorWithOpacity, white, blue, green, orange, lightRed } from 'styled/colors';
 import getDataFromAPI from 'helpers/api_functions';
@@ -37,12 +38,12 @@ const Form = styled.form`
 `;
 
 const SportForm = () => {
-  const { training, user, userDetails, setTraining } = useContext(AppContext);
+  const { training, user, setErrorBar, userDetails, setTraining } = useContext(AppContext);
   const [trainingTime, setTrainingTime] = useState('0');
   const [intensityButtonColor, setIntensityButtonColor] = useState(orange);
 
   const handleInputChange = (e) => {
-    if (Number.isNaN(e.target.value)) {
+    if (Number.isNaN(Number(e.target.value))) {
       setTrainingTime((prevState) => prevState);
     } else {
       setTrainingTime(removeFirstZero(e.target.value));
@@ -69,11 +70,20 @@ const SportForm = () => {
     return 1;
   };
 
+  const errorFunction = (errorText) => {
+    setErrorBar({ visibility: true, text: errorText });
+    setTimeout(() => setErrorBar({ visibility: false, text: '' }), 3000);
+  };
+
   const checkStatus = (data) => {
     const { status, training: trainingData } = data;
 
     if (status === 1) {
       setTraining((prevState) => ({ ...prevState, data: [trainingData, ...prevState.data] }));
+    } else if (status === 2) {
+      errorFunction(app.error.addTraingin);
+    } else if (status === 3) {
+      errorFunction(app.error.server);
     }
   };
 
@@ -97,7 +107,7 @@ const SportForm = () => {
         },
       },
       checkStatus,
-      () => console.log('error'), // eslint-disable-line
+      () => errorFunction(app.error.addTraingin),
       localStorage.getItem('userToken'),
     );
 

@@ -13,7 +13,7 @@ import {
 } from 'helpers/local_storage_functions';
 import { user as userRoute, details as detailsRoute } from 'data/api_routes';
 import { main } from 'data/routes';
-import { login } from 'data/value';
+import { login, app } from 'data/value';
 import { colorWithOpacity, lightGrey, red } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
@@ -36,11 +36,9 @@ const Info = styled.div`
   height: 20px;
   text-align: center;
   font-size: 1rem;
-  font-weight: 500;
   color: ${red};
   opacity: ${({ isVisibility }) => (isVisibility ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
-
   @media screen and (max-width: 768px) {
     padding: 5px 0;
     color: ${colorWithOpacity(red, 0.8)};
@@ -55,7 +53,9 @@ const LoginForm = () => {
     infoText: { incorrect, error },
   } = login;
 
-  const { setToken, setUser, setUserDetails, setLoading, setIsLogged } = useContext(AppContext);
+  const { setToken, setUser, setErrorBar, setUserDetails, setLoading, setIsLogged } = useContext(
+    AppContext,
+  );
   const history = useHistory();
 
   const [passwordType, setPasswordType] = useState(true);
@@ -84,6 +84,11 @@ const LoginForm = () => {
     setInfoText(text);
   };
 
+  const errorFunction = () => {
+    setErrorBar({ visibility: true, text: app.error.server });
+    setTimeout(() => setErrorBar({ visibility: false, text: '' }), 3000);
+  };
+
   const checkDetailsStatus = (data) => {
     const {
       status,
@@ -98,17 +103,13 @@ const LoginForm = () => {
         bmi: calculateBMI(height, weight),
       }));
       setBMIInLocalStorage(calculateBMI(height, weight));
+    } else if (status === 3) {
+      errorFunction();
     }
   };
 
   const getDetailsData = (userId, token) =>
-    getDataFromAPI(
-      detailsRoute.userId,
-      { userId },
-      checkDetailsStatus,
-      () => console.log('error'), // eslint-disable-line
-      token,
-    );
+    getDataFromAPI(detailsRoute.userId, { userId }, checkDetailsStatus, errorFunction, token);
 
   const loginUser = (user, token) => {
     setUser({ ...user });

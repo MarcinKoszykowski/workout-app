@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   top: 30px;
   bottom: 30px;
   right: 50px;
+  min-height: 450px;
   z-index: 1;
 
   @media screen and (max-width: 992px) {
@@ -26,12 +27,14 @@ const Wrapper = styled.div`
     top: 20px;
     left: 170px;
     bottom: auto;
+    min-height: 70px;
   }
 
   @media screen and (max-width: 576px) {
     top: 15px;
     left: 115px;
     right: 15px;
+    min-height: 60px;
   }
 
   @media screen and (max-width: 420px) {
@@ -39,6 +42,7 @@ const Wrapper = styled.div`
     right: 15px;
     left: 90px;
     top: 12.5px;
+    min-height: 45px;
   }
 `;
 

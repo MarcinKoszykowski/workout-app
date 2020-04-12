@@ -59,15 +59,18 @@ const user = {
   form: {
     age: {
       name: 'age',
-      max: 130,
+      pattern: '[1-9]|[1-9][0-9]|1[0-2][0-9]|130',
+      errorText: 'min: 1, max: 130',
     },
     height: {
       name: 'height',
-      max: 250,
+      pattern: '[1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|250',
+      errorText: 'min: 1, max: 250',
     },
     weight: {
       name: 'weight',
-      max: 300,
+      pattern: '[1-9]|[1-9][0-9]|[1-2][0-9][0-9]|300',
+      errorText: 'min: 1, max: 300',
     },
   },
 };
@@ -77,6 +80,12 @@ const app = {
   404: {
     text: `404`,
     sub: 'page not found',
+  },
+  error: {
+    server: 'server connection error',
+    delete: 'error deleting item',
+    addTraingin: 'error adding item',
+    addDetails: 'error adding details',
   },
 };
 

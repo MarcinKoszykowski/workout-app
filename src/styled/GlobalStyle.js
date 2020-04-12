@@ -2,8 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 import { purple, colorWithOpacity } from './colors';
 
 const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css?family=Major+Mono+Display|Montserrat:100,200,300,400,500,600,700,800,900&display=swap&subset=latin-ext');
-
     *, *::after, *::before {
         margin: 0;
         padding: 0;
@@ -35,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
         overflow-y: scroll;
         background-color: ${colorWithOpacity(purple, 0.3)};
-        font-weight: 400;
+        font-weight: 500;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }

@@ -9,6 +9,7 @@ import {
   setDetailsInLocalStorage,
   setBMIInLocalStorage,
 } from 'helpers/local_storage_functions';
+import { app } from 'data/value';
 import { main, login as loginURL, sport, calendar } from 'data/routes';
 import {
   user as userRoute,
@@ -16,9 +17,10 @@ import {
   training as trainingRoute,
 } from 'data/api_routes';
 import GlobalStyle from 'styled/GlobalStyle';
+import ErrorBar from 'components/ErrorBar/ErrorBar';
+import LoadingTemplates from 'templates/LoadingTemplates';
 import SportView from 'views/SportView';
 import CalendarView from 'views/CalendarView';
-import LoadingTemplates from 'templates/LoadingTemplates';
 import MainView from './views/MainView';
 import LoginView from './views/LoginView';
 import NotFoundView from './views/NotFoundView';
@@ -33,6 +35,7 @@ const App = () => {
     setUser,
     loading,
     setLoading,
+    setErrorBar,
   } = useContext(AppContext);
   const history = useHistory();
 
@@ -70,6 +73,11 @@ const App = () => {
     }));
   };
 
+  const errorFunction = () => {
+    setErrorBar({ visibility: true, text: app.error.server });
+    setTimeout(() => setErrorBar({ visibility: false, text: '' }), 3000);
+  };
+
   const checkDetailsStatus = (data) => {
     const {
       status,
@@ -84,6 +92,8 @@ const App = () => {
         bmi: calculateBMI(height, weight),
       }));
       setBMIInLocalStorage(calculateBMI(height, weight));
+    } else if (status === 3) {
+      errorFunction();
     }
   };
 
@@ -92,6 +102,8 @@ const App = () => {
 
     if (status === 1) {
       setTraining((prevState) => ({ ...prevState, data: userTraining.reverse() }));
+    } else if (status === 3) {
+      errorFunction();
     }
   };
 
@@ -100,7 +112,7 @@ const App = () => {
       userRoute.id,
       { id: localStorage.getItem('userId') },
       checkUserStatus,
-      () => console.log('error'), // eslint-disable-line
+      errorFunction,
       localStorage.getItem('userToken'),
     );
 
@@ -113,7 +125,7 @@ const App = () => {
         detailsRoute.userId,
         { userId: localStorage.getItem('userId') },
         checkDetailsStatus,
-        () => console.log('error'), // eslint-disable-line
+        errorFunction,
         localStorage.getItem('userToken'),
       );
     }
@@ -124,7 +136,7 @@ const App = () => {
       trainingRoute.getByUserId,
       { userId: localStorage.getItem('userId') },
       checkTrainingStatus,
-      () => console.log('error'), // eslint-disable-line
+      errorFunction,
       localStorage.getItem('userToken'),
     );
   };
@@ -151,6 +163,7 @@ const App = () => {
     <>
       <GlobalStyle />
       <LoadingTemplates isVisibility={loading} />
+      <ErrorBar />
       <Switch>
         <Route exact path={main} component={MainView} />
         <Route exact path={loginURL} component={LoginView} />

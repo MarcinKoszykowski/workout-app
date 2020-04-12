@@ -52,7 +52,7 @@ const Input = styled.input`
   }
 
   &:not(:placeholder-shown) + ${Label} {
-    top: -20px;
+    top: -18px;
     left: 0;
     font-size: 0.6rem;
 
@@ -73,7 +73,7 @@ const Input = styled.input`
     }
 
     & + ${Label} {
-      top: -20px;
+      top: -18px;
       left: 0;
       font-size: 0.65rem;
 

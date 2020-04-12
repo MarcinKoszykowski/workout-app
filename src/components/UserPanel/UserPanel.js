@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
+  font-weight: 600;
   margin: 0 auto;
   height: auto;
   top: 40%;

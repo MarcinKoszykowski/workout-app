@@ -28,7 +28,6 @@ const Info = styled.div`
   margin-bottom: 30px;
   text-align: center;
   font-size: 0.9rem;
-  font-weight: 500;
   color: ${({ color }) => color};
   opacity: ${({ isVisibility }) => (isVisibility ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;

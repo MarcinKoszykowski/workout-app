@@ -3,9 +3,9 @@ import { useDidMount } from 'beautiful-react-hooks';
 import styled from 'styled-components';
 import AppContext from 'context';
 import getDataFromAPI from 'helpers/api_functions';
-import { calculateBMI, checkEditInUserForm } from 'helpers/functions';
+import { calculateBMI, checkEditInUserForm, removeFirstZero } from 'helpers/functions';
 import { setDetailsInLocalStorage, setBMIInLocalStorage } from 'helpers/local_storage_functions';
-import { user as userValue } from 'data/value';
+import { user as userValue, app } from 'data/value';
 import { details as detailsRoute } from 'data/api_routes';
 import { blue } from 'styled/colors';
 import FormInput from '../molecules/FormInput';
@@ -61,7 +61,7 @@ const FormButton = styled(Button)`
 `;
 
 const UserForm = () => {
-  const { userDetails, user, setUserDetails } = useContext(AppContext);
+  const { userDetails, user, setErrorBar, setUserDetails } = useContext(AppContext);
 
   const {
     button: { save },
@@ -69,20 +69,24 @@ const UserForm = () => {
   } = userValue;
 
   const [formUser, setFormUser] = useState({
-    age: 0,
-    height: 0,
-    weight: 0,
+    age: '0',
+    height: '0',
+    weight: '0',
   });
 
   const handleInputChange = (e) => {
-    const value = {
-      ...formUser,
-      [e.target.name]: e.target.value,
-    };
-    setFormUser(value);
+    if (Number.isNaN(Number(e.target.value))) {
+      setFormUser((prevState) => prevState);
+    } else {
+      const value = {
+        ...formUser,
+        [e.target.name]: e.target.value,
+      };
+      setFormUser(removeFirstZero(value));
+    }
   };
 
-  const setValue = (value) => value || 0;
+  const setValue = (value) => value || '0';
 
   const setUserData = () => {
     setFormUser({
@@ -90,6 +94,11 @@ const UserForm = () => {
       height: setValue(userDetails.data.height),
       weight: setValue(userDetails.data.weight),
     });
+  };
+
+  const errorFunction = (errorText) => {
+    setErrorBar({ visibility: true, text: errorText });
+    setTimeout(() => setErrorBar({ visibility: false, text: '' }), 3000);
   };
 
   const checkStatus = (data) => {
@@ -104,7 +113,9 @@ const UserForm = () => {
       }));
       setBMIInLocalStorage(calculateBMI(formUser.height, formUser.weight));
     } else if (status === 2) {
-      console.log('error'); // eslint-disable-line
+      errorFunction(app.error.addDetails);
+    } else if (status === 3) {
+      errorFunction(app.error.server);
     }
   };
 
@@ -123,7 +134,7 @@ const UserForm = () => {
           },
         },
         checkStatus,
-        () => console.log('error'), // eslint-disable-line
+        () => errorFunction(app.error.server),
         localStorage.getItem('userToken'),
       );
     }
@@ -137,24 +148,27 @@ const UserForm = () => {
     <Form autoComplete="off" onSubmit={(e) => handleInputOnSubmit(e)}>
       <FormInput
         onChange={(e) => handleInputChange(e)}
-        max={age.max}
-        value={Number(formUser.age)}
+        pattern={age.pattern}
+        value={formUser.age}
         name={age.name}
         label={age.name}
+        errorText={age.errorText}
       />
       <FormInput
         onChange={(e) => handleInputChange(e)}
-        max={height.max}
-        value={Number(formUser.height)}
+        pattern={height.pattern}
+        value={formUser.height}
         name={height.name}
         label={`${height.name} [cm]`}
+        errorText={height.errorText}
       />
       <FormInput
         onChange={(e) => handleInputChange(e)}
-        max={weight.max}
-        value={Number(formUser.weight)}
+        pattern={weight.pattern}
+        value={formUser.weight}
         name={weight.name}
         label={`${weight.name} [kg]`}
+        errorText={weight.errorText}
       />
       <FormButton>{save}</FormButton>
     </Form>

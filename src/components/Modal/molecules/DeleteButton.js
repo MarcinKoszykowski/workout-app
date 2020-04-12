@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import AppContext from 'context';
 import { training as trainingRoute } from 'data/api_routes';
+import { app } from 'data/value';
 import getDataFromAPI from 'helpers/api_functions';
 import { red } from 'styled/colors';
 import trashIcon from 'assets/icons/trash.svg';
@@ -20,12 +21,21 @@ const StyledButton = styled(Button)`
 `;
 
 const DeleteButton = () => {
-  const { training, setTraining, setVisibility } = useContext(AppContext);
+  const { training, setErrorBar, setTraining, setVisibility } = useContext(AppContext);
+
+  const errorFunction = (errorText) => {
+    setErrorBar({ visibility: true, text: errorText });
+    setTimeout(() => setErrorBar({ visibility: false, text: '' }), 3000);
+  };
 
   const checkStatus = (data) => {
     const { status } = data;
 
-    console.log(status); // eslint-disable-line
+    if (status === 2) {
+      errorFunction(app.error.delete);
+    } else if (status === 3) {
+      errorFunction(app.error.server);
+    }
   };
 
   const deleteButtonOnClick = () => {
@@ -39,7 +49,7 @@ const DeleteButton = () => {
       trainingRoute.delete,
       { id: training.sportId },
       checkStatus,
-      () => console.log('error'), // eslint-disable-line
+      () => errorFunction(app.error.delete),
       localStorage.getItem('userToken'),
     );
     setVisibility((prevState) => ({ ...prevState, modal: false }));

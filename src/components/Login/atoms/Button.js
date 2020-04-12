@@ -12,7 +12,6 @@ const Button = styled.button`
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
   font-size: 1rem;
-  font-weight: 500;
   letter-spacing: 1px;
   text-transform: capitalize;
 

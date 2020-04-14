@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import md5 from 'md5';
 import AppContext from 'context';
 import getDataFromAPI from 'helpers/api_functions';
-import { calculateBMI, removeWhitespace } from 'helpers/functions';
+import { calculateBMI, removeWhitespace, functionWithTimeout } from 'helpers/functions';
 import {
   setDetailsInLocalStorage,
   setBMIInLocalStorage,
@@ -86,20 +86,18 @@ const LoginForm = () => {
     setFormUser(value);
   };
 
-  const handleTextVisibility = () => {
-    setTextVisibility(true);
-    setTimeout(() => setTextVisibility(false), 3000);
-  };
-
   const handleStatus = (text) => {
-    handleTextVisibility();
+    functionWithTimeout(setTextVisibility, true, false, 3000);
     setInfoText(text);
   };
 
-  const errorFunction = () => {
-    setErrorBar({ visibility: true, text: app.error.server });
-    setTimeout(() => setErrorBar({ visibility: false, text: '' }), 3000);
-  };
+  const errorFunction = () =>
+    functionWithTimeout(
+      setErrorBar,
+      { visibility: true, text: app.error.server },
+      { visibility: false, text: '' },
+      3000,
+    );
 
   const checkDetailsStatus = (data) => {
     const {

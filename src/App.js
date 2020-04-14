@@ -3,7 +3,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 import { useDidMount } from 'beautiful-react-hooks';
 import AppContext from 'context';
 import getDataFromAPI from 'helpers/api_functions';
-import { calculateBMI } from 'helpers/functions';
+import { calculateBMI, functionWithTimeout } from 'helpers/functions';
 import {
   checkDetailsInLocalStora,
   setDetailsInLocalStorage,
@@ -73,10 +73,13 @@ const App = () => {
     }));
   };
 
-  const errorFunction = () => {
-    setErrorBar({ visibility: true, text: app.error.server });
-    setTimeout(() => setErrorBar({ visibility: false, text: '' }), 3000);
-  };
+  const errorFunction = () =>
+    functionWithTimeout(
+      setErrorBar,
+      { visibility: true, text: app.error.server },
+      { visibility: false, text: '' },
+      3000,
+    );
 
   const checkDetailsStatus = (data) => {
     const {

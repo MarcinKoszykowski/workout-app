@@ -56,6 +56,11 @@ const removeFirstZero = (value) => {
   return value;
 };
 
+const functionWithTimeout = (func, value, timeoutValue, duration) => {
+  func(value);
+  setTimeout(() => func(timeoutValue), duration);
+};
+
 export {
   setColorBMI,
   removeWhitespace,
@@ -64,4 +69,5 @@ export {
   calculateBMI,
   calculateIndexBMI,
   calculateCalories,
+  functionWithTimeout,
 };

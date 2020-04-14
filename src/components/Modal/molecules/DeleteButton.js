@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AppContext from 'context';
 import { training as trainingRoute } from 'data/api_routes';
 import { app } from 'data/value';
+import { functionWithTimeout } from 'helpers/functions';
 import getDataFromAPI from 'helpers/api_functions';
 import { red } from 'styled/colors';
 import trashIcon from 'assets/icons/trash.svg';
@@ -24,8 +25,12 @@ const DeleteButton = () => {
   const { training, setErrorBar, setTraining, setVisibility } = useContext(AppContext);
 
   const errorFunction = (errorText) => {
-    setErrorBar({ visibility: true, text: errorText });
-    setTimeout(() => setErrorBar({ visibility: false, text: '' }), 3000);
+    functionWithTimeout(
+      setErrorBar,
+      { visibility: true, text: errorText },
+      { visibility: false, text: '' },
+      3000,
+    );
   };
 
   const checkStatus = (data) => {

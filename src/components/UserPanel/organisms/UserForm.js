@@ -3,7 +3,12 @@ import { useDidMount, useWillUnmount } from 'beautiful-react-hooks';
 import styled from 'styled-components';
 import AppContext from 'context';
 import getDataFromAPI from 'helpers/api_functions';
-import { calculateBMI, checkEditInUserForm, removeFirstZero } from 'helpers/functions';
+import {
+  calculateBMI,
+  checkEditInUserForm,
+  removeFirstZero,
+  functionWithTimeout,
+} from 'helpers/functions';
 import { setDetailsInLocalStorage, setBMIInLocalStorage } from 'helpers/local_storage_functions';
 import { user as userValue, app } from 'data/value';
 import { details as detailsRoute } from 'data/api_routes';
@@ -95,10 +100,13 @@ const UserForm = () => {
     }));
   };
 
-  const errorFunction = (errorText) => {
-    setErrorBar({ visibility: true, text: errorText });
-    setTimeout(() => setErrorBar({ visibility: false, text: '' }), 3000);
-  };
+  const errorFunctions = (errorText) =>
+    functionWithTimeout(
+      setErrorBar,
+      { visibility: true, text: errorText },
+      { visibility: false, text: '' },
+      3000,
+    );
 
   const checkStatus = (data) => {
     const { status } = data;
@@ -112,9 +120,9 @@ const UserForm = () => {
       }));
       setBMIInLocalStorage(calculateBMI(formUser.height, formUser.weight));
     } else if (status === 2) {
-      errorFunction(app.error.addDetails);
+      errorFunctions(app.error.addDetails);
     } else if (status === 3) {
-      errorFunction(app.error.server);
+      errorFunctions(app.error.server);
     }
   };
 
@@ -133,7 +141,7 @@ const UserForm = () => {
           },
         },
         checkStatus,
-        () => errorFunction(app.error.server),
+        () => errorFunctions(app.error.server),
         localStorage.getItem('userToken'),
       );
     }

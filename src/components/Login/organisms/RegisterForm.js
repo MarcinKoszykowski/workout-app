@@ -6,7 +6,7 @@ import getDataFromAPI from 'helpers/api_functions';
 import { register } from 'data/value';
 import { user as userRoute } from 'data/api_routes';
 import { colorWithOpacity, red, lightGrey, green } from 'styled/colors';
-import { removeWhitespace } from 'helpers/functions';
+import { removeWhitespace, functionWithTimeout } from 'helpers/functions';
 import FormInput from '../molecules/FormInput';
 import Button from '../atoms/Button';
 
@@ -79,13 +79,8 @@ const RegisterForm = () => {
     setFormNewUser(value);
   };
 
-  const handleTextVisibility = () => {
-    setTextVisibility(true);
-    setTimeout(() => setTextVisibility(false), 3000);
-  };
-
   const handleStatus = (text) => {
-    handleTextVisibility();
+    functionWithTimeout(setTextVisibility, true, false, 3000);
     setInfoText(text);
   };
 

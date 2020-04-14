@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { functionWithTimeout } from 'helpers/functions';
 import animations from 'styled/animations';
 import { purple, colorWithOpacity, lightGrey, lightRed, red } from 'styled/colors';
 import eyeIcon from 'assets/icons/eye.svg';
@@ -132,15 +133,14 @@ const FormInput = ({
 }) => {
   const [errorVisibility, setErrorVisibility] = useState(false);
 
+  const errorFunction = () => functionWithTimeout(setErrorVisibility, true, false, 4000);
   const handleOnInvalid = () => {
     if (value.length === 0) {
-      setErrorVisibility(true);
-      setTimeout(() => setErrorVisibility(false), 4000);
+      errorFunction();
       return;
     }
 
-    setErrorVisibility(true);
-    setTimeout(() => setErrorVisibility(false), 4000);
+    errorFunction();
   };
 
   return (

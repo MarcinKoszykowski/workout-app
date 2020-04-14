@@ -5,7 +5,7 @@ import { app } from 'data/value';
 import { training as trainingRoute } from 'data/api_routes';
 import { colorWithOpacity, white, blue, green, orange, lightRed } from 'styled/colors';
 import getDataFromAPI from 'helpers/api_functions';
-import { calculateCalories, removeFirstZero } from 'helpers/functions';
+import { calculateCalories, removeFirstZero, functionWithTimeout } from 'helpers/functions';
 import FormInput from '../molecules/FormInput';
 import FormButton from '../atoms/FormButton';
 import IntensityButton from '../atoms/IntensityButton';
@@ -73,8 +73,12 @@ const SportForm = () => {
   };
 
   const errorFunction = (errorText) => {
-    setErrorBar({ visibility: true, text: errorText });
-    setTimeout(() => setErrorBar({ visibility: false, text: '' }), 3000);
+    functionWithTimeout(
+      setErrorBar,
+      { visibility: true, text: errorText },
+      { visibility: false, text: '' },
+      3000,
+    );
   };
 
   const checkStatus = (data) => {

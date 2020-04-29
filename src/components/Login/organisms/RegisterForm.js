@@ -84,7 +84,7 @@ const RegisterForm = () => {
     setInfoText(text);
   };
 
-  const chechPasswordConfirmation = () => {
+  const passwordComparison = () => {
     if (formNewUser.password !== formNewUser.confirm) {
       handleStatus(confirmation);
       return false;
@@ -107,7 +107,7 @@ const RegisterForm = () => {
   const handleInputOnSubmit = (e) => {
     e.preventDefault();
 
-    if (chechPasswordConfirmation()) {
+    if (passwordComparison()) {
       getDataFromAPI(
         userRoute.register,
         {

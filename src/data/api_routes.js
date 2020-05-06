@@ -2,6 +2,7 @@ const user = {
   register: '/user/register',
   login: '/user/login',
   id: '/user/get/id',
+  editPassword: '/user/edit/password',
 };
 
 const details = {

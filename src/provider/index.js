@@ -23,6 +23,7 @@ const AppProvider = ({ children }) => {
     mainButton: false,
     calendarButton: false,
     modal: false,
+    passwordPanel: false,
   });
 
   const [errorBar, setErrorBar] = useState({

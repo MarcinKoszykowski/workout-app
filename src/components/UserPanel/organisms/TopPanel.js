@@ -23,7 +23,7 @@ const TopPanel = () => {
   const { setVisibility } = useContext(AppContext);
 
   const exitButtonOnClick = () => {
-    setVisibility((prevState) => ({ ...prevState, userPanel: false }));
+    setVisibility((prevState) => ({ ...prevState, userPanel: false, passwordPanel: false }));
   };
 
   return (

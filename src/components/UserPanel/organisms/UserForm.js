@@ -20,18 +20,18 @@ const Form = styled.form`
   position: relative;
   margin: auto;
   width: 100%;
-  padding: 25px 0 30px;
+  padding: 25px 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   @media screen and (max-width: 576px) {
-    padding: 22.5px 0 25px;
+    padding: 22.5px 0 17.5px;
   }
 
   @media screen and (max-width: 420px) {
-    padding: 20px 0 20px;
+    padding: 20px 0 15px;
   }
 `;
 

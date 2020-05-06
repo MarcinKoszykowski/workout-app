@@ -4,7 +4,7 @@ import { colorWithOpacity, lightRed, white } from 'styled/colors';
 const Text = styled.span`
   display: inline-block;
   background-color: ${colorWithOpacity(lightRed, 0.7)};
-  padding: 15px 0;
+  padding: 15px 30px;
   width: 60%;
   font-size: 2rem;
   color: ${white};

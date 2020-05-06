@@ -50,6 +50,33 @@ const register = {
   },
 };
 
+const changePassword = {
+  button: 'save',
+  form: {
+    password: {
+      name: 'password',
+      type: 'password',
+    },
+    newPassword: {
+      name: 'newPassword',
+      label: 'new password',
+      type: 'password',
+      pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@[-`{-~]).{8,40}$',
+      errorText: 'upper case, lower case, number, symbol and min 8 chars',
+    },
+    confirm: {
+      name: 'confirm',
+      type: 'password',
+    },
+  },
+  infoText: {
+    change: 'Success! Password has been changed.',
+    confirmation: 'The new password and confirmation password do not match.',
+    error: 'Server connection ERROR',
+    password: 'Wrong password.',
+  },
+};
+
 const user = {
   button: {
     save: 'save',
@@ -73,6 +100,13 @@ const user = {
   },
 };
 
+const password = {
+  button: {
+    password: 'change password',
+    details: 'edit details',
+  },
+};
+
 const app = {
   name: 'workout app',
   404: {
@@ -87,4 +121,4 @@ const app = {
   },
 };
 
-export { login, register, user, app };
+export { login, register, user, password, app, changePassword };

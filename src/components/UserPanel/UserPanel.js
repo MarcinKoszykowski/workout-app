@@ -3,8 +3,11 @@ import styled from 'styled-components';
 import AppContext from 'context';
 import { colorWithOpacity, white, black } from 'styled/colors';
 import CoverBackground from 'atoms/CoverBackground';
+import { password } from 'data/value';
 import UserForm from './organisms/UserForm';
 import TopPanel from './organisms/TopPanel';
+import EditFormButton from './molecules/EditFormButton';
+import ChangePasswordForm from './organisms/ChangePasswordForm';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -40,7 +43,12 @@ const Wrapper = styled.div`
 `;
 
 const UserPanel = () => {
-  const { visibility } = useContext(AppContext);
+  const { visibility, setVisibility } = useContext(AppContext);
+
+  const { button } = password;
+
+  const handleEditFormButtonOnClick = () =>
+    setVisibility((prevState) => ({ ...prevState, passwordPanel: !prevState.passwordPanel }));
 
   return (
     visibility.userPanel && (
@@ -48,7 +56,11 @@ const UserPanel = () => {
         <CoverBackground />
         <Wrapper>
           <TopPanel />
-          <UserForm />
+          {visibility.passwordPanel ? <ChangePasswordForm /> : <UserForm />}
+          <EditFormButton
+            onClick={handleEditFormButtonOnClick}
+            text={visibility.passwordPanel ? button.details : button.password}
+          />
         </Wrapper>
       </>
     )

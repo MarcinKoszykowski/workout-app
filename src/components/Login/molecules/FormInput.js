@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { functionWithTimeout } from 'helpers/functions';
 import animations from 'styled/animations';
 import { purple, colorWithOpacity, lightGrey, lightRed, red } from 'styled/colors';
@@ -15,6 +15,15 @@ const Wrapper = styled.div`
   margin: 25px 0;
   flex-shrink: 0;
   animation: ${animations.opacityZeroToOne} 0.3s ease-in-out;
+
+  ${({ userPanel }) =>
+    userPanel &&
+    css`
+      @media screen and (max-width: 576px) {
+        margin: 20px 0;
+        width: 85%;
+      }
+    `}
 `;
 
 const Label = styled.label`
@@ -25,9 +34,13 @@ const Label = styled.label`
   left: 5px;
   transition: top 0.2s ease, left 0.2s ease, font 0.2s ease;
 
-  @media screen and (max-width: 768px) {
-    color: ${lightGrey};
-  }
+  ${({ userPanel }) =>
+    !userPanel &&
+    css`
+      @media screen and (max-width: 768px) {
+        color: ${lightGrey};
+      }
+    `}
 `;
 
 const Bar = styled.div`
@@ -37,9 +50,13 @@ const Bar = styled.div`
   background-color: ${colorWithOpacity(purple, 0.6)};
   transition: background-color 0.2s ease;
 
-  @media screen and (max-width: 768px) {
-    background: ${lightGrey};
-  }
+  ${({ userPanel }) =>
+    !userPanel &&
+    css`
+      @media screen and (max-width: 768px) {
+        background: ${lightGrey};
+      }
+    `}
 `;
 
 const Input = styled.input`
@@ -48,18 +65,26 @@ const Input = styled.input`
   line-height: 22px;
   background-color: transparent;
 
-  @media screen and (max-width: 768px) {
-    color: ${lightGrey};
-  }
+  ${({ userPanel }) =>
+    !userPanel &&
+    css`
+      @media screen and (max-width: 768px) {
+        color: ${lightGrey};
+      }
+    `}
 
   &:not(:placeholder-shown) + ${Label} {
     top: -18px;
     left: 0;
     font-size: 0.6rem;
 
-    @media screen and (max-width: 768px) {
-      color: ${colorWithOpacity(lightGrey, 0.8)};
-    }
+    ${({ userPanel }) =>
+      !userPanel &&
+      css`
+        @media screen and (max-width: 768px) {
+          color: ${colorWithOpacity(lightGrey, 0.8)};
+        }
+      `}
   }
 
   &:focus {
@@ -68,9 +93,13 @@ const Input = styled.input`
     & ~ ${Bar} {
       background-color: ${colorWithOpacity(purple, 0.8)};
 
-      @media screen and (max-width: 768px) {
-        background-color: ${colorWithOpacity(lightGrey, 0.7)};
-      }
+      ${({ userPanel }) =>
+        !userPanel &&
+        css`
+          @media screen and (max-width: 768px) {
+            background-color: ${colorWithOpacity(lightGrey, 0.7)};
+          }
+        `}
     }
 
     & + ${Label} {
@@ -78,9 +107,13 @@ const Input = styled.input`
       left: 0;
       font-size: 0.65rem;
 
-      @media screen and (max-width: 768px) {
-        color: ${colorWithOpacity(lightGrey, 0.7)};
-      }
+      ${({ userPanel }) =>
+        !userPanel &&
+        css`
+          @media screen and (max-width: 768px) {
+            color: ${colorWithOpacity(lightGrey, 0.7)};
+          }
+        `}
     }
   }
 `;
@@ -95,13 +128,17 @@ const ErrorText = styled.span`
   opacity: ${({ isVisibility }) => (isVisibility ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
 
-  @media screen and (max-width: 768px) {
-    color: ${red};
-  }
+  ${({ userPanel }) =>
+    !userPanel &&
+    css`
+      @media screen and (max-width: 768px) {
+        color: ${red};
+      }
 
-  @media screen and (max-width: 420px) {
-    font-size: 0.45rem;
-  }
+      @media screen and (max-width: 420px) {
+        font-size: 0.45rem;
+      }
+    `}
 `;
 
 const EyeIcon = styled.div`
@@ -113,9 +150,13 @@ const EyeIcon = styled.div`
   cursor: pointer;
   background: url(${({ slash }) => (slash ? eyeSlashIcon : eyeIcon)}) no-repeat center;
 
-  @media screen and (max-width: 768px) {
-    background-image: url(${({ slash }) => (slash ? eyeSlashIconWhite : eyeIconWhite)});
-  }
+  ${({ userPanel }) =>
+    !userPanel &&
+    css`
+      @media screen and (max-width: 768px) {
+        background-image: url(${({ slash }) => (slash ? eyeSlashIconWhite : eyeIconWhite)});
+      }
+    `}
 `;
 
 const FormInput = ({
@@ -130,6 +171,7 @@ const FormInput = ({
   password,
   pattern,
   errorText,
+  userPanel,
 }) => {
   const [errorVisibility, setErrorVisibility] = useState(false);
 
@@ -144,7 +186,7 @@ const FormInput = ({
   };
 
   return (
-    <Wrapper>
+    <Wrapper userPanel={userPanel}>
       <Input
         onChange={onChange}
         value={value}
@@ -156,11 +198,16 @@ const FormInput = ({
         onInvalid={handleOnInvalid}
         required
         placeholder=" "
+        userPanel={userPanel}
       />
-      <Label htmlFor={name}>{label}</Label>
-      <Bar />
-      {password && <EyeIcon slash={slash} onClick={eyeOnClick} />}
-      <ErrorText isVisibility={errorVisibility}>{errorText}</ErrorText>
+      <Label userPanel={userPanel} htmlFor={name}>
+        {label}
+      </Label>
+      <Bar userPanel={userPanel} />
+      {password && <EyeIcon userPanel={userPanel} slash={slash} onClick={eyeOnClick} />}
+      <ErrorText userPanel={userPanel} isVisibility={errorVisibility}>
+        {errorText}
+      </ErrorText>
     </Wrapper>
   );
 };
@@ -177,6 +224,7 @@ FormInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   errorText: PropTypes.string,
   pattern: PropTypes.string,
+  userPanel: PropTypes.bool,
 };
 
 FormInput.defaultProps = {
@@ -188,6 +236,7 @@ FormInput.defaultProps = {
   value: null,
   errorText: 'empty',
   pattern: null,
+  userPanel: false,
 };
 
 export default FormInput;

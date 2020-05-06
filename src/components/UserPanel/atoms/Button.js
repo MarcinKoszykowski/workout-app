@@ -34,14 +34,15 @@ const Button = styled.button`
   }
 
   @media screen and (max-width: 576px) {
-    padding: 8px;
-    width: 140px;
+    padding: 9px;
+    font-size: 0.9rem;
+    width: 190px;
   }
 
   @media screen and (max-width: 420px) {
     padding: 8px;
-    font-size: 0.95rem;
-    width: 120px;
+    font-size: 0.8rem;
+    width: 180px;
   }
 `;
 

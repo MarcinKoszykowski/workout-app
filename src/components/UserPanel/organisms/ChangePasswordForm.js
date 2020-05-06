@@ -73,7 +73,7 @@ const FormButton = styled(Button)`
 `;
 
 const ChangePasswordForm = () => {
-  const { user, setErrorBar } = useContext(AppContext);
+  const { user, setErrorBar, setUser } = useContext(AppContext);
   const {
     button,
     form: { password, newPassword, confirm },
@@ -141,6 +141,11 @@ const ChangePasswordForm = () => {
 
     if (status === 1) {
       errorTextFunction(infoText.change, false);
+      setUser((prevState) => ({
+        ...prevState,
+        password: md5(formNewPassword.newPassword),
+      }));
+      localStorage.setItem('userPassword', md5(formNewPassword.newPassword));
     } else if (status === 2 || status === 4) {
       errorFunctions(infoText.error);
     } else if (status === 3) {

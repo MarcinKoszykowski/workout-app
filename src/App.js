@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDidMount } from 'beautiful-react-hooks';
 import AppContext from 'context';
 import getDataFromAPI from 'helpers/api_functions';
@@ -10,20 +10,16 @@ import {
   setBMIInLocalStorage,
 } from 'helpers/local_storage_functions';
 import { app } from 'data/value';
-import { main, login as loginURL, sport, calendar } from 'data/routes';
+import { login as loginURL } from 'data/routes';
 import {
   user as userRoute,
   details as detailsRoute,
   training as trainingRoute,
 } from 'data/api_routes';
 import GlobalStyle from 'styled/GlobalStyle';
+import Routes from 'Routes';
 import ErrorBar from 'components/ErrorBar/ErrorBar';
 import LoadingTemplates from 'templates/LoadingTemplates';
-import SportView from 'views/SportView';
-import CalendarView from 'views/CalendarView';
-import MainView from './views/MainView';
-import LoginView from './views/LoginView';
-import NotFoundView from './views/NotFoundView';
 
 const App = () => {
   const {
@@ -167,13 +163,7 @@ const App = () => {
       <GlobalStyle />
       <LoadingTemplates isVisibility={loading} />
       <ErrorBar />
-      <Switch>
-        <Route exact path={main} component={MainView} />
-        <Route exact path={loginURL} component={LoginView} />
-        <Route exact path={sport} component={SportView} />
-        <Route exact path={calendar} component={CalendarView} />
-        <Route component={NotFoundView} />
-      </Switch>
+      <Routes />
     </>
   );
 };

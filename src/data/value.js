@@ -121,4 +121,18 @@ const app = {
   },
 };
 
-export { login, register, user, password, app, changePassword };
+const info = {
+  title: 'workout',
+  info: {
+    sport: 'select sport',
+    intensity: 'set intensity',
+    life: 'change your life',
+  },
+  intensity: {
+    low: 'low',
+    normal: 'normal',
+    high: 'high',
+  },
+};
+
+export { login, register, user, password, app, changePassword, info };

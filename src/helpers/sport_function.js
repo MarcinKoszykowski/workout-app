@@ -1,3 +1,5 @@
+import { calculateIndexBMI } from './functions';
+
 const setSportTitle = (title) => title.replace('-', ' ');
 
 const getTrainingBySportName = (array, sport) => {
@@ -12,4 +14,17 @@ const setSportDate = (date) =>
 const setSportTime = (time) => `${time} min`;
 const setSportKcal = (kcal) => `${Math.round(kcal)} kcal`;
 
-export { setSportTitle, getTrainingBySportName, setSportDate, setSportTime, setSportKcal };
+const calculateCalories = (time, kcal, weight, bmi, intensity = 1) => {
+  const indexBMI = calculateIndexBMI(bmi);
+
+  return ((time / 60) * kcal * weight * indexBMI * intensity).toFixed(2);
+};
+
+export {
+  setSportTitle,
+  getTrainingBySportName,
+  setSportDate,
+  setSportTime,
+  setSportKcal,
+  calculateCalories,
+};

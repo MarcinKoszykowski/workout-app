@@ -40,10 +40,14 @@ const Wrapper = styled.div`
     right: 5px;
   }
 
-  &::after {
+  &::after,
+  &::before {
     content: '';
     position: absolute;
     width: 25%;
+  }
+
+  &::after {
     top: 50%;
     left: 0;
     bottom: 0;
@@ -52,9 +56,6 @@ const Wrapper = styled.div`
   }
 
   &::before {
-    content: '';
-    position: absolute;
-    width: 25%;
     top: 0;
     right: 0;
     bottom: 50%;

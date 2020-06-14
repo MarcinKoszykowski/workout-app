@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import AppContext from 'context';
 import mainImage from 'assets/images/main.jpg';
 import NavigationTemplate from 'templates/NavigationTemplate';
+import Info from 'components/Info/Info';
 import Background from 'atoms/Background';
 import Wrapper from 'atoms/Wrapper';
 
@@ -29,6 +30,7 @@ const MainView = () => {
     <Wrapper>
       <NavigationTemplate />
       <StyledBackground image={mainImage} />
+      <Info />
     </Wrapper>
   );
 };

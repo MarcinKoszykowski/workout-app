@@ -42,12 +42,6 @@ const setColorBMI = (bmi) => {
   return lightRed;
 };
 
-const calculateCalories = (time, kcal, weight, bmi, intensity = 1) => {
-  const indexBMI = calculateIndexBMI(bmi);
-
-  return ((time / 60) * kcal * weight * indexBMI * intensity).toFixed(2);
-};
-
 const removeWhitespace = (value) => value.replace(' ', '');
 const removeFirstZero = (value) => {
   if (value.length > 1 && value.charAt(0) === '0') {
@@ -68,6 +62,5 @@ export {
   checkEditInUserForm,
   calculateBMI,
   calculateIndexBMI,
-  calculateCalories,
   functionWithTimeout,
 };

@@ -134,11 +134,11 @@ const ErrorText = styled.span`
       @media screen and (max-width: 768px) {
         color: ${red};
       }
-
-      @media screen and (max-width: 420px) {
-        font-size: 0.45rem;
-      }
     `}
+
+  @media screen and (max-width: 420px) {
+    font-size: 0.45rem;
+  }
 `;
 
 const EyeIcon = styled.div`

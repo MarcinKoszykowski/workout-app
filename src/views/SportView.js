@@ -26,11 +26,14 @@ const SportView = () => {
       modal: false,
     }));
 
+    const urlSport = window.location.pathname.slice(7);
+    const setSport = () => sports.find(({ name }) => name === urlSport);
+
     if (!training.sport.name) {
-      if (sports.find((item) => item.name === window.location.pathname.slice(7))) {
+      if (setSport()) {
         setTraining((prevState) => ({
           ...prevState,
-          sport: sports.find((item) => item.name === window.location.pathname.slice(7)),
+          sport: setSport(),
         }));
       } else {
         history.push(page404);
